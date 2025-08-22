@@ -47,10 +47,13 @@ public class Matriz {
 	
 
 	public void generarMatrizSolucion() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	
+	public void generarSolucionPredefinida() {
+		
+	}
 	
     //necesita se testeada
 	@Override
@@ -65,8 +68,13 @@ public class Matriz {
 		boolean sonIguales = true;
 		for (int fila = 0; fila < matriz.length; fila++) {
 		    for (int columna = 0; columna < matriz[0].length; columna++) {
-		    		sonIguales =sonIguales && (matriz[fila][columna] == other.matriz[fila][columna]);
+		    	if(other.matriz[fila][columna] == 2) {
+		    		sonIguales =sonIguales && (matriz[fila][columna] == 0);
 		    }
+		    	else{
+		    		sonIguales =sonIguales && (matriz[fila][columna] == other.matriz[fila][columna]);
+		    		}
+		    	}
 		}
 		return sonIguales;
 	}
