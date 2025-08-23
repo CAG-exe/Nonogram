@@ -79,4 +79,12 @@ public class Matriz {
 		return sonIguales;
 	}
 
+	public int consultarTamanio() {
+		return matriz.length;
+	}
+
+	public int consultarMatriz(int i, int f) {
+		return matriz[i][f];
+	}
+
 }
