@@ -8,7 +8,7 @@ public class Task {
 	List<String> tareas;
 	
 	public Task() {
-		tareas = new ArrayList<String>();
+		tareas = new ArrayList<String>(); //Junta ambas task, la primera mitad es en horizontal, la segunda mitad es en vertical.
 	}
 	
 	public List<String> generarTasks(Matriz mat){
@@ -21,7 +21,7 @@ public class Task {
 	}
 	
 	public List<String> generarTasksFila(Matriz mat, int tamanio, boolean esHorizontal){
-		ArrayList<String> tasksHorizontal = new ArrayList<String>();
+		ArrayList<String> tasks = new ArrayList<String>();
 		
 		for(int i = 0; i<tamanio; i++) {
 			
@@ -37,10 +37,10 @@ public class Task {
 	                   valor = mat.consultarMatriz(f, i); // Columna i, Fila j
 	               }
 				
-				if(valor == 1) {
+				if(valor == 1) { // Si es 1 (negro) entonces suma el contador.
 					contador++;
 				}else {
-					if (contador > 0) {
+					if (contador > 0) { //Cuando llega a una casilla blanca entonces suma a la task acumulado.
 		                if (tarea.length() > 0) tarea+= " ";
 		                tarea+= contador;
 		            }
@@ -48,13 +48,13 @@ public class Task {
 				}	
 			}
 			
-			if (contador > 0) {
+			if (contador > 0) { //Guarda la ultima acumulacion.
                 if (tarea.length() > 0) tarea+= " ";
                 tarea+= contador;
             }
-			tasksHorizontal.add(tarea);
+			tasks.add(tarea); //Añade el String al task. 
 		}
-		return tasksHorizontal;
+		return tasks;
 		
 	}
 }
