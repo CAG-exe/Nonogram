@@ -8,7 +8,7 @@ public class Task {
 	List<String> tareas;
 	
 	public Task() {
-		List<String> tareas = new ArrayList<String>();
+		tareas = new ArrayList<String>();
 	}
 	
 	public List<String> generarTasks(Matriz mat){
@@ -40,8 +40,10 @@ public class Task {
 				if(valor == 1) {
 					contador++;
 				}else {
-					if(contador >0 )
-						tarea += " " + contador;
+					if (contador > 0) {
+		                if (tarea.length() > 0) tarea+= " ";
+		                tarea+= contador;
+		            }
 					contador = 0;
 				}	
 			}
