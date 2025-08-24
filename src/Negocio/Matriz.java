@@ -23,7 +23,7 @@ public class Matriz {
 			DesmarcarCasilla(fila,columna);
 		}
 		else if(valorC==1){
-			MarcarConExis(fila,columna);
+			MarcarConEquis(fila,columna);
 		}
 		RellenarConNegroCasilla(fila,columna);
 	}
@@ -41,7 +41,7 @@ public class Matriz {
 	
 	// las marca con exis en la matriz se muestran con un "2":Claudio
 	
-	private void MarcarConExis(int fila, int columna) {
+	private void MarcarConEquis(int fila, int columna) {
 		matriz[fila][columna]=2;
 	}
 	
