@@ -92,6 +92,7 @@ public class Interfaz {
 					"• Click izquierdo: Pintar casilla (negro)\n" +
 					"• Click derecho: Marcar como vacía (X)\n" +
 					"• Click derecho nuevamente: Borrar marca\n\n";
-			
+			JLabel areaTexto = new JLabel(reglas);
+			areaTexto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		}
 	}
