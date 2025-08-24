@@ -71,5 +71,27 @@ public class Interfaz {
 		btnNewButton.setBounds(396, 212, 109, 32);
 		frame.getContentPane().add(btnNewButton);
 		
+		JButton btnReglas = new JButton("Reglas del juego");
+		btnReglas.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnReglas.setBounds(396, 260, 109, 32);
+		btnReglas.addActionListener(e -> mostrarReglas());
+		frame.getContentPane().add(btnReglas);
 	}
-}
+		
+		private void mostrarReglas() {
+			JFrame ventanaReglas = new JFrame("Reglas del Nonograma");
+			ventanaReglas.setBounds(100, 100, 626, 459);
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+			String reglas =
+					"Cómo jugar:\n" +
+					"Los números en los bordes indican cuántas casillas consecutivas\n" +
+					"debes pintar en esa fila o columna.\n\n" +
+					"Si hay varios números, significa que hay varios grupos\n" +
+					"separados por al menos una casilla vacía.\n\n" +
+					"CONTROLES:\n" +
+					"• Click izquierdo: Pintar casilla (negro)\n" +
+					"• Click derecho: Marcar como vacía (X)\n" +
+					"• Click derecho nuevamente: Borrar marca\n\n";
+			
+		}
+	}
