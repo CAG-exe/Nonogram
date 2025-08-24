@@ -12,7 +12,13 @@ public class Task {
 	}
 	
 	public List<String> generarTasks(Matriz mat){
+		if (mat == null) {
+			throw new IllegalArgumentException("La matriz no puede ser null");
+		}
 		int tamanio = mat.consultarTamanio();
+		if (tamanio <= 0) {
+			throw new IllegalArgumentException("El tamaño de la matriz debe ser mayor a 0");
+		}
 		
 		 tareas.addAll(generarTasksFila(mat, tamanio, true));  // Horizontal
 	     tareas.addAll(generarTasksFila(mat, tamanio, false)); // Vertical
