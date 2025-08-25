@@ -33,12 +33,7 @@ public class NanogramGrilla{
 		GridBagConstraints gbc = new GridBagConstraints();
 	    gbc.fill = GridBagConstraints.BOTH; // Que ocupen todo el espacio disponible
 	    gbc.insets = new Insets(0, 0, 0, 0); // Sin espacio entre casillas
-		
-        gbc.gridx = 0; // Posicion de X = 0
-        gbc.gridy = 0; // Posicion de Y = 0
-        gbc.weightx = 0.2; // Espacio para las pistas horizontales
-        gbc.weighty = 0.2;
-        
+	    
         gbc.gridx = 1; // Posicion de X = 1
         gbc.gridy = 0; // Posicion de Y = 0
         gbc.weightx = 0.8; // Espacio para las pistas verticales
@@ -64,6 +59,8 @@ public class NanogramGrilla{
 	}
 
 	private void generarCasillas() {
+		panelCasillas.setLayout(new GridLayout(tamanio, tamanio, 0, 0));
+		panelCasillas.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		this.casillas = new JButton[tamanio][tamanio];
 		for(int i = 0; i<tamanio ; i++) {
 			for(int j = 0; j<tamanio ; j++) {
@@ -99,9 +96,8 @@ public class NanogramGrilla{
 	private JPanel crearPanel(Color color) {
 		JPanel panel = new JPanel();
 		panel.setBackground(color);
+		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		panel.setLayout(new BorderLayout());
 		return panel;
 	}
 }
-     	  panelCasillas.setLayout(new GridLayout(tamanio, tamanio, 0, 0));
-    	panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
