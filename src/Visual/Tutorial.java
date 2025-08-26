@@ -60,6 +60,7 @@ public class Tutorial {
 			public void actionPerformed(ActionEvent e) {
 				Interfaz interfaz = new Interfaz();
 				interfaz.setVisible(true);
+				frame.setVisible(false);
 		}});
 
 		
@@ -119,5 +120,6 @@ public class Tutorial {
 		lblNewLabel_10.setBounds(25, 258, 233, 24);
 		frame.getContentPane().add(lblNewLabel_10);
 	}
+
 
 }
