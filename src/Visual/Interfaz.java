@@ -14,8 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -53,6 +55,9 @@ public class Interfaz {
 
 		initialize();
 	}
+	public void setVisible(boolean visible) {
+		frame.setVisible(visible);
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -87,7 +92,7 @@ public class Interfaz {
 		JugarButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		frame.getContentPane().add(JugarButton);
 		
-		JButton ComoJugarButton = new JButton("!!Como Juegar!!");
+		JButton ComoJugarButton = new JButton("!!Como Jugar!!");
 		ComoJugarButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -99,6 +104,13 @@ public class Interfaz {
 			}
 			
 		});
+		
+		ComoJugarButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Tutorial tutorial = new Tutorial();
+				tutorial.setVisible(true);
+			}});
+
 		
 		ComoJugarButton.setBackground(new Color(238, 230, 202));
 		ComoJugarButton.setFont(new Font("Tahoma", Font.BOLD, 15));

@@ -3,6 +3,8 @@ package Visual;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -35,6 +37,9 @@ public class Tutorial {
 	public Tutorial() {
 		initialize();
 	}
+	public void setVisible(boolean visible) {
+		frame.setVisible(visible);
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -50,6 +55,13 @@ public class Tutorial {
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton.setBounds(552, 463, 173, 48);
 		frame.getContentPane().add(btnNewButton);
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Interfaz interfaz = new Interfaz();
+				interfaz.setVisible(true);
+		}});
+
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon("G:\\Nonograma\\ayuda.png"));
