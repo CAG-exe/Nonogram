@@ -22,9 +22,6 @@ import java.awt.event.ActionListener;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-import GUI.Interfaz;
-import GUI.Menu;
-import GUI.Tutorial;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
