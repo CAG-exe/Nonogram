@@ -4,46 +4,56 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Task {
-
-	List<String> tareas;
 	
-	public Task() {
-		tareas = new ArrayList<String>(); //Junta ambas task, la primera mitad es en horizontal, la segunda mitad es en vertical.
+
+	private List<String> tareasTotales; //Junta ambas task, la primera mitad es en horizontal, la segunda mitad es en vertical
+	private List<String> tasksHorizontal;
+	private List<String> tasksVertical;
+	private int tamanio;
+	
+	public Task(Matriz mat,int tamanio) {
+		tareasTotales = new ArrayList<String>(); 
+		tasksHorizontal = new ArrayList<String>(); 
+		tasksVertical = new ArrayList<String>(); 
+		generarTasks(mat,tamanio);
 	}
 	
-	public List<String> generarTasks(Matriz mat){
+	private List<String> generarTasks(Matriz mat, int tamanio){
 		if (mat == null) {
 			throw new IllegalArgumentException("La matriz no puede ser null");
 		}
-		int tamanio = mat.consultarTamanio();
+		this.tamanio = tamanio;
 		if (tamanio <= 0) {
 			throw new IllegalArgumentException("El tamaño de la matriz debe ser mayor a 0");
 		}
 		
-		 tareas.addAll(generarTasksFila(mat, tamanio, true));  // Horizontal
-	     tareas.addAll(generarTasksFila(mat, tamanio, false)); // Vertical
+		tasksHorizontal.addAll(generarTasksFila(mat, tamanio, true));
+		tareasTotales.addAll(tasksHorizontal);  // Horizontal
+		 
+		tasksVertical.addAll(generarTasksFila(mat, tamanio, false)); // Vertical
+		tareasTotales.addAll(tasksVertical);
 		
-		return tareas;
+		return tareasTotales;
 	}
 	
-	public List<String> generarTasksFila(Matriz mat, int tamanio, boolean esHorizontal){
+	private List<String> generarTasksFila(Matriz mat, int tamanio, boolean esHorizontal){
 		ArrayList<String> tasks = new ArrayList<String>();
 		
-		for(int i = 0; i<tamanio; i++) {
+		for(int fila = 0; fila<tamanio; fila++) {
 			
 			String tarea = "";
 			int contador = 0;
 			
-			for(int f = 0 ; f<tamanio; f++) {
+			for(int columna = 0 ; columna<tamanio; columna++) {
 				
-				int valor;
+				boolean valor;
 				if (esHorizontal) {
-	                   valor = mat.consultarMatriz(i, f); // Fila i, Columna j
+	                   valor = mat.consultarMatriz(fila, columna);
 	               } else {
-	                   valor = mat.consultarMatriz(f, i); // Columna i, Fila j
+	                   valor = mat.consultarMatriz(columna, fila);
 	               }
 				
-				if(valor == 1) { // Si es 1 (negro) entonces suma el contador.
+				if(valor) { // Si es true (negro) entonces suma el contador.
 					contador++;
 				}else {
 					if (contador > 0) { //Cuando llega a una casilla blanca entonces suma a la task acumulado.
@@ -57,10 +67,28 @@ public class Task {
 			if (contador > 0) { //Guarda la ultima acumulacion.
                 if (tarea.length() > 0) tarea+= " ";
                 tarea+= contador;
+            } else {
+            	if (tarea.length() == 0)
+                tarea+= contador;
             }
 			tasks.add(tarea); //Añade el String al task. 
 		}
 		return tasks;
-		
+	}
+	
+	public boolean comprobarIgualdad(Task otroTask) {
+		return otroTask.tareasTotales.equals(tareasTotales);
+	}
+	
+	public List<String> obtenerTasksHorizontales(){
+		return this.tasksHorizontal;
+	}
+	
+	public List<String> obtenerTasksVerticales(){
+		return this.tasksVertical;
+	}
+	
+	public List<String> obtenerTodosLosTasks(){
+		return tareasTotales;
 	}
 }

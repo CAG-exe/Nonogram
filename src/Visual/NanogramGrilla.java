@@ -30,30 +30,30 @@ public class NanogramGrilla{
 	
 	private void iniciar() {
 		panelNanograma.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		GridBagConstraints gbc = new GridBagConstraints();
-	    gbc.fill = GridBagConstraints.BOTH; // Que ocupen todo el espacio disponible
-	    gbc.insets = new Insets(0, 0, 0, 0); // Sin espacio entre casillas
+		GridBagConstraints gbcParaLosPaneles = new GridBagConstraints();
+	    gbcParaLosPaneles.fill = GridBagConstraints.BOTH; // Que ocupen todo el espacio disponible
+	    gbcParaLosPaneles.insets = new Insets(0, 0, 0, 0); // Sin espacio entre casillas
 	    
-        gbc.gridx = 1; // Posicion de X = 1
-        gbc.gridy = 0; // Posicion de Y = 0
-        gbc.weightx = 0.8; // Espacio para las pistas verticales
-        gbc.weighty = 0.2;
+	    gbcParaLosPaneles.gridx = 1; // Posicion de X = 1
+	    gbcParaLosPaneles.gridy = 0; // Posicion de Y = 0
+	    gbcParaLosPaneles.weightx = 0.8; // Espacio para las pistas verticales
+	    gbcParaLosPaneles.weighty = 0.2;
         JPanel panelTasksVerticales = crearPanel(Color.white);
-        panelNanograma.add(panelTasksVerticales, gbc);
+        panelNanograma.add(panelTasksVerticales, gbcParaLosPaneles);
         
-        gbc.gridx = 0; // Posicion de X = 0
-        gbc.gridy = 1; // Posicion de Y = 1
-        gbc.weightx = 0.2; // Espacio para las pistas horizontales
-        gbc.weighty = 0.8;
+        gbcParaLosPaneles.gridx = 0; // Posicion de X = 0
+        gbcParaLosPaneles.gridy = 1; // Posicion de Y = 1
+        gbcParaLosPaneles.weightx = 0.2; // Espacio para las pistas horizontales
+        gbcParaLosPaneles.weighty = 0.8;
         JPanel panelTasksHorizontales = crearPanel(Color.white);
-        panelNanograma.add(panelTasksHorizontales, gbc);
+        panelNanograma.add(panelTasksHorizontales, gbcParaLosPaneles);
         
-        gbc.gridx = 1; // Posicion de X = 1
-        gbc.gridy = 1; // Posicion de Y = 1
-        gbc.weightx = 0.9; // Espacio principal para las casillas
-        gbc.weighty = 0.9;
+        gbcParaLosPaneles.gridx = 1; // Posicion de X = 1
+        gbcParaLosPaneles.gridy = 1; // Posicion de Y = 1
+        gbcParaLosPaneles.weightx = 0.9; // Espacio principal para las casillas
+        gbcParaLosPaneles.weighty = 0.9;
         this.panelCasillas = crearPanel(Color.white);
-        panelNanograma.add(panelCasillas, gbc);
+        panelNanograma.add(panelCasillas, gbcParaLosPaneles);
         generarCasillas();
 
 	}
