@@ -70,33 +70,22 @@ public class Interfaz extends JFrame{
         menu.ComoJugarButton.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        		frame.getContentPane().removeAll();
-        		frame.getContentPane().add(tutorial, BorderLayout.CENTER);
-        		frame.revalidate();
-        		frame.repaint();
+        		cambiarDePanel(tutorial);
         	}
         });
     
         this.menu = menu;
         JPanel tuto = new Tutorial();
         this.tutorial= tuto;
-
-        // Agregá el panel del menú al ContentPane de la Interfaz
-        // Usa BorderLayout.CENTER para que el panel ocupe todo el espacio disponible
         frame.getContentPane().add(this.menu, BorderLayout.CENTER);
-
-        // Hace que la ventana sea visible
         frame.setVisible(true);
 	}
 
 	public static void volverAlMenu() {
 		try {
-			frame.getContentPane().removeAll();
-			frame.getContentPane().add(menu, BorderLayout.CENTER);
-			frame.revalidate();
-			frame.repaint();
+			cambiarDePanel(menu);
+			frame.setBounds(560, 200, 800, 640);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -104,12 +93,17 @@ public class Interfaz extends JFrame{
 	public static void abrirJuego(int tamanio) {
 		try {
 			juego = new NanogramWindow(tamanio);
-			frame.getContentPane().removeAll();
-			frame.getContentPane().add(juego, BorderLayout.CENTER);
-			frame.revalidate();
-			frame.repaint();
+			cambiarDePanel(juego);
+			frame.setBounds(650, 200, 626, 600);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+	}
+	private static void cambiarDePanel(JPanel panel) {
+		frame.getContentPane().removeAll();
+		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		frame.revalidate();
+		frame.repaint();
 	}
 }

@@ -56,7 +56,7 @@ public class NanogramWindow extends JPanel {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		setBackground(new Color(137, 108, 108));
+
 		setLayout(new BorderLayout());
 		
 		JPanel panel = new JPanel();
@@ -76,7 +76,7 @@ public class NanogramWindow extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		comprobarButton.setBounds(254, 410, 106, 39);
+		comprobarButton.setBounds(354, 410, 106, 39);
 		panel.add(comprobarButton);
 		
 		JButton volverButton = new JButton("Volver al Menú");
@@ -85,7 +85,7 @@ public class NanogramWindow extends JPanel {
 				Interfaz.volverAlMenu();
 			}
 		});
-		volverButton.setBounds(50, 410, 150, 39);
+		volverButton.setBounds(90, 410, 150, 39);
 		panel.add(volverButton);
 	}
 }

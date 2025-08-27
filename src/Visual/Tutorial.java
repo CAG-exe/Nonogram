@@ -24,16 +24,25 @@ public class Tutorial extends JPanel {
 	public Tutorial() {
 		setBackground(new Color(137, 108, 108));
 		setLayout(null);
-		JButton btnNewButton = new JButton("<=Atras");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		JButton BotonVolverMenu = new JButton("<=Atras");
+		BotonVolverMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Interfaz.volverAlMenu();;
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				BotonVolverMenu.setBackground(new Color(245, 250, 225));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				BotonVolverMenu.setBackground(new Color(238, 230, 202));
+			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnNewButton.setBounds(613, 511, 118, 38);
-		add(btnNewButton);
+		BotonVolverMenu.setFont(new Font("Tahoma", Font.BOLD, 16));
+		BotonVolverMenu.setBounds(613, 511, 118, 38);
+		BotonVolverMenu.setBackground(new Color(238, 230, 202));
+		add(BotonVolverMenu);
 		
 	
 		JLabel lblNewLabel = new JLabel("");

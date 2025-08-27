@@ -16,11 +16,14 @@ import javax.swing.JRadioButton;
 
 public class Menu extends JPanel {
 	
-	public JButton ComoJugarButton;
+	protected JButton ComoJugarButton;
 	private JRadioButton cincoXcincoRadioButton;
 	private JRadioButton diezXdiezRadioButton;
 	private JRadioButton quinceXquinceRadioButton;
 	private JRadioButton veinteXveinteRadioButton;
+	private Color BotonBase;
+	private Color BotonHover;
+	private Color ColorRadioButton;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -30,16 +33,19 @@ public class Menu extends JPanel {
 	public Menu() {
 		setBackground(new Color(137, 108, 108));
 		setLayout(null);
+		BotonBase = new Color(238, 230, 202);
+		BotonHover = new Color(245, 250, 225);
+		ColorRadioButton = new Color(229, 190, 181);
 		
 		JButton JugarButton = new JButton("Jugar!");
 		JugarButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				JugarButton.setBackground(new Color(245, 250, 225));
+				JugarButton.setBackground(BotonHover);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				JugarButton.setBackground(new Color(238, 230, 202));
+				JugarButton.setBackground(BotonBase);
 			}
 		});
 		
@@ -60,15 +66,15 @@ public class Menu extends JPanel {
 		ComoJugarButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				ComoJugarButton.setBackground(new Color(245, 250, 225));
+				ComoJugarButton.setBackground(BotonHover);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				ComoJugarButton.setBackground(new Color(238, 230, 202));
+				ComoJugarButton.setBackground(BotonBase);
 			}
 		});
 		
-		ComoJugarButton.setBackground(new Color(238, 230, 202));
+		ComoJugarButton.setBackground(BotonBase);
 		ComoJugarButton.setFont(new Font("Tahoma", Font.BOLD, 15));
 		ComoJugarButton.setBounds(501, 388, 150, 77);
 		add(ComoJugarButton);
@@ -80,23 +86,23 @@ public class Menu extends JPanel {
 		add(LogoLabel);
 		
 		cincoXcincoRadioButton = new JRadioButton("5x5");
-		cincoXcincoRadioButton.setBackground(new Color(229, 190, 181));
+		cincoXcincoRadioButton.setBackground(ColorRadioButton);
 		cincoXcincoRadioButton.setToolTipText("");
 		cincoXcincoRadioButton.setBounds(117, 261, 150, 37);
 		add(cincoXcincoRadioButton);
 		
 		diezXdiezRadioButton = new JRadioButton("10x10");
-		diezXdiezRadioButton.setBackground(new Color(229, 190, 181));
+		diezXdiezRadioButton.setBackground(ColorRadioButton);
 		diezXdiezRadioButton.setBounds(117, 318, 150, 37);
 		add(diezXdiezRadioButton);
 		
 		quinceXquinceRadioButton = new JRadioButton("15x15");
-		quinceXquinceRadioButton.setBackground(new Color(229, 190, 181));
+		quinceXquinceRadioButton.setBackground(ColorRadioButton);
 		quinceXquinceRadioButton.setBounds(117, 374, 150, 37);
 		add(quinceXquinceRadioButton);
 		
 		veinteXveinteRadioButton = new JRadioButton("20x20");
-		veinteXveinteRadioButton.setBackground(new Color(229, 190, 181));
+		veinteXveinteRadioButton.setBackground(ColorRadioButton);
 		veinteXveinteRadioButton.setBounds(117, 428, 150, 37);
 		add(veinteXveinteRadioButton);
 		
