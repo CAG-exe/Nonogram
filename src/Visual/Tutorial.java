@@ -37,8 +37,9 @@ public class Tutorial extends JPanel {
 		
 	
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("G:\\Nonograma\\ayuda.png"));
-		lblNewLabel.setBounds(62, 448, 397, 135);
+		ImageIcon ayuda = new ImageIcon(getClass().getResource("/media/ayuda1.png"));
+		lblNewLabel.setIcon(new ImageIcon(Tutorial.class.getResource("/media/ayuda.png")));
+		lblNewLabel.setBounds(62, 448, 347, 135);
 		add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Idea  del juego ganado");
@@ -68,7 +69,8 @@ public class Tutorial extends JPanel {
 		add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("");
-		lblNewLabel_6.setIcon(new ImageIcon("G:\\Nonograma\\ayuda2.png"));
+		ImageIcon ayuda2 = new ImageIcon(getClass().getResource("/media/ayuda2.png"));
+		lblNewLabel_6.setIcon(ayuda2);
 		lblNewLabel_6.setBounds(595, 68, 132, 20);
 		add(lblNewLabel_6);
 		

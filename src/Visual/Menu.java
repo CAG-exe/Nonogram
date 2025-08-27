@@ -66,7 +66,8 @@ public class Menu extends JPanel {
 
 		
 		JLabel LogoLabel = new JLabel("");
-		LogoLabel.setIcon(new ImageIcon("/Nonograma/src/nonograms-logo.png"));
+		ImageIcon Logo = new ImageIcon(getClass().getResource("/media/nonograms-logo.png"));
+		LogoLabel.setIcon(Logo);
 		LogoLabel.setBounds(39, 85, 700, 116);
 		add(LogoLabel);
 		
