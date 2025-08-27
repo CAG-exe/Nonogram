@@ -37,8 +37,8 @@ public class Tutorial extends JPanel {
 		
 	
 		JLabel lblNewLabel = new JLabel("");
-		ImageIcon ayuda = new ImageIcon(getClass().getResource("/media/ayuda1.png"));
-		lblNewLabel.setIcon(new ImageIcon(Tutorial.class.getResource("/media/ayuda.png")));
+		ImageIcon ayuda = new ImageIcon(getClass().getResource("/media/ayuda.png"));
+		lblNewLabel.setIcon(ayuda);
 		lblNewLabel.setBounds(62, 448, 347, 135);
 		add(lblNewLabel);
 		
