@@ -22,7 +22,6 @@ import java.awt.event.ActionListener;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -32,6 +31,8 @@ public class Interfaz extends JFrame{
 	private static JFrame frame;
 	private static JPanel menu;
 	private JPanel tutorial;
+	private static JPanel juego;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -65,7 +66,6 @@ public class Interfaz extends JFrame{
         frame.setLocationRelativeTo(null); // Centra la ventana en la pantalla
         
         // Creá una instancia del panel del menú
-        
         Menu menu = new Menu(); // Asumiendo que PanelMenu hereda de JPane
         menu.ComoJugarButton.addMouseListener(new MouseAdapter() {
         	@Override
@@ -99,10 +99,17 @@ public class Interfaz extends JFrame{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		
 	}
-
-
-
+	
+	public static void abrirJuego(int tamanio) {
+		try {
+			juego = new NanogramWindow(tamanio);
+			frame.getContentPane().removeAll();
+			frame.getContentPane().add(juego, BorderLayout.CENTER);
+			frame.revalidate();
+			frame.repaint();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+}

@@ -15,9 +15,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class NanogramWindow {
+public class NanogramWindow extends JPanel {
 
-	private JFrame frame;
 	private JButton[][] casillas;
 	private int tamanio = 5;
 	private JPanel panelPrincipal;
@@ -30,8 +29,13 @@ public class NanogramWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					JFrame juegoNonograma = new JFrame("Nonograma");
 					NanogramWindow window = new NanogramWindow(5);
-					window.frame.setVisible(true);
+					juegoNonograma.add(window);
+					juegoNonograma.setBounds(100, 100, 626, 600);
+					juegoNonograma.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					juegoNonograma.setLocationRelativeTo(null);
+					juegoNonograma.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -43,24 +47,21 @@ public class NanogramWindow {
 	 * Create the application.
 	 */
 	public NanogramWindow(int tamanio) {
+		this.tamanio = tamanio;
 		initialize();
-		NanogramGrilla nanogramaGrilla = new NanogramGrilla(tamanio,panelNanograma);
+		NanogramGrilla nanogramaGrilla = new NanogramGrilla(tamanio, panelNanograma);
 	}
-
-
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame("Nonograma");
-		frame.setBounds(100, 100, 626, 600);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null);
+		setBackground(new Color(137, 108, 108));
+		setLayout(new BorderLayout());
 		
 		JPanel panel = new JPanel();
 		this.panelPrincipal = panel;
-		frame.getContentPane().add(panelPrincipal, BorderLayout.CENTER);
+		add(panelPrincipal, BorderLayout.CENTER);
 		panelPrincipal.setLayout(null);
 		
 		JPanel panelNanograma = new JPanel(new GridBagLayout());
@@ -77,6 +78,14 @@ public class NanogramWindow {
 		});
 		comprobarButton.setBounds(254, 410, 106, 39);
 		panel.add(comprobarButton);
+		
+		JButton volverButton = new JButton("Volver al Menú");
+		volverButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Interfaz.volverAlMenu();
+			}
+		});
+		volverButton.setBounds(50, 410, 150, 39);
+		panel.add(volverButton);
 	}
-
 }
