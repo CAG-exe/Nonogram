@@ -9,11 +9,15 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 public class NanogramGrilla{
 	private JButton[][] casillas;
@@ -80,6 +84,19 @@ public class NanogramGrilla{
 							}
 						}
 					}
+				});
+				
+				casilla.addMouseListener(new MouseAdapter() {
+				    @Override
+				    public void mouseClicked(MouseEvent e) {
+				        if (SwingUtilities.isRightMouseButton(e)) {
+				        	if(casilla.getText() == "x") {
+				        		casilla.setText("");
+				        	} else {
+				        		casilla.setText("x");
+				        	}
+				        }
+				    }
 				});
 				
 				casillas[i][j] = casilla;
