@@ -24,6 +24,8 @@ public class Menu extends JPanel {
 	private Color BotonBase;
 	private Color BotonHover;
 	private Color ColorRadioButton;
+	private int tamanio;
+	
 	
 	private static final long serialVersionUID = 1L;
 
@@ -36,6 +38,7 @@ public class Menu extends JPanel {
 		BotonBase = new Color(238, 230, 202);
 		BotonHover = new Color(245, 250, 225);
 		ColorRadioButton = new Color(229, 190, 181);
+		tamanio=5;
 		
 		JButton JugarButton = new JButton("Jugar!");
 		JugarButton.addMouseListener(new MouseAdapter() {
@@ -52,12 +55,12 @@ public class Menu extends JPanel {
 		JugarButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int tamanio = 5;
+				
 				Interfaz.abrirJuego(tamanio);
 			}
 		});
 		
-		JugarButton.setBackground(new Color(238, 230, 202));
+		JugarButton.setBackground(BotonBase);
 		JugarButton.setBounds(501, 268, 150, 77);
 		JugarButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		add(JugarButton);
@@ -86,23 +89,51 @@ public class Menu extends JPanel {
 		add(LogoLabel);
 		
 		cincoXcincoRadioButton = new JRadioButton("5x5");
-		cincoXcincoRadioButton.setBackground(ColorRadioButton);
-		cincoXcincoRadioButton.setToolTipText("");
+		cincoXcincoRadioButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("el tamanio es 5");
+				tamanio=5;
+			}
+		});
+		recolorearBoton(cincoXcincoRadioButton);
 		cincoXcincoRadioButton.setBounds(117, 261, 150, 37);
 		add(cincoXcincoRadioButton);
 		
 		diezXdiezRadioButton = new JRadioButton("10x10");
-		diezXdiezRadioButton.setBackground(ColorRadioButton);
+		diezXdiezRadioButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("el tamanio es 10");
+				tamanio=10;
+			}
+		});
+		recolorearBoton(diezXdiezRadioButton);
 		diezXdiezRadioButton.setBounds(117, 318, 150, 37);
 		add(diezXdiezRadioButton);
 		
 		quinceXquinceRadioButton = new JRadioButton("15x15");
-		quinceXquinceRadioButton.setBackground(ColorRadioButton);
+		quinceXquinceRadioButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("el tamanio es 15");
+				tamanio=15;
+			}
+		});
+		recolorearBoton(quinceXquinceRadioButton);
 		quinceXquinceRadioButton.setBounds(117, 374, 150, 37);
 		add(quinceXquinceRadioButton);
 		
 		veinteXveinteRadioButton = new JRadioButton("20x20");
-		veinteXveinteRadioButton.setBackground(ColorRadioButton);
+		veinteXveinteRadioButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("el tamanio es 20");
+				tamanio=20
+						;
+			}
+		});
+		recolorearBoton(veinteXveinteRadioButton);
 		veinteXveinteRadioButton.setBounds(117, 428, 150, 37);
 		add(veinteXveinteRadioButton);
 		
@@ -116,5 +147,17 @@ public class Menu extends JPanel {
         grupoOpciones.add(veinteXveinteRadioButton);
         
         cincoXcincoRadioButton.setSelected(true);
+        
+        JLabel Info_extra = new JLabel("Para seleccionar el nivel correctamente darle doble click");
+        Info_extra.setForeground(new Color(75, 35, 65));
+        Info_extra.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+        Info_extra.setBounds(62, 506, 444, 48);
+        add(Info_extra);
+        
+        
+	}
+
+	private void recolorearBoton(JRadioButton boton) {
+		boton.setBackground(ColorRadioButton);
 	}	
 }

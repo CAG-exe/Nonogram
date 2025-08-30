@@ -94,7 +94,12 @@ public class Interfaz extends JFrame{
 		try {
 			juego = new NanogramWindow(tamanio);
 			cambiarDePanel(juego);
-			frame.setBounds(650, 200, 626, 600);
+			if(tamanio==15)
+				frame.setBounds(530, 130, 826, 800);
+			else if(tamanio==20)
+				frame.setBounds(530, 130, 826, 800);
+			else
+				frame.setBounds(600, 200, 626, 600);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

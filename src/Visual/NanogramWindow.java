@@ -21,6 +21,8 @@ public class NanogramWindow extends JPanel {
 	private int tamanio = 5;
 	private JPanel panelPrincipal;
 	private JPanel panelNanograma;
+	private JButton comprobarButton;
+	private JButton volverButton;
 
 	/**
 	 * Launch the application.
@@ -48,14 +50,14 @@ public class NanogramWindow extends JPanel {
 	 */
 	public NanogramWindow(int tamanio) {
 		this.tamanio = tamanio;
-		initialize();
+		initialize(tamanio);
 		NanogramGrilla nanogramaGrilla = new NanogramGrilla(tamanio, panelNanograma);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(int tamanio) {
 
 		setLayout(new BorderLayout());
 		
@@ -63,29 +65,52 @@ public class NanogramWindow extends JPanel {
 		this.panelPrincipal = panel;
 		add(panelPrincipal, BorderLayout.CENTER);
 		panelPrincipal.setLayout(null);
-		
-		JPanel panelNanograma = new JPanel(new GridBagLayout());
-		this.panelNanograma = panelNanograma;
-		panelNanograma.setBounds(180, 100, 250, 250);
-		panel.add(panelNanograma);
-		panelNanograma.setLayout(new GridLayout(5, 5, 0, 0));
-		panelNanograma.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		
-		JButton comprobarButton = new JButton("Comprobar");
+		panelPrincipal.setBackground(new Color(137, 108, 108));
+		comprobarButton = new JButton("Comprobar");
 		comprobarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		comprobarButton.setBounds(354, 410, 106, 39);
 		panel.add(comprobarButton);
 		
-		JButton volverButton = new JButton("Volver al Menú");
+		volverButton = new JButton("Volver al Menú");
 		volverButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Interfaz.volverAlMenu();
 			}
 		});
-		volverButton.setBounds(90, 410, 150, 39);
 		panel.add(volverButton);
+		
+		JPanel panelNanograma = new JPanel(new GridBagLayout());
+		this.panelNanograma = panelNanograma;
+		cambioDeTmanioBounds(tamanio);
+		panel.add(panelNanograma);
+		panelNanograma.setLayout(new GridLayout(5, 5, 0, 0));
+		panelNanograma.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		
+	}
+
+	private void cambioDeTmanioBounds(int tamanio) {
+		if(tamanio==5) {
+			this.panelNanograma.setBounds(180, 100, 250, 250);
+			comprobarButton.setBounds(354, 410, 106, 39);
+			volverButton.setBounds(90, 410, 150, 39);
+		}
+		else if(tamanio==10) {
+			this.panelNanograma.setBounds(100, 50, 350, 350);
+			comprobarButton.setBounds(354, 410, 106, 39);
+			volverButton.setBounds(90, 410, 150, 39);
+		}
+		else if(tamanio==15) {
+			this.panelNanograma.setBounds(140, 80, 500, 500);
+			comprobarButton.setBounds(504, 610, 106, 39);
+			volverButton.setBounds(180, 610, 150, 39);
+		}
+		else {
+			this.panelNanograma.setBounds(140, 80, 550, 550);
+			comprobarButton.setBounds(474, 660, 106, 39);
+			volverButton.setBounds(170, 660, 150, 39);
+			
+		}
 	}
 }
