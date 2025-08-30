@@ -26,24 +26,24 @@ public class NanogramWindow extends JPanel {
 
 	/**
 	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JFrame juegoNonograma = new JFrame("Nonograma");
-					NanogramWindow window = new NanogramWindow(5);
-					juegoNonograma.add(window);
-					juegoNonograma.setBounds(100, 100, 626, 600);
-					juegoNonograma.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					juegoNonograma.setLocationRelativeTo(null);
-					juegoNonograma.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					JFrame juegoNonograma = new JFrame("Nonograma");
+//					NanogramWindow window = new NanogramWindow(5);
+//					juegoNonograma.add(window);
+//					juegoNonograma.setBounds(100, 100, 626, 600);
+//					juegoNonograma.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//					juegoNonograma.setLocationRelativeTo(null);
+//					juegoNonograma.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.

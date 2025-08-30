@@ -41,9 +41,14 @@ public class NanogramGrilla{
 	}
 	
 	private void iniciar() {
-		
 		especificarTamañosDePaneles();
-		
+		crearPanelesDelNanograma();
+        generarCasillas();
+        
+	}
+	
+
+	private void crearPanelesDelNanograma() {
 		GridBagConstraints gbc = new GridBagConstraints();
 	    gbc.fill = GridBagConstraints.BOTH; // Que ocupen todo el espacio disponible
         gbc.weightx = 0;
@@ -51,8 +56,8 @@ public class NanogramGrilla{
         gbc.gridwidth = 1; //Ocupara 1 celda
         gbc.gridheight = 1; //Ocupara 1 celda
         
-        gbc.gridx = 1;
-        gbc.gridy = 0;
+        gbc.gridx = 1; // Posicion de X = 1
+        gbc.gridy = 0; // Posicion de Y = 0
         JPanel panelTasksVerticales = panelesGrupo[0];
         this.panelTasksVerticales = panelTasksVerticales;
         panelNanograma.add(panelTasksVerticales, gbc);
@@ -69,10 +74,7 @@ public class NanogramGrilla{
         gbc.fill = GridBagConstraints.BOTH; // Que ocupen todo el espacio disponible
         this.panelCasillas = panelesGrupo[2];
         panelNanograma.add(panelCasillas, gbc);
-        generarCasillas();
-        
 	}
-	
 
 	private void especificarTamañosDePaneles() {
 		panelesGrupo = new JPanel[3];

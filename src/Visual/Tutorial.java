@@ -24,7 +24,7 @@ public class Tutorial extends JPanel {
 	public Tutorial() {
 		setBackground(new Color(137, 108, 108));
 		setLayout(null);
-		JButton BotonVolverMenu = new JButton("<=Atras");
+		JButton BotonVolverMenu = new JButton("Volver al Menú");
 		BotonVolverMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -40,7 +40,7 @@ public class Tutorial extends JPanel {
 			}
 		});
 		BotonVolverMenu.setFont(new Font("Tahoma", Font.BOLD, 16));
-		BotonVolverMenu.setBounds(613, 511, 118, 38);
+		BotonVolverMenu.setBounds(573, 511, 168, 38);
 		BotonVolverMenu.setBackground(new Color(238, 230, 202));
 		add(BotonVolverMenu);
 		
