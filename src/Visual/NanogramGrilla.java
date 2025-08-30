@@ -124,7 +124,7 @@ public class NanogramGrilla{
     	casilla.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) { //Click izquierdo
-                    if (casilla.getBackground().equals(Color.white)) {
+                    if (casilla.getBackground().equals(Color.white) && casilla.getText() != "X") {
                         casilla.setBackground(Color.black);
                         casilla.setText("");
                     } else if (casilla.getBackground().equals(Color.black)) {
