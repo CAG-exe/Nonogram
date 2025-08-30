@@ -24,7 +24,6 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 public class NanogramGrilla{
-	private JButton[][] casillas;
 	private int tamanio;
 	private JPanel panelNanograma;
 	private JPanel[] panelesGrupo; //Contiene los paneles de casillas y los tasks
@@ -104,74 +103,11 @@ public class NanogramGrilla{
 	private void generarCasillas() {
 		panelCasillas.setLayout(new GridLayout(tamanio, tamanio, 0, 0));
 		panelCasillas.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
-		this.casillas = new JButton[tamanio][tamanio];
-		for(int i = 0; i<tamanio ; i++) {
-			for(int j = 0; j<tamanio ; j++) {
-				JButton casilla = new JButton();
-				casilla.setBackground(Color.white);
-				casilla.setBorder(BorderFactory.createLineBorder(Color.gray));
-				
-				accionesDeClicACasillas(casilla);
-				
-				casillas[i][j] = casilla;
-				panelCasillas.add(casilla);
-			}
-		}
+		panelCasillas = TablaBotones.generarCasillas(panelCasillas, tamanio);
 		panelCasillas.revalidate();
 		panelCasillas.repaint();
 	}
 	
-	
-    private void accionesDeClicACasillas(JButton casilla) {
-    	casilla.addMouseListener(new MouseListener() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON1) { //Click izquierdo
-                    if (casilla.getBackground().equals(Color.white) && casilla.getText() != "X") {
-                        casilla.setBackground(Color.black);
-                        casilla.setText("");
-                    } else if (casilla.getBackground().equals(Color.black)) {
-                        casilla.setBackground(Color.white);
-                        casilla.setText("");
-                    }
-                } else if (e.getButton() == MouseEvent.BUTTON3) { //Click derecho
-                    if (casilla.getText().equals("X")) {
-                        casilla.setText("");
-                        casilla.setBackground(Color.white);
-                    } else {
-                        casilla.setText("X");
-                        casilla.setForeground(Color.blue);
-                        casilla.setBackground(Color.white);
-                        casilla.setFont(new Font("Arial", Font.BOLD, 24));
-                    }
-				}
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
-	}
 
 	private JPanel crearPanel(int ancho, int alto,Color color) {
 		JPanel panel = new JPanel();
