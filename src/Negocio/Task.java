@@ -18,6 +18,7 @@ public class Task {
 		generarTasks(mat,tamanio);
 	}
 	
+	
 	private List<String> generarTasks(Matriz mat, int tamanio){
 		if (mat == null) {
 			throw new IllegalArgumentException("La matriz no puede ser null");
@@ -76,6 +77,17 @@ public class Task {
 		return tasks;
 	}
 	
+	// Muestra los valores e las pistas para mostrar a la izquierda
+	public String[] getPistasFilas() {
+	    return tasksHorizontal.toArray(new String[0]);
+	}
+
+	// Obtiene los valores de las pistas para mostrar arriba 
+	public String[] getPistasColumnas() {
+	    return tasksVertical.toArray(new String[0]);
+	}
+
+	
 	public boolean comprobarIgualdad(Task otroTask) {
 		return otroTask.tareasTotales.equals(tareasTotales);
 	}
@@ -91,4 +103,5 @@ public class Task {
 	public List<String> obtenerTodosLosTasks(){
 		return tareasTotales;
 	}
+	
 }
