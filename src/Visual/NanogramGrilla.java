@@ -24,9 +24,11 @@ public class NanogramGrilla{
 	private JButton[][] casillas;
 	private int tamanio;
 	private JPanel panelNanograma;
+	private JPanel[] panelesGrupo; //Contiene los paneles de casillas y los tasks
 	private JPanel panelCasillas;
 	private JPanel panelTasksVerticales;
 	private JPanel panelTasksHorizontales;
+
 	
 	public NanogramGrilla(int tamanio, JPanel panelNanograma) {
 		this.tamanio = tamanio;
@@ -36,39 +38,63 @@ public class NanogramGrilla{
 	}
 	
 	private void iniciar() {
+		
+		especificarTamañosDePaneles();
+		
 		GridBagConstraints gbc = new GridBagConstraints();
 	    gbc.fill = GridBagConstraints.BOTH; // Que ocupen todo el espacio disponible
         gbc.weightx = 0;
         gbc.weighty = 0;
+        gbc.gridwidth = 1; //Ocupara 1 celda
+        gbc.gridheight = 1; //Ocupara 1 celda
         
         gbc.gridx = 1;
         gbc.gridy = 0;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        JPanel panelTasksVerticales = crearPanel(250, 50,Color.white);
+        JPanel panelTasksVerticales = panelesGrupo[0];
         this.panelTasksVerticales = panelTasksVerticales;
         panelNanograma.add(panelTasksVerticales, gbc);
 
         
         gbc.gridx = 0; // Posicion de X = 0
         gbc.gridy = 1; // Posicion de Y = 1
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        JPanel panelTasksHorizontales = crearPanel(50,250,Color.white);
+        JPanel panelTasksHorizontales = panelesGrupo[1];
         this.panelTasksHorizontales = panelTasksHorizontales;
         panelNanograma.add(panelTasksHorizontales, gbc);
         
         gbc.gridx = 1; // Posicion de X = 1
         gbc.gridy = 1; // Posicion de Y = 1
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.fill = GridBagConstraints.BOTH;
-        this.panelCasillas = crearPanel(250,250,Color.white);
+        gbc.fill = GridBagConstraints.BOTH; // Que ocupen todo el espacio disponible
+        this.panelCasillas = panelesGrupo[2];
         panelNanograma.add(panelCasillas, gbc);
         generarCasillas();
         
 	}
 	
+
+	private void especificarTamañosDePaneles() {
+		panelesGrupo = new JPanel[3];
+		if(tamanio==5) {
+			panelesGrupo[0] = crearPanel(200, 50,Color.white);
+			panelesGrupo[1] = crearPanel(50, 200,Color.white);
+			panelesGrupo[2] = crearPanel(200, 200,Color.white);
+		}
+		else if(tamanio==10) {
+			panelesGrupo[0] = crearPanel(280, 70,Color.white);
+			panelesGrupo[1] = crearPanel(70, 280,Color.white);
+			panelesGrupo[2] = crearPanel(280, 280,Color.white);
+		}
+		else if(tamanio==15) {
+			panelesGrupo[0] = crearPanel(420, 90,Color.white);
+			panelesGrupo[1] = crearPanel(90, 420,Color.white);
+			panelesGrupo[2] = crearPanel(420, 420,Color.white);
+		}
+		else {
+			panelesGrupo[0] = crearPanel(420, 130,Color.white);
+			panelesGrupo[1] = crearPanel(130, 420,Color.white);
+			panelesGrupo[2] = crearPanel(420, 420,Color.white);
+			
+		}	
+	}
 
 	private void generarCasillas() {
 		panelCasillas.setLayout(new GridLayout(tamanio, tamanio, 0, 0));
