@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class NanogramGrilla{
@@ -20,6 +21,7 @@ public class NanogramGrilla{
 	private int tamanio;
 	private JPanel panelNanograma;
 	private JPanel panelCasillas;
+	private JLabel MensajeFinal;
 	
 	public NanogramGrilla(int tamanio, JPanel panelNanograma) {
 		this.tamanio = tamanio;
@@ -68,15 +70,20 @@ public class NanogramGrilla{
 				casilla.setBackground(Color.white);
 				casilla.setBorder(BorderFactory.createLineBorder(Color.gray));
 				
+				final int row=i;
+				final int col=j;
+							
 				casilla.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(casilla.getBackground().equals(Color.white)) {
 							casilla.setBackground(Color.black);
 							casilla.setText("");
+							NanogramWindow.sendInfo(row,col);
 						} else {
 							if(casilla.getBackground().equals(Color.black)) {
 								casilla.setBackground(Color.white);
 								casilla.setText("");
+								NanogramWindow.sendInfo(row,col);
 							}
 						}
 					}

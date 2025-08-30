@@ -8,14 +8,11 @@ public class Nonograma {
 	private Matriz matrizJuego;
 	private Task Tasks; 
 	
-	public Nonograma() {  // constructor basico que solo crea matrzices 5x5 : Claudio
-		matrizJuego = new Matriz(5);
-		matrizSolucion =new Matriz(5); 
+	public Nonograma(int size) {
+		matrizJuego =new Matriz(size);
+		matrizSolucion =new Matriz(size); 
 	}
-	
-	//Despues podemos sobrecargar el constructor para más matrices 
-	
-	
+
 	//le pide a la clase matriz que marque la matriz juego
 	public void marcarCasilla(int fila, int columna) {
 		matrizSolucion.marcarCasilla(fila, columna);
@@ -25,10 +22,20 @@ public class Nonograma {
 	// le pide a la clase matriz que genere una solucion
 	public void generarMatrizSolucion(){
 		matrizSolucion.generarMatrizSolucion();
-	} 
+	}
+	
 	// le pide a la clase matriz que verifique la igualdad de matrices
-	public boolean verificarIgualdad(int[][] matrizSolucion) {
-			return matrizSolucion.equals(matrizJuego);	
+	public boolean verificarIgualdad() {
+			return matrizSolucion.equals(getMatrizJuego());	
+	}
+
+	private Matriz getMatrizJuego() {
+		return matrizJuego;
+	}
+
+	public void generarMatrizSolucionPredefinida() {
+		matrizSolucion.generarSolucionPredefinida();
+		
 	}
 
 }

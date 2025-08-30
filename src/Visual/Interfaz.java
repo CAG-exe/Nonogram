@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -64,6 +65,8 @@ public class Interfaz extends JFrame{
         frame.setBounds(100,100,800, 640);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null); // Centra la ventana en la pantalla
+        ImageIcon favicon = new ImageIcon(getClass().getResource("/media/icon.png"));
+        frame.setIconImage(favicon.getImage());
         
         // Creá una instancia del panel del menú
         Menu menu = new Menu(); // Asumiendo que PanelMenu hereda de JPane

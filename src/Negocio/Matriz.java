@@ -25,7 +25,7 @@ public class Matriz {
 
 	public void marcarCasilla(int fila, int columna) {
 		Boolean valor = matriz[fila][columna];
-		if(valor) {
+		if(!valor) {
 			MarcarCasilla(fila,columna);
 		}
 		DesmarcarCasilla(fila,columna);
@@ -42,12 +42,6 @@ public class Matriz {
 		matriz[fila][columna]= true;
 	}
 	
-	// las marca con exis en la matriz se muestran con un "2":Claudio
-//	
-//	private void MarcarConEquis(int fila, int columna) {
-//		matriz[fila][columna]=2;
-//	}
-	
 
 	public void generarMatrizSolucion() {
 		double random;
@@ -63,7 +57,7 @@ public class Matriz {
 	}
 	
 	public void generarSolucionPredefinida() {
-		
+		matriz[0][0]=true;
 	}
 	
 	public int longitud() {
