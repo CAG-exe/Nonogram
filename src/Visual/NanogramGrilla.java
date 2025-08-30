@@ -119,12 +119,16 @@ public class NanogramGrilla{
 	
 	private void accionesDeClicACasillas(JButton casilla) {
 		casilla.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(casilla.getBackground().equals(Color.white)) {
+			public void actionPerformed(ActionEvent e) { //Luego tambien voy a tratar de hacerlo con un EMUN. Para mas facha
+				if(casilla.getBackground().equals(Color.white) && casilla.getText() != "X") {
 					casilla.setBackground(Color.black);
 					casilla.setText("");
 				} else {
 					if(casilla.getBackground().equals(Color.black)) {
+						casilla.setBackground(Color.white);
+						casilla.setText("X"); //Luego voy a hacer que la X se vea mas linda, por ahora se vera medio fea.
+					} else {
+						if(casilla.getText() == "X")
 						casilla.setBackground(Color.white);
 						casilla.setText("");
 					}
