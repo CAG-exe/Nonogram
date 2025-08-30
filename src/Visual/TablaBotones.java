@@ -20,7 +20,7 @@ public class TablaBotones {
 				casilla.setBackground(Color.white);
 				casilla.setBorder(BorderFactory.createLineBorder(Color.gray));
 				
-				accionesDeClicACasillas(casilla);
+				accionesDeClicACasillas(casilla, i ,j);
 				
 				casillas[i][j] = casilla;
 				panelCasillas.add(casilla);
@@ -30,12 +30,14 @@ public class TablaBotones {
 	};
 	
 	
-	private static void accionesDeClicACasillas(JButton casilla) {
+	private static void accionesDeClicACasillas(JButton casilla,int i,int j) {
     	casilla.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) { //Click izquierdo
                     if (casilla.getBackground().equals(Color.white) && casilla.getText() != "X") {
                         casilla.setBackground(Color.black);
+                        NanogramWindow.sendInfo(i,j);
+                        System.out.println("hola "+i+"tardes "+j);
                         casilla.setText("");
                     } else if (casilla.getBackground().equals(Color.black)) {
                         casilla.setBackground(Color.white);

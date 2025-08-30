@@ -26,7 +26,7 @@ public Boolean[][] matriz;
 
 	public void marcarCasilla(int fila, int columna) {
 		Boolean valorBooleano = matriz[fila][columna];
-		if(valorBooleano) {
+		if(!valorBooleano) {
 			MarcarCasilla(fila,columna);
 		} else {
 			DesmarcarCasilla(fila,columna);
