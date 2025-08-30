@@ -41,8 +41,6 @@ public Boolean[][] matriz;
 	private void MarcarCasilla(int fila,int columna){
 		matriz[fila][columna]= true;
 	}
-	
-	
 
 	public void generarMatrizSolucion() {
 		double random;
@@ -58,7 +56,7 @@ public Boolean[][] matriz;
 	}
 	
 	public void generarSolucionPredefinida() {
-		
+		matriz[0][0]=true;
 	}
 	
 	public int longitud() {

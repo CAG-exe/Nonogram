@@ -30,7 +30,7 @@ public class NanogramGrilla{
 	private JPanel panelCasillas;
 	private JPanel panelTasksVerticales;
 	private JPanel panelTasksHorizontales;
-
+	private JLabel MensajeFinal;
 	
 	public NanogramGrilla(int tamanio, JPanel panelNanograma) {
 		this.tamanio = tamanio;
