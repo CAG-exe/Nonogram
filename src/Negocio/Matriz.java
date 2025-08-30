@@ -3,9 +3,10 @@ package Negocio;
 import java.util.List;
 import java.util.Random;
 
+
 public class Matriz {
 	
-	public Boolean[][] matriz;
+public Boolean[][] matriz;
 	
 	public Matriz(int tamanio) {
 		if (tamanio <= 0) {
@@ -24,29 +25,23 @@ public class Matriz {
 	}
 
 	public void marcarCasilla(int fila, int columna) {
-		Boolean valor = matriz[fila][columna];
-		if(valor) {
+		Boolean valorBooleano = matriz[fila][columna];
+		if(valorBooleano) {
 			MarcarCasilla(fila,columna);
+		} else {
+			DesmarcarCasilla(fila,columna);
 		}
-		DesmarcarCasilla(fila,columna);
 	}
 	
-	
-	// las casillas desmarcadas en la matriz se muestran con un "0":Claudio
+
 	private void DesmarcarCasilla(int fila, int columna) {
 		matriz[fila][columna]=false;
 	}
-	
-	// las casillas Rellenas en la matriz se muestran con un "0":Claudio
+
 	private void MarcarCasilla(int fila,int columna){
 		matriz[fila][columna]= true;
 	}
 	
-	// las marca con exis en la matriz se muestran con un "2":Claudio
-//	
-//	private void MarcarConEquis(int fila, int columna) {
-//		matriz[fila][columna]=2;
-//	}
 	
 
 	public void generarMatrizSolucion() {

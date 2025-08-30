@@ -3,21 +3,22 @@ package Negocio;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Task {
 
-	private List<String> tareas; //Junta ambas task, la primera mitad es en horizontal, la segunda mitad es en vertical
+	private List<String> tareasTotales; //Junta ambas task, la primera mitad es en horizontal, la segunda mitad es en vertical
 	private List<String> tasksHorizontal;
 	private List<String> tasksVertical;
 	private int tamanio;
 	
 	public Task(Matriz mat,int tamanio) {
-		tareas = new ArrayList<String>(); 
+		tareasTotales = new ArrayList<String>(); 
 		tasksHorizontal = new ArrayList<String>(); 
 		tasksVertical = new ArrayList<String>(); 
 		generarTasks(mat,tamanio);
 	}
 	
-	public List<String> generarTasks(Matriz mat, int tamanio){
+	private List<String> generarTasks(Matriz mat, int tamanio){
 		if (mat == null) {
 			throw new IllegalArgumentException("La matriz no puede ser null");
 		}
@@ -27,29 +28,29 @@ public class Task {
 		}
 		
 		tasksHorizontal.addAll(generarTasksFila(mat, tamanio, true));
-		tareas.addAll(tasksHorizontal);  // Horizontal
+		tareasTotales.addAll(tasksHorizontal);  // Horizontal
 		 
 		tasksVertical.addAll(generarTasksFila(mat, tamanio, false)); // Vertical
-		tareas.addAll(tasksVertical);
+		tareasTotales.addAll(tasksVertical);
 		
-		return tareas;
+		return tareasTotales;
 	}
 	
 	private List<String> generarTasksFila(Matriz mat, int tamanio, boolean esHorizontal){
 		ArrayList<String> tasks = new ArrayList<String>();
 		
-		for(int i = 0; i<tamanio; i++) {
+		for(int fila = 0; fila<tamanio; fila++) {
 			
 			String tarea = "";
 			int contador = 0;
 			
-			for(int f = 0 ; f<tamanio; f++) {
+			for(int columna = 0 ; columna<tamanio; columna++) {
 				
 				boolean valor;
 				if (esHorizontal) {
-	                   valor = mat.consultarMatriz(i, f); // Fila i, Columna j
+	                   valor = mat.consultarMatriz(fila, columna);
 	               } else {
-	                   valor = mat.consultarMatriz(f, i); // Columna i, Fila j
+	                   valor = mat.consultarMatriz(columna, fila);
 	               }
 				
 				if(valor) { // Si es true (negro) entonces suma el contador.
@@ -73,7 +74,10 @@ public class Task {
 			tasks.add(tarea); //Añade el String al task. 
 		}
 		return tasks;
-		
+	}
+	
+	public boolean comprobarIgualdad(Task otroTask) {
+		return otroTask.tareasTotales.equals(tareasTotales);
 	}
 	
 	public List<String> obtenerTasksHorizontales(){
@@ -85,6 +89,6 @@ public class Task {
 	}
 	
 	public List<String> obtenerTodosLosTasks(){
-		return tareas;
+		return tareasTotales;
 	}
 }
