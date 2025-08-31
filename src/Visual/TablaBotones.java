@@ -18,6 +18,7 @@ public class TablaBotones {
 	
 	TablaBotones(JPanel panelCasillas, int tamanio){
 		casillas = new JButton[tamanio][tamanio];
+		this.panelCasillas = panelCasillas;
 		this.tamanio = tamanio;
 	}
 
