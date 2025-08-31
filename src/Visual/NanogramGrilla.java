@@ -103,7 +103,8 @@ public class NanogramGrilla{
 	private void generarCasillas() {
 		panelCasillas.setLayout(new GridLayout(tamanio, tamanio, 0, 0));
 		panelCasillas.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
-		panelCasillas = TablaBotones.generarCasillas(panelCasillas, tamanio);
+		TablaBotones tablaBotones= new TablaBotones(panelCasillas,tamanio);
+		panelCasillas = tablaBotones.generarCasillas();
 		panelCasillas.revalidate();
 		panelCasillas.repaint();
 	}
