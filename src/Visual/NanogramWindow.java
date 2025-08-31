@@ -30,6 +30,7 @@ public class NanogramWindow extends JPanel {
 	private JButton comprobarButton;
 	private JButton volverButton;
 	private JButton pista;
+	private boolean pistaUsada = false;
 
 
 
@@ -80,9 +81,15 @@ public class NanogramWindow extends JPanel {
 		pista.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int[] pista = Controlador.pedirPista();
-				if(pista.length>1)
-					darPista(pista);
+				if (!pistaUsada) {
+					int[] pista = Controlador.pedirPista();
+					if (pista.length > 1) {
+						darPista(pista);
+						pistaUsada = true;
+						NanogramWindow.this.pista.setText("PISTA USADA");
+						NanogramWindow.this.pista.setForeground(Color.BLACK);
+					}
+				}
 			}
 
 			private void darPista(int[] pista) {
