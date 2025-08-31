@@ -11,20 +11,31 @@ import javax.swing.JPanel;
 
 public class TablaBotones {
 	private enum estadoBoton{NEGRO,BLANCO,EQUIS}
+	private JPanel panelCasillas;
+	public JButton[][] casillas;
+	private int tamanio;
+	
+	
+	TablaBotones(JPanel panelCasillas, int tamanio){
+		panelCasillas = new JPanel();
+		casillas = new JButton[tamanio][tamanio];
+		this.tamanio = tamanio;
+	}
 
-	public static JPanel generarCasillas(JPanel panelCasillas, int tamanio) {
-		JButton[][] casillas = new JButton[tamanio][tamanio];
-		for(int i = 0; i<tamanio ; i++) {
-			for(int j = 0; j<tamanio ; j++) {
+	public JPanel generarCasillas() {
+		for(int i = 0; i<this.tamanio ; i++) {
+			for(int j = 0; j<this.tamanio ; j++) {
 				JButton casilla = new JButton();
 				casilla.setBackground(Color.white);
 				casilla.setBorder(BorderFactory.createLineBorder(Color.gray));
 				accionesDeClicACasillas(casilla, i ,j);
 				casillas[i][j] = casilla;
-				panelCasillas.add(casilla);
+				this.casillas[i][j] = casilla;
+				this.panelCasillas.add(casilla);
+
 			}
 		}
-		return panelCasillas;
+		return this.panelCasillas;
 	};
 	
 	
@@ -80,6 +91,11 @@ public class TablaBotones {
 				
 			}
 		});
+		
+	}
+
+	public JButton[][] getBotones() {
+		return casillas; 
 		
 	}
 

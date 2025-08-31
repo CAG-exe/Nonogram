@@ -76,6 +76,7 @@ public class NanogramWindow extends JPanel {
 		panel.add(volverButton);
 		
 		pista = new JButton("PISTA");
+		pista.setBounds(600, 600, 150, 39);
 		pista.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
