@@ -31,11 +31,13 @@ public class NanogramGrilla{
 	private JPanel panelTasksVerticales;
 	private JPanel panelTasksHorizontales;
 	private JLabel MensajeFinal;
+	private JButton[][] BotonesGrilla;
 	
 	public NanogramGrilla(int tamanio, JPanel panelNanograma) {
 		this.tamanio = tamanio;
 		this.panelNanograma = panelNanograma;
 		this.panelNanograma.setLayout(new GridBagLayout());
+		BotonesGrilla = new JButton[tamanio][tamanio];
 		iniciar();
 	}
 	
@@ -119,4 +121,9 @@ public class NanogramGrilla{
 		panel.setLayout(new BorderLayout());
 		return panel;
 	}
+
+	public void darPista(int[] pista) {
+		
+	}
+
 }

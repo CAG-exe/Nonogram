@@ -1,5 +1,6 @@
 package Negocio;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -94,6 +95,27 @@ public Boolean[][] matriz;
 			throw new IllegalArgumentException("Los parametros son invalidos.");
 		}
 	}
-	
 
+	public List<Integer> conseguirMarcada(int fila) {
+		ArrayList<Integer> columnasMarcadas= new ArrayList<Integer>();
+		for(int col=0;col<matriz.length;col++) {
+			if(matriz[fila][col]==true) {
+				columnasMarcadas.add(col);
+			}
+		}
+		return columnasMarcadas;
+	}
+
+	public int conserguirNoMarcadaDe(List<Integer> columnaSolucion, int fila) {
+		columnaSolucion = (ArrayList<Integer>) columnaSolucion;
+		for(Integer columna : columnaSolucion) {
+			if(matriz[fila][columna]==false) {
+				matriz[fila][columna] = true;
+				return columna;
+			}
+		}
+		return -1;
+	}
+
+	
 }

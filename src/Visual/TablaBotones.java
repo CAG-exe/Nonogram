@@ -19,9 +19,7 @@ public class TablaBotones {
 				JButton casilla = new JButton();
 				casilla.setBackground(Color.white);
 				casilla.setBorder(BorderFactory.createLineBorder(Color.gray));
-				
 				accionesDeClicACasillas(casilla, i ,j);
-				
 				casillas[i][j] = casilla;
 				panelCasillas.add(casilla);
 			}
@@ -36,11 +34,13 @@ public class TablaBotones {
                 if (e.getButton() == MouseEvent.BUTTON1) { //Click izquierdo
                     if (casilla.getBackground().equals(Color.white) && casilla.getText() != "X") {
                         casilla.setBackground(Color.black);
+                        System.out.println("casilla:"+ i+" , "+j+"fue marcada");
                         NanogramWindow.sendInfo(i,j);
-                        System.out.println("hola "+i+"tardes "+j);
                         casilla.setText("");
                     } else if (casilla.getBackground().equals(Color.black)) {
                         casilla.setBackground(Color.white);
+                        System.out.println("casilla:"+ i+" , "+j+"fue desmarcada");
+                        NanogramWindow.sendInfo(i,j);
                         casilla.setText("");
                     }
                 } else if (e.getButton() == MouseEvent.BUTTON3) { //Click derecho
@@ -82,5 +82,6 @@ public class TablaBotones {
 		});
 		
 	}
+
 	
 }
