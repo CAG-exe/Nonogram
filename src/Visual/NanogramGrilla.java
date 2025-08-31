@@ -31,6 +31,8 @@ public class NanogramGrilla{
 	private JPanel panelTasksVerticales;
 	private JPanel panelTasksHorizontales;
 	private JLabel MensajeFinal;
+
+	private TablaBotones tablaBotones;
 	
 	public NanogramGrilla(int tamanio, JPanel panelNanograma) {
 		this.tamanio = tamanio;
@@ -103,7 +105,7 @@ public class NanogramGrilla{
 	private void generarCasillas() {
 		panelCasillas.setLayout(new GridLayout(tamanio, tamanio, 0, 0));
 		panelCasillas.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
-		TablaBotones tablaBotones= new TablaBotones(panelCasillas,tamanio);
+		this.tablaBotones= new TablaBotones(panelCasillas,tamanio);
 		panelCasillas = tablaBotones.generarCasillas();
 		panelCasillas.revalidate();
 		panelCasillas.repaint();

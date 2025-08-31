@@ -25,6 +25,7 @@ public class NanogramWindow extends JPanel {
 	private int tamanio = 5;
 	private JPanel panelPrincipal;
 	private JPanel panelNanograma;
+	private TablaBotones tablaBotones;
 	private JButton comprobarButton;
 	private JButton volverButton;
 	private static Nonograma Game;
