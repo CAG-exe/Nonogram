@@ -1,5 +1,6 @@
 package Visual;
 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
@@ -12,13 +13,13 @@ import javax.swing.JPanel;
 public class TablaBotones {
 	private enum estadoBoton{NEGRO,BLANCO,EQUIS}
 	private JPanel panelCasillas;
-	public JButton[][] casillas;
+	public static JButton[][] casillas;
 	private int tamanio;
 	
 	
 	TablaBotones(JPanel panelCasillas, int tamanio){
-		panelCasillas = new JPanel();
 		casillas = new JButton[tamanio][tamanio];
+		this.panelCasillas = panelCasillas;
 		this.tamanio = tamanio;
 	}
 
@@ -28,11 +29,11 @@ public class TablaBotones {
 				JButton casilla = new JButton();
 				casilla.setBackground(Color.white);
 				casilla.setBorder(BorderFactory.createLineBorder(Color.gray));
+				
 				accionesDeClicACasillas(casilla, i ,j);
-				casillas[i][j] = casilla;
+				
 				this.casillas[i][j] = casilla;
 				this.panelCasillas.add(casilla);
-
 			}
 		}
 		return this.panelCasillas;
@@ -45,13 +46,10 @@ public class TablaBotones {
                 if (e.getButton() == MouseEvent.BUTTON1) { //Click izquierdo
                     if (casilla.getBackground().equals(Color.white) && casilla.getText() != "X") {
                         casilla.setBackground(Color.black);
-                        System.out.println("casilla:"+ i+" , "+j+"fue marcada");
                         NanogramWindow.sendInfo(i,j);
                         casilla.setText("");
                     } else if (casilla.getBackground().equals(Color.black)) {
                         casilla.setBackground(Color.white);
-                        System.out.println("casilla:"+ i+" , "+j+"fue desmarcada");
-                        NanogramWindow.sendInfo(i,j);
                         casilla.setText("");
                     }
                 } else if (e.getButton() == MouseEvent.BUTTON3) { //Click derecho
@@ -94,10 +92,9 @@ public class TablaBotones {
 		
 	}
 
-	public JButton[][] getBotones() {
-		return casillas; 
+	public static JButton[][] getCasillas() {
 		
+		return casillas;
 	}
-
 	
 }

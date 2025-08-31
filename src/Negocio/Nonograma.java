@@ -54,21 +54,20 @@ public class Nonograma {
 	}
 	
 	public int[] DarPista() {
-		boolean buscarCasilla=true;
-		while(buscarCasilla) {
+		int buscarCasilla=20;
+		while(buscarCasilla>1) {
 			int fila = generarNumeroEntreFilas();
 			HashSet<Integer> filasVisitadas=new HashSet<Integer>();
 			if(!filasVisitadas.contains(fila)) {
 				ArrayList<Integer> columnaSolucion = (ArrayList<Integer>) matrizSolucion.conseguirMarcada(fila);
 				int columnaEncontrada = matrizJuego.conserguirNoMarcadaDe(columnaSolucion,fila);
 				if(columnaEncontrada != -1) {
-					buscarCasilla=false;
 					return new int[]{fila,columnaEncontrada};
 				}
+				}
+			buscarCasilla--;
 			}
-			filasVisitadas.add(fila);
-			}
-		return null;
+		return new int[] {-1};
 	}
 	
 	private int generarNumeroEntreFilas() {

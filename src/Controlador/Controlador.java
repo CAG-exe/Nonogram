@@ -22,7 +22,7 @@ public class Controlador {
 	
 	public static void InstanciarNonograma(int tamanio) {
 		game=new Nonograma(tamanio);
-		game.generarMatrizSolucionPredefinida();
+		game.generarMatrizSolucion();
 	}
 	
 	public static boolean verificarIgualdad() {

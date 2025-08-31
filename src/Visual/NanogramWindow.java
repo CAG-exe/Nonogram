@@ -22,7 +22,7 @@ import java.awt.event.ActionEvent;
 
 public class NanogramWindow extends JPanel {
 
-	private JButton[][] casillas;
+	private static JButton[][] casillas;
 	private int tamanio = 5;
 	private JPanel panelPrincipal;
 	private JPanel panelNanograma;
@@ -81,8 +81,13 @@ public class NanogramWindow extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int[] pista = Controlador.pedirPista();
-				NanogramaGrilla.darPista(pista);
-				
+				if(pista.length>1)
+					darPista(pista);
+			}
+
+			private void darPista(int[] pista) {
+				if(pista.length ==2) {
+					casillas[pista[0]][pista[1]].setBackground(Color.BLACK);}
 			}
 		});
 		panel.add(pista);
@@ -123,6 +128,12 @@ public class NanogramWindow extends JPanel {
 
 	public static void sendInfo(int row, int col) {
 		Controlador.marcarCasilla(row, col);
+	}
+
+
+	public static void darCasillas(JButton[][] casillas2) {
+		casillas = casillas2;
+		
 	}
 	
 

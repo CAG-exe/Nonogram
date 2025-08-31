@@ -31,7 +31,8 @@ public class NanogramGrilla{
 	private JPanel panelTasksVerticales;
 	private JPanel panelTasksHorizontales;
 	private JLabel MensajeFinal;
-	private JButton[][] BotonesGrilla;
+
+	private TablaBotones tablaBotones;
 	
 	public NanogramGrilla(int tamanio, JPanel panelNanograma) {
 		this.tamanio = tamanio;
@@ -104,9 +105,9 @@ public class NanogramGrilla{
 	private void generarCasillas() {
 		panelCasillas.setLayout(new GridLayout(tamanio, tamanio, 0, 0));
 		panelCasillas.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
-		TablaBotones tablaBotones= new TablaBotones(panelCasillas,tamanio);
+		this.tablaBotones= new TablaBotones(panelCasillas,tamanio);
+		NanogramWindow.darCasillas(TablaBotones.casillas);
 		panelCasillas = tablaBotones.generarCasillas();
-		BotonesGrilla =tablaBotones.getBotones();
 		panelCasillas.revalidate();
 		panelCasillas.repaint();
 	}
@@ -121,10 +122,6 @@ public class NanogramGrilla{
 		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		panel.setLayout(new BorderLayout());
 		return panel;
-	}
-
-	public void darPista(int[] pista) {
-		BotonesGrilla[pista[0]][pista[1]].setBackground(Color.BLACK);
 	}
 
 }
