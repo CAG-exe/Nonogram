@@ -36,6 +36,7 @@ public class NanogramWindow extends JPanel {
 	private JButton comprobarButton;
 	private JButton volverButton;
 	private JButton pista;
+	private JLabel textoPista;
 	private boolean pistaUsada = false;
 
 
@@ -120,19 +121,33 @@ public class NanogramWindow extends JPanel {
 		});
 		panel.add(volverButton);
 		
+		
 		pista = new JButton("PISTA");
 		pista.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (!pistaUsada) {
+				int cantidadPista = Controlador.cantidadPista();
+				if ( cantidadPista >= 1) {
 					int[] pista = Controlador.pedirPista();
 					if (pista.length > 1) {
 						darPista(pista);
-						pistaUsada = true;
-						NanogramWindow.this.pista.setText("PISTA USADA");
-						NanogramWindow.this.pista.setForeground(Color.BLACK);
+						renombrar();
+						usable(cantidadPista);
+						}
+					}
+				}
+				
+			private void usable(int cantidadPista) {
+				if(cantidadPista==1){
+				pista.setText("PISTA USADAS");
+				pista.setEnabled(false);
 				}
 			}
+
+			private void renombrar() {
+				int pistas=Controlador.cantidadPista();
+				pista.setText("PISTA ("+pistas+")");
+				
 			}
 
 			private void darPista(int[] pista) {
@@ -140,6 +155,8 @@ public class NanogramWindow extends JPanel {
 					casillas[pista[0]][pista[1]].setBackground(Color.BLACK);}
 			}
 		});
+		
+		
 		panel.add(pista);
 		
 		JPanel panelNanograma = new JPanel(new GridBagLayout());
@@ -159,22 +176,22 @@ public class NanogramWindow extends JPanel {
 			pista.setBounds(240, 410, 150, 39);
 		}
 		else if(tamanio==10) {
-			this.panelNanograma.setBounds(120, 70, 350, 350);
-			comprobarButton.setBounds(430, 460, 150, 39);
-			volverButton.setBounds(20, 460, 150, 39);
-			pista.setBounds(225, 460, 150, 39);
+			this.panelNanograma.setBounds(120, 100, 350, 350);
+			comprobarButton.setBounds(430, 490, 150, 39);
+			volverButton.setBounds(20, 490, 150, 39);
+			pista.setBounds(225, 490, 150, 39);
 		}
 		else if(tamanio==15) {
-			this.panelNanograma.setBounds(140, 80, 500, 500);
-			comprobarButton.setBounds(620, 610, 150, 39);
-			volverButton.setBounds(40, 610, 150, 39);
-			pista.setBounds(325, 610, 150, 39);
+			this.panelNanograma.setBounds(140, 110, 500, 500);
+			comprobarButton.setBounds(620, 640, 150, 39);
+			volverButton.setBounds(40, 640, 150, 39);
+			pista.setBounds(325, 640, 150, 39);
 		}
 		else {
-			this.panelNanograma.setBounds(140, 80, 550, 550);
-			comprobarButton.setBounds(650, 660, 150, 39);
-			volverButton.setBounds(40, 660, 150, 39);
-			pista.setBounds(335, 660, 150, 39);
+			this.panelNanograma.setBounds(140, 110, 550, 550);
+			comprobarButton.setBounds(650, 690, 150, 39);
+			volverButton.setBounds(40, 690, 150, 39);
+			pista.setBounds(335, 690, 150, 39);
 			
 		}
 	}

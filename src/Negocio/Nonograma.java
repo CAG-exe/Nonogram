@@ -11,11 +11,13 @@ public class Nonograma {
 	private Matriz matrizJuego;
 	private Task tasksSolucion; 
 	private Task tasksMatrizDelJugador;
-	private int tamanio = 5; 
+	private int tamanio = 5;
+	private int pista;
 	
 	public Nonograma(int size) {
 		matrizJuego =new Matriz(size);
-		matrizSolucion =new Matriz(size); 
+		matrizSolucion =new Matriz(size);
+		pista= setPista(size);
 	}
 
 	//le pide a la clase matriz que marque la matriz juego
@@ -62,6 +64,7 @@ public class Nonograma {
 				ArrayList<Integer> columnaSolucion = (ArrayList<Integer>) matrizSolucion.conseguirMarcada(fila);
 				int columnaEncontrada = matrizJuego.conserguirNoMarcadaDe(columnaSolucion,fila);
 				if(columnaEncontrada != -1) {
+					pista--;
 					return new int[]{fila,columnaEncontrada};
 				}
 				filasVisitadas.add(fila);
@@ -75,6 +78,20 @@ public class Nonograma {
 		return (int)(Math.random()*matrizJuego.longitud());
 	}
 
+	private int setPista(int size) {
+		if(size==5)
+			return 3;
+		else if(size==10)
+			return 5;
+		else if(size == 15)
+			return 7;
+		else 
+			return 10;
+	}
+
+	public int getPista() {
+		return pista;
+	}
 
 }
 
