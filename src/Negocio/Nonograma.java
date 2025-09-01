@@ -75,5 +75,6 @@ public class Nonograma {
 		return (int)(Math.random()*matrizJuego.longitud());
 	}
 
+
 }
 
