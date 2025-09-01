@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -39,6 +40,7 @@ public class NonogramWindow extends JPanel {
 	private JButton pista;
 	private JButton solucionBoton;
 	private boolean pistaUsada = false;
+	private JButton volverButton2;
 
 
 
@@ -138,6 +140,24 @@ public class NonogramWindow extends JPanel {
 		});
 		panel.add(volverButton);
 		
+		//------------BOTON VOLVER EN EL JUEGO-------------------------
+		volverButton2 = new JButton("Volver al Menú");
+		volverButton2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int opcion = JOptionPane.showConfirmDialog(
+					null,
+					"¿Estás seguro de que quieres volver? ¡Perderás el progreso actual!",
+					"",
+					JOptionPane.YES_NO_OPTION
+				);
+
+				if (opcion == JOptionPane.YES_OPTION) {
+					Interfaz.volverAlMenu();
+				}
+				// Si selecciona NO, no hace nada y continúa en el juego
+			}
+		});
+		panel.add(volverButton2);
 		
 		
 		//----------------BOTON DE PISTA-------------------------
@@ -195,28 +215,28 @@ public class NonogramWindow extends JPanel {
 		if(tamanio==5) {
 			this.panelNonograma.setBounds(180, 100, 250, 250);
 			comprobarButton.setBounds(450, 410, 150, 39);
-			volverButton.setBounds(30, 410, 150, 39);
+			volverButton2.setBounds(30, 410, 150, 39);
 			pista.setBounds(240, 410, 150, 39);
 			solucionBoton.setBounds(240, 460, 150, 39);
 		}
 		else if(tamanio==10) {
 			this.panelNonograma.setBounds(120, 70, 350, 350);
 			comprobarButton.setBounds(430, 460, 150, 39);
-			volverButton.setBounds(20, 460, 150, 39);
+			volverButton2.setBounds(20, 460, 150, 39);
 			pista.setBounds(225, 460, 150, 39);
 			solucionBoton.setBounds(225, 510, 150, 39);
 		}
 		else if(tamanio==15) {
 			this.panelNonograma.setBounds(140, 80, 500, 500);
 			comprobarButton.setBounds(620, 610, 150, 39);
-			volverButton.setBounds(40, 610, 150, 39);
+			volverButton2.setBounds(40, 610, 150, 39);
 			pista.setBounds(325, 610, 150, 39);
 			solucionBoton.setBounds(325, 660, 150, 39);
 		}
 		else {
 			this.panelNonograma.setBounds(140, 80, 550, 550);
 			comprobarButton.setBounds(650, 660, 150, 39);
-			volverButton.setBounds(40, 660, 150, 39);
+			volverButton2.setBounds(40, 660, 150, 39);
 			pista.setBounds(335, 660, 150, 39);
 			solucionBoton.setBounds(335, 710, 150, 39);
 			
