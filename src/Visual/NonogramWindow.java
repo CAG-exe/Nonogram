@@ -19,7 +19,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.InputStream;
 import java.awt.event.ActionEvent;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class NonogramWindow extends JPanel {
 
@@ -41,6 +47,41 @@ public class NonogramWindow extends JPanel {
 		initialize(tamanio);
 		Controlador.InstanciarNonograma(tamanio);
 		NonogramaGrilla = new NonogramGrilla(tamanio, panelNonograma);
+	}
+	
+	private void reproducirSonidoVictoria() {
+		try {
+			InputStream sonido = Class.class.getResourceAsStream("/media/sound_victory.wav");
+		    if (sonido == null) {
+		        System.out.println("No se pudo encontrar el archivo");
+		        return;
+		    }
+		    
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(sonido);
+			Clip clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+			clip.start();
+		}
+		catch (Exception e) {
+		    System.out.println(e);
+		}	
+	}
+	private void reproducirSonidoDerrota() {
+		try {
+			InputStream sonido = Class.class.getResourceAsStream("/media/sound_lost1.wav");
+		    if (sonido == null) {
+		        System.out.println("No se pudo encontrar el archivo");
+		        return;
+		    }
+		    
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(sonido);
+			Clip clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+			clip.start();
+		}
+		catch (Exception e) {
+		    System.out.println(e);
+		}	
 	}
 
 
@@ -67,9 +108,11 @@ public class NonogramWindow extends JPanel {
 		comprobarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pistaUsada = true;
+				reproducirSonidoDerrota();
 				if(Controlador.verificarIgualdad()) {
 					MensajeFinal.setVisible(true);
 					comprobarButton.setVisible(false);
+					reproducirSonidoVictoria();
 				}
 			}
 		});
@@ -90,7 +133,6 @@ public class NonogramWindow extends JPanel {
 		
 		//----------------BOTON DE PISTA-------------------------
 		pista = new JButton("PISTA");
-		pista.setBounds(5, 300, 150, 39);
 		pista.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -116,8 +158,7 @@ public class NonogramWindow extends JPanel {
 		
 		
 		/////-------------------------BOTON DE SOLUCION-----------------------
-		solucionBoton = new JButton("Solución");
-		solucionBoton.setBounds(10, 500, 150, 39);
+		solucionBoton = new JButton("Ver solución");
 		solucionBoton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -144,23 +185,31 @@ public class NonogramWindow extends JPanel {
 	private void cambioDeTmanioBounds(int tamanio) {
 		if(tamanio==5) {
 			this.panelNonograma.setBounds(180, 100, 250, 250);
-			comprobarButton.setBounds(354, 410, 106, 39);
-			volverButton.setBounds(90, 410, 150, 39);
+			comprobarButton.setBounds(450, 410, 150, 39);
+			volverButton.setBounds(30, 410, 150, 39);
+			pista.setBounds(240, 410, 150, 39);
+			solucionBoton.setBounds(240, 460, 150, 39);
 		}
 		else if(tamanio==10) {
 			this.panelNonograma.setBounds(120, 70, 350, 350);
-			comprobarButton.setBounds(374, 430, 106, 39);
-			volverButton.setBounds(90, 430, 150, 39);
+			comprobarButton.setBounds(430, 460, 150, 39);
+			volverButton.setBounds(20, 460, 150, 39);
+			pista.setBounds(225, 460, 150, 39);
+			solucionBoton.setBounds(225, 510, 150, 39);
 		}
 		else if(tamanio==15) {
 			this.panelNonograma.setBounds(140, 80, 500, 500);
-			comprobarButton.setBounds(504, 610, 106, 39);
-			volverButton.setBounds(180, 610, 150, 39);
+			comprobarButton.setBounds(620, 610, 150, 39);
+			volverButton.setBounds(40, 610, 150, 39);
+			pista.setBounds(325, 610, 150, 39);
+			solucionBoton.setBounds(325, 660, 150, 39);
 		}
 		else {
 			this.panelNonograma.setBounds(140, 80, 550, 550);
-			comprobarButton.setBounds(474, 660, 106, 39);
-			volverButton.setBounds(170, 660, 150, 39);
+			comprobarButton.setBounds(650, 660, 150, 39);
+			volverButton.setBounds(40, 660, 150, 39);
+			pista.setBounds(335, 660, 150, 39);
+			solucionBoton.setBounds(335, 710, 150, 39);
 			
 		}
 	}
