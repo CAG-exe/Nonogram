@@ -18,7 +18,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.InputStream;
 import java.awt.event.ActionEvent;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class NanogramWindow extends JPanel {
 
@@ -39,6 +45,41 @@ public class NanogramWindow extends JPanel {
 		initialize(tamanio);
 		Controlador.InstanciarNonograma(tamanio);
 		NanogramaGrilla = new NanogramGrilla(tamanio, panelNanograma);
+	}
+	
+	private void reproducirSonidoVictoria() {
+		try {
+			InputStream sonido = Class.class.getResourceAsStream("/media/sound_victory.wav");
+		    if (sonido == null) {
+		        System.out.println("No se pudo encontrar el archivo");
+		        return;
+		    }
+		    
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(sonido);
+			Clip clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+			clip.start();
+		}
+		catch (Exception e) {
+		    System.out.println(e);
+		}	
+	}
+	private void reproducirSonidoDerrota() {
+		try {
+			InputStream sonido = Class.class.getResourceAsStream("/media/sound_lost1.wav");
+		    if (sonido == null) {
+		        System.out.println("No se pudo encontrar el archivo");
+		        return;
+		    }
+		    
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(sonido);
+			Clip clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+			clip.start();
+		}
+		catch (Exception e) {
+		    System.out.println(e);
+		}	
 	}
 
 
@@ -61,9 +102,11 @@ public class NanogramWindow extends JPanel {
 		comprobarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pistaUsada = true;
+				reproducirSonidoDerrota();
 				if(Controlador.verificarIgualdad()) {
 					MensajeFinal.setVisible(true);
 					comprobarButton.setVisible(false);
+					reproducirSonidoVictoria();
 				}
 			}
 		});
@@ -88,8 +131,8 @@ public class NanogramWindow extends JPanel {
 						pistaUsada = true;
 						NanogramWindow.this.pista.setText("PISTA USADA");
 						NanogramWindow.this.pista.setForeground(Color.BLACK);
-					}
 				}
+			}
 			}
 
 			private void darPista(int[] pista) {
