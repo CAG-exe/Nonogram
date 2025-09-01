@@ -34,10 +34,13 @@ public class Controlador {
 	}
 	
 	public static int[] pedirPista() {
+
 		return game.DarPista();
 		}
 
 	public static int cantidadPista() {
 		return game.getPista();
 	}
-	}
+
+
+}
