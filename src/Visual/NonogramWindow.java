@@ -51,7 +51,7 @@ public class NonogramWindow extends JPanel {
 	
 	private void reproducirSonidoVictoria() {
 		try {
-			InputStream sonido = Class.class.getResourceAsStream("/media/sound_victory.wav");
+			InputStream sonido = getClass().getResourceAsStream("/media/sound_victory.wav");
 		    if (sonido == null) {
 		        System.out.println("No se pudo encontrar el archivo");
 		        return;
@@ -89,9 +89,14 @@ public class NonogramWindow extends JPanel {
 
 		setLayout(new BorderLayout());
 		JLabel MensajeFinal=new JLabel("");
-		MensajeFinal.setText("Hola");
+		MensajeFinal.setText("FELICIDADES GANASTE");
 		MensajeFinal.setFont(new Font("Tahoma", Font.BOLD, 13));
 		MensajeFinal.setBounds(404, 430, 106, 39);
+		
+		JLabel MensajeDerrota=new JLabel("");
+		MensajeDerrota.setText("FELICIDADES PERDISTE");
+		MensajeDerrota.setFont(new Font("Tahoma", Font.BOLD, 13));
+		MensajeDerrota.setBounds(424, 410, 196, 39);
 		
 		JPanel panel = new JPanel();
 		this.panelPrincipal = panel;
@@ -100,6 +105,8 @@ public class NonogramWindow extends JPanel {
 		panelPrincipal.setBackground(new Color(137, 108, 108));
 		panelPrincipal.add(MensajeFinal);
 		MensajeFinal.setVisible(false);
+		panelPrincipal.add(MensajeDerrota);
+		MensajeDerrota.setVisible(false);
 		
 		
 		
@@ -109,6 +116,8 @@ public class NonogramWindow extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				pistaUsada = true;
 				reproducirSonidoDerrota();
+				MensajeDerrota.setVisible(true);
+				comprobarButton.setVisible(false);
 				if(Controlador.verificarIgualdad()) {
 					MensajeFinal.setVisible(true);
 					comprobarButton.setVisible(false);
