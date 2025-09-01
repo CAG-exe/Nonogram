@@ -64,6 +64,7 @@ public class Nonograma {
 				if(columnaEncontrada != -1) {
 					return new int[]{fila,columnaEncontrada};
 				}
+				filasVisitadas.add(fila);
 				}
 			buscarCasilla--;
 			}
