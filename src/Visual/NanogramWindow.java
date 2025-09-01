@@ -60,6 +60,7 @@ public class NanogramWindow extends JPanel {
 		comprobarButton = new JButton("Comprobar");
 		comprobarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				pistaUsada = true;
 				if(Controlador.verificarIgualdad()) {
 					MensajeFinal.setVisible(true);
 					comprobarButton.setVisible(false);
