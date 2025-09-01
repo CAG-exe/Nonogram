@@ -34,6 +34,6 @@ public class Controlador {
 	}
 	
 	public static int[] pedirPista() {
-		return game.DarPista();
-		}
+		return game.DarPista();		
 	}
+}

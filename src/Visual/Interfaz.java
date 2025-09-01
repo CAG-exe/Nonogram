@@ -69,7 +69,7 @@ public class Interfaz extends JFrame{
 	public static void abrirJuego(int tamanio) {
 		try {
 			frame.setTitle("Nonograma-Juego");
-			juego = new NanogramWindow(tamanio);
+			juego = new NonogramWindow(tamanio);
 			cambiarDePanel(juego);
 			if(tamanio==15)
 				frame.setBounds(530, 130, 826, 800);
@@ -82,6 +82,9 @@ public class Interfaz extends JFrame{
 		}
 		
 	}
+	
+	
+	
 	private static void cambiarDePanel(JPanel panel) {
 		frame.getContentPane().removeAll();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);

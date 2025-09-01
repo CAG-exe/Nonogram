@@ -46,7 +46,7 @@ public class TablaBotones {
                 if (e.getButton() == MouseEvent.BUTTON1) { //Click izquierdo
                     if (casilla.getBackground().equals(Color.white) && casilla.getText() != "X") {
                         casilla.setBackground(Color.black);
-                        NanogramWindow.sendInfo(i,j);
+                        NonogramWindow.sendInfo(i,j);
                         casilla.setText("");
                     } else if (casilla.getBackground().equals(Color.black)) {
                         casilla.setBackground(Color.white);

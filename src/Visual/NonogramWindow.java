@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,25 +21,26 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class NanogramWindow extends JPanel {
+public class NonogramWindow extends JPanel {
 
 	private static JButton[][] casillas;
 	private int tamanio = 5;
 	private JPanel panelPrincipal;
-	private JPanel panelNanograma;
-	private NanogramGrilla NanogramaGrilla;
+	private JPanel panelNonograma;
+	private NonogramGrilla NonogramaGrilla;
 	private JButton comprobarButton;
 	private JButton volverButton;
 	private JButton pista;
+	private JButton solucionBoton;
 	private boolean pistaUsada = false;
 
 
 
-	public NanogramWindow(int tamanio) {
+	public NonogramWindow(int tamanio) {
 		this.tamanio = tamanio;
 		initialize(tamanio);
 		Controlador.InstanciarNonograma(tamanio);
-		NanogramaGrilla = new NanogramGrilla(tamanio, panelNanograma);
+		NonogramaGrilla = new NonogramGrilla(tamanio, panelNonograma);
 	}
 
 
@@ -57,6 +59,10 @@ public class NanogramWindow extends JPanel {
 		panelPrincipal.setBackground(new Color(137, 108, 108));
 		panelPrincipal.add(MensajeFinal);
 		MensajeFinal.setVisible(false);
+		
+		
+		
+		//-------------------BOTON COMPROBAR-------------------
 		comprobarButton = new JButton("Comprobar");
 		comprobarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -69,6 +75,9 @@ public class NanogramWindow extends JPanel {
 		});
 		panel.add(comprobarButton);
 		
+		
+		
+		//------------BOTON VOLVER-------------------------
 		volverButton = new JButton("Volver al Menú");
 		volverButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -77,6 +86,9 @@ public class NanogramWindow extends JPanel {
 		});
 		panel.add(volverButton);
 		
+		
+		
+		//----------------BOTON DE PISTA-------------------------
 		pista = new JButton("PISTA");
 		pista.setBounds(5, 300, 150, 39);
 		pista.addActionListener(new ActionListener() {
@@ -87,8 +99,9 @@ public class NanogramWindow extends JPanel {
 					if (pista.length > 1) {
 						darPista(pista);
 						pistaUsada = true;
-						NanogramWindow.this.pista.setText("PISTA USADA");
-						NanogramWindow.this.pista.setForeground(Color.BLACK);
+						solucionBoton.setVisible(true);
+						NonogramWindow.this.pista.setText("PISTA USADA");
+						NonogramWindow.this.pista.setForeground(Color.BLACK);
 					}
 				}
 			}
@@ -100,8 +113,27 @@ public class NanogramWindow extends JPanel {
 		});
 		panel.add(pista);
 		
+		
+		
+		/////-------------------------BOTON DE SOLUCION-----------------------
+		solucionBoton = new JButton("Solución");
+		solucionBoton.setBounds(10, 500, 150, 39);
+		solucionBoton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Boolean[][] matriz = new Boolean[5][5];
+				Solucion ventanaSolucion = new Solucion(matriz,tamanio,NonogramaGrilla.obtenerPanelTasksVerticales(), NonogramaGrilla.obtenerPanelTasksHorizontales());
+				ventanaSolucion.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				ventanaSolucion.setVisible(true);
+			}
+		});
+		panel.add(solucionBoton);
+		solucionBoton.setVisible(false);
+		
+		
+		
 		JPanel panelNanograma = new JPanel(new GridBagLayout());
-		this.panelNanograma = panelNanograma;
+		this.panelNonograma = panelNanograma;
 		cambioDeTmanioBounds(tamanio);
 		panel.add(panelNanograma);
 		panelNanograma.setLayout(new GridLayout(5, 5, 0, 0));
@@ -111,22 +143,22 @@ public class NanogramWindow extends JPanel {
 
 	private void cambioDeTmanioBounds(int tamanio) {
 		if(tamanio==5) {
-			this.panelNanograma.setBounds(180, 100, 250, 250);
+			this.panelNonograma.setBounds(180, 100, 250, 250);
 			comprobarButton.setBounds(354, 410, 106, 39);
 			volverButton.setBounds(90, 410, 150, 39);
 		}
 		else if(tamanio==10) {
-			this.panelNanograma.setBounds(120, 70, 350, 350);
+			this.panelNonograma.setBounds(120, 70, 350, 350);
 			comprobarButton.setBounds(374, 430, 106, 39);
 			volverButton.setBounds(90, 430, 150, 39);
 		}
 		else if(tamanio==15) {
-			this.panelNanograma.setBounds(140, 80, 500, 500);
+			this.panelNonograma.setBounds(140, 80, 500, 500);
 			comprobarButton.setBounds(504, 610, 106, 39);
 			volverButton.setBounds(180, 610, 150, 39);
 		}
 		else {
-			this.panelNanograma.setBounds(140, 80, 550, 550);
+			this.panelNonograma.setBounds(140, 80, 550, 550);
 			comprobarButton.setBounds(474, 660, 106, 39);
 			volverButton.setBounds(170, 660, 150, 39);
 			

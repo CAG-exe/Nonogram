@@ -23,7 +23,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
-public class NanogramGrilla{
+public class NonogramGrilla{
 	private int tamanio;
 	private JPanel panelNanograma;
 	private JPanel[] panelesGrupo; //Contiene los paneles de casillas y los tasks
@@ -34,7 +34,7 @@ public class NanogramGrilla{
 
 	private TablaBotones tablaBotones;
 	
-	public NanogramGrilla(int tamanio, JPanel panelNanograma) {
+	public NonogramGrilla(int tamanio, JPanel panelNanograma) {
 		this.tamanio = tamanio;
 		this.panelNanograma = panelNanograma;
 		this.panelNanograma.setLayout(new GridBagLayout());
@@ -106,7 +106,7 @@ public class NanogramGrilla{
 		panelCasillas.setLayout(new GridLayout(tamanio, tamanio, 0, 0));
 		panelCasillas.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
 		this.tablaBotones= new TablaBotones(panelCasillas,tamanio);
-		NanogramWindow.darCasillas(TablaBotones.casillas);
+		NonogramWindow.darCasillas(TablaBotones.casillas);
 		panelCasillas = tablaBotones.generarCasillas();
 		panelCasillas.revalidate();
 		panelCasillas.repaint();
@@ -123,5 +123,12 @@ public class NanogramGrilla{
 		panel.setLayout(new BorderLayout());
 		return panel;
 	}
-
+	
+	public JPanel obtenerPanelTasksVerticales() {
+		return panelTasksVerticales;
+	}
+	
+	public JPanel obtenerPanelTasksHorizontales() {
+		return panelTasksHorizontales;
+	}
 }
