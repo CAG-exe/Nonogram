@@ -1,5 +1,8 @@
 package Negocio;
 
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Nonograma {
@@ -48,7 +51,27 @@ public class Nonograma {
 
 	public void generarMatrizSolucionPredefinida() {
 		matrizSolucion.generarSolucionPredefinida();
-		
+	}
+	
+	public int[] DarPista() {
+		int buscarCasilla=20;
+		while(buscarCasilla>1) {
+			int fila = generarNumeroEntreFilas();
+			HashSet<Integer> filasVisitadas=new HashSet<Integer>();
+			if(!filasVisitadas.contains(fila)) {
+				ArrayList<Integer> columnaSolucion = (ArrayList<Integer>) matrizSolucion.conseguirMarcada(fila);
+				int columnaEncontrada = matrizJuego.conserguirNoMarcadaDe(columnaSolucion,fila);
+				if(columnaEncontrada != -1) {
+					return new int[]{fila,columnaEncontrada};
+				}
+				}
+			buscarCasilla--;
+			}
+		return new int[] {-1};
+	}
+	
+	private int generarNumeroEntreFilas() {
+		return (int)(Math.random()*matrizJuego.longitud());
 	}
 
 

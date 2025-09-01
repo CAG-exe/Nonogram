@@ -1,5 +1,6 @@
 package Visual;
 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
@@ -11,31 +12,41 @@ import javax.swing.JPanel;
 
 public class TablaBotones {
 	private enum estadoBoton{NEGRO,BLANCO,EQUIS}
+	private JPanel panelCasillas;
+	public static JButton[][] casillas;
+	private int tamanio;
+	
+	
+	TablaBotones(JPanel panelCasillas, int tamanio){
+		casillas = new JButton[tamanio][tamanio];
+		this.panelCasillas = panelCasillas;
+		this.tamanio = tamanio;
+	}
 
-	public static JPanel generarCasillas(JPanel panelCasillas, int tamanio) {
-		JButton[][] casillas = new JButton[tamanio][tamanio];
-		for(int i = 0; i<tamanio ; i++) {
-			for(int j = 0; j<tamanio ; j++) {
+	public JPanel generarCasillas() {
+		for(int i = 0; i<this.tamanio ; i++) {
+			for(int j = 0; j<this.tamanio ; j++) {
 				JButton casilla = new JButton();
 				casilla.setBackground(Color.white);
 				casilla.setBorder(BorderFactory.createLineBorder(Color.gray));
 				
-				accionesDeClicACasillas(casilla);
+				accionesDeClicACasillas(casilla, i ,j);
 				
-				casillas[i][j] = casilla;
-				panelCasillas.add(casilla);
+				this.casillas[i][j] = casilla;
+				this.panelCasillas.add(casilla);
 			}
 		}
-		return panelCasillas;
+		return this.panelCasillas;
 	};
 	
 	
-	private static void accionesDeClicACasillas(JButton casilla) {
+	private static void accionesDeClicACasillas(JButton casilla,int i,int j) {
     	casilla.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) { //Click izquierdo
                     if (casilla.getBackground().equals(Color.white) && casilla.getText() != "X") {
                         casilla.setBackground(Color.black);
+                        NanogramWindow.sendInfo(i,j);
                         casilla.setText("");
                     } else if (casilla.getBackground().equals(Color.black)) {
                         casilla.setBackground(Color.white);
@@ -79,6 +90,11 @@ public class TablaBotones {
 			}
 		});
 		
+	}
+
+	public static JButton[][] getCasillas() {
+		
+		return casillas;
 	}
 	
 }

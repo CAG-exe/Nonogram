@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import Controlador.Controlador;
 import Negocio.Nonograma;
 
 import java.awt.BorderLayout;
@@ -21,49 +22,26 @@ import java.awt.event.ActionEvent;
 
 public class NanogramWindow extends JPanel {
 
-	private JButton[][] casillas;
+	private static JButton[][] casillas;
 	private int tamanio = 5;
 	private JPanel panelPrincipal;
 	private JPanel panelNanograma;
+	private NanogramGrilla NanogramaGrilla;
 	private JButton comprobarButton;
 	private JButton volverButton;
-	private static Nonograma Game;
+	private JButton pista;
+	private boolean pistaUsada = false;
 
-	/**
-	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					JFrame juegoNonograma = new JFrame("Nonograma");
-//					NanogramWindow window = new NanogramWindow(5);
-//					juegoNonograma.add(window);
-//					juegoNonograma.setBounds(100, 100, 626, 600);
-//					juegoNonograma.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//					juegoNonograma.setLocationRelativeTo(null);
-//					juegoNonograma.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
-	/**
-	 * Create the application.
-	 */
+
 	public NanogramWindow(int tamanio) {
 		this.tamanio = tamanio;
 		initialize(tamanio);
-		Game = new Nonograma(tamanio);
-		Game.generarMatrizSolucionPredefinida();
-		NanogramGrilla nanogramaGrilla = new NanogramGrilla(tamanio, panelNanograma);
+		Controlador.InstanciarNonograma(tamanio);
+		NanogramaGrilla = new NanogramGrilla(tamanio, panelNanograma);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+
 	private void initialize(int tamanio) {
 
 		setLayout(new BorderLayout());
@@ -82,7 +60,8 @@ public class NanogramWindow extends JPanel {
 		comprobarButton = new JButton("Comprobar");
 		comprobarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(Game.verificarIgualdad()) {
+				pistaUsada = true;
+				if(Controlador.verificarIgualdad()) {
 					MensajeFinal.setVisible(true);
 					comprobarButton.setVisible(false);
 				}
@@ -97,6 +76,29 @@ public class NanogramWindow extends JPanel {
 			}
 		});
 		panel.add(volverButton);
+		
+		pista = new JButton("PISTA");
+		pista.setBounds(5, 300, 150, 39);
+		pista.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (!pistaUsada) {
+					int[] pista = Controlador.pedirPista();
+					if (pista.length > 1) {
+						darPista(pista);
+						pistaUsada = true;
+						NanogramWindow.this.pista.setText("PISTA USADA");
+						NanogramWindow.this.pista.setForeground(Color.BLACK);
+					}
+				}
+			}
+
+			private void darPista(int[] pista) {
+				if(pista.length ==2) {
+					casillas[pista[0]][pista[1]].setBackground(Color.BLACK);}
+			}
+		});
+		panel.add(pista);
 		
 		JPanel panelNanograma = new JPanel(new GridBagLayout());
 		this.panelNanograma = panelNanograma;
@@ -130,9 +132,16 @@ public class NanogramWindow extends JPanel {
 			
 		}
 	}
+	
 
 	public static void sendInfo(int row, int col) {
-		Game.marcarCasilla(row, col);
+		Controlador.marcarCasilla(row, col);
+	}
+
+
+	public static void darCasillas(JButton[][] casillas2) {
+		casillas = casillas2;
+		
 	}
 	
 

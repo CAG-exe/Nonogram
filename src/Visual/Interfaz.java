@@ -34,33 +34,7 @@ public class Interfaz extends JFrame{
 	private JPanel tutorial;
 	private static JPanel juego;
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Interfaz window = new Interfaz();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
 	public Interfaz() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
 		frame = new JFrame("Nonograma-Menu");
         frame.setBounds(100,100,800, 640);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,12 +42,11 @@ public class Interfaz extends JFrame{
         ImageIcon favicon = new ImageIcon(getClass().getResource("/media/icon.png"));
         frame.setIconImage(favicon.getImage());
         
-        // Creá una instancia del panel del menú
-        Menu menu = new Menu(); // Asumiendo que PanelMenu hereda de JPane
+        Menu menu = new Menu(); 
         menu.ComoJugarButton.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		cambiarDePanel(tutorial);
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        	cambiarDePanel(tutorial);
         	}
         });
     
@@ -95,6 +68,7 @@ public class Interfaz extends JFrame{
 	
 	public static void abrirJuego(int tamanio) {
 		try {
+			frame.setTitle("Nonograma-Juego");
 			juego = new NanogramWindow(tamanio);
 			cambiarDePanel(juego);
 			if(tamanio==15)
