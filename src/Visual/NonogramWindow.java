@@ -53,7 +53,7 @@ public class NonogramWindow extends JPanel {
 	
 	private void reproducirSonidoVictoria() {
 		try {
-			InputStream sonido = getClass().getResourceAsStream("/media/sound_victory.wav");
+			InputStream sonido = Class.class.getResourceAsStream("/media/sound_victory.wav");
 		    if (sonido == null) {
 		        System.out.println("No se pudo encontrar el archivo");
 		        return;
@@ -165,16 +165,28 @@ public class NonogramWindow extends JPanel {
 		pista.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (!pistaUsada) {
+				int cantidadPista = Controlador.cantidadPista();
+				if ( cantidadPista >= 1) {
 					int[] pista = Controlador.pedirPista();
 					if (pista.length > 1) {
 						darPista(pista);
-						pistaUsada = true;
-						solucionBoton.setVisible(true);
-						NonogramWindow.this.pista.setText("PISTA USADA");
-						NonogramWindow.this.pista.setForeground(Color.BLACK);
+						renombrar();
+						usable(cantidadPista);
+						}
 					}
 				}
+				
+			private void usable(int cantidadPista) {
+				if(cantidadPista==1){
+				pista.setText("PISTA USADAS");
+				pista.setEnabled(false);
+				}
+			}
+
+			private void renombrar() {
+				int pistas=Controlador.cantidadPista();
+				pista.setText("PISTA ("+pistas+")");
+				
 			}
 
 			private void darPista(int[] pista) {
@@ -182,6 +194,7 @@ public class NonogramWindow extends JPanel {
 					casillas[pista[0]][pista[1]].setBackground(Color.BLACK);}
 			}
 		});
+		
 		panel.add(pista);
 		
 		
