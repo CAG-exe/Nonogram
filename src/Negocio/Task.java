@@ -77,7 +77,7 @@ public class Task {
 		return tasks;
 	}
 	
-	// Muestra los valores e las pistas para mostrar a la izquierda
+	// Obtiene los valores e las pistas para mostrar a la izquierda
 	public String[] getPistasFilas() {
 	    return tasksHorizontal.toArray(new String[0]);
 	}
