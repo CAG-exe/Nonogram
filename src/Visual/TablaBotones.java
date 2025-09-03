@@ -55,7 +55,8 @@ public class TablaBotones {
                         casilla.setBackground(Color.white);
                         casilla.setText("");
                     }
-                } else if (e.getButton() == MouseEvent.BUTTON3) { //Click derecho
+                } }
+                else if (e.getButton() == MouseEvent.BUTTON3) { //Click derecho
                     if (casilla.getText().equals("X")) {
                         casilla.setText("");
                         casilla.setBackground(Color.white);
@@ -66,7 +67,6 @@ public class TablaBotones {
                         casilla.setFont(new Font("Arial", Font.BOLD, 24));
                     }
 				}
-                }
 			}
 
 			@Override

@@ -42,7 +42,7 @@ public class ControladorPrincipal {
 	}
 	
 	public static boolean verificarRespuestaCorrecta() {
-		return gameModel.verificarIgualdad();
+		return gameModel.comprobarSolucionDelJugador();
 	}
 	
 	public static void marcarCasilla(int row, int col) {
