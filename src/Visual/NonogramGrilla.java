@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
 
 import Controlador.ControladorPrincipal;
 
@@ -65,22 +66,30 @@ public class NonogramGrilla{
 		for(String task : tasks) {
 			JLabel textoParaTask = new JLabel();
 			textoParaTask.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+			textoParaTask.setHorizontalAlignment(SwingConstants.CENTER);
+	        textoParaTask.setVerticalAlignment(SwingConstants.CENTER);
 			textoParaTask.setText(task);
 			panelTasksHorizontales.add(textoParaTask);
 		}
 	}
 
 	private void colocarTasksVerticales() {
-		panelTasksVerticales.setLayout(new GridLayout(1, tamanio, 0, 0));
+	    panelTasksVerticales.setLayout(new GridLayout(1, tamanio, 0, 0));
 	    ArrayList<String> tasks = (ArrayList<String>) controladorPrincipal.obtenerListaDeTasksVerticalesDelNonograma();
-	    for (String task : tasks) {
-			JLabel textoParaTask = new JLabel();
-			textoParaTask.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-			textoParaTask.setText(task);
-			panelTasksVerticales.add(textoParaTask);
-		}
-	}
 
+	    for (String task : tasks) {
+	        JPanel columna = new JPanel(new GridLayout(0, 1));
+	        columna.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+
+	        String[] numeros = task.split(" ");
+	        for (String numero : numeros) {
+	            JLabel lbl = new JLabel(numero, SwingConstants.CENTER);
+	            columna.add(lbl);
+	        }
+
+	        panelTasksVerticales.add(columna);
+	    }
+	}
 	private void crearPanelesDelNanograma() {
 		GridBagConstraints gbc = new GridBagConstraints();
 	    gbc.fill = GridBagConstraints.BOTH; // Que ocupen todo el espacio disponible
