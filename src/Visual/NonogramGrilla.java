@@ -71,7 +71,14 @@ public class NonogramGrilla{
 	}
 
 	private void colocarTasksVerticales() {
-		
+		panelTasksVerticales.setLayout(new GridLayout(1, tamanio, 0, 0));
+	    ArrayList<String> tasks = (ArrayList<String>) controladorPrincipal.obtenerListaDeTasksVerticalesDelNonograma();
+	    for (String task : tasks) {
+			JLabel textoParaTask = new JLabel();
+			textoParaTask.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+			textoParaTask.setText(task);
+			panelTasksVerticales.add(textoParaTask);
+		}
 	}
 
 	private void crearPanelesDelNanograma() {

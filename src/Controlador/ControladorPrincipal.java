@@ -178,7 +178,7 @@ public class ControladorPrincipal {
 	}
 	
 	public List<String> obtenerListaDeTasksVerticalesDelNonograma(){
-		return gameModel.obtenerTasksHorizontales();
+		return gameModel.obtenerTasksVerticales();
 	}
 	
 	public void terminarJuego(){
