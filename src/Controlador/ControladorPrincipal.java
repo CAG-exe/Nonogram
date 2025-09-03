@@ -2,6 +2,7 @@ package Controlador;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -170,6 +171,14 @@ public class ControladorPrincipal {
 	
 	public static boolean juegoAndando() {
 		return gameModel.isJuegoAndando();
+	}
+	
+	public List<String> obtenerListaDeTasksHorizontalesDelNonograma(){
+		return gameModel.obtenerTasksHorizontales();
+	}
+	
+	public List<String> obtenerListaDeTasksVerticalesDelNonograma(){
+		return gameModel.obtenerTasksHorizontales();
 	}
 	
 	public void terminarJuego(){

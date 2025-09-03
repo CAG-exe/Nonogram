@@ -28,7 +28,7 @@ public class Nonograma {
 		this.pista = setPista(tamanio);
 		matrizJuego = new Matriz(tamanio);
 		matrizSolucion = new Matriz(tamanio);
-		matrizSolucion.generarMatrizSolucion();
+		generarMatrizSolucion();
 		CalculadoraDeTamanios = new CalculadoraDeTamanios(tamanio);
 		pista=setPista(tamanio);
 		JuegoAndando=true;
@@ -43,6 +43,7 @@ public class Nonograma {
 	// le pide a la clase matriz que genere una solucion
 	public void generarMatrizSolucion(){
 		matrizSolucion.generarMatrizSolucion();
+		tasksSolucion = new Task(matrizSolucion, tamanio);
 	}
 
 	public Task TaksDeMatrizSolucion() {
@@ -141,5 +142,12 @@ public class Nonograma {
 	public boolean isJuegoAndando() {
 		return JuegoAndando;
 	}
+	
+	public List<String> obtenerTasksHorizontales(){
+		return tasksSolucion.obtenerTasksHorizontales();
+	}
 
+	public List<String> obtenerTasksVerticales(){
+		return tasksSolucion.obtenerTasksVerticales();
+	}
 }

@@ -32,7 +32,7 @@ import javax.sound.sampled.Clip;
 public class NonogramWindow extends JPanel {
 
 	private static JButton[][] casillas;
-	private int tamanio = 5;
+	private int tamanio;
 	private JPanel panelPrincipal;
 	private JPanel panelNonograma;
 	private NonogramGrilla NonogramaGrilla;

@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -48,9 +49,30 @@ public class NonogramGrilla{
 		especificarTamañosDePaneles();
 		crearPanelesDelNanograma();
         generarCasillas();
+        colocarTasks();
         
 	}
 	
+
+	private void colocarTasks() {
+		colocarTasksHorizontales();
+		colocarTasksVerticales();
+	}
+
+	private void colocarTasksHorizontales() {
+		panelTasksHorizontales.setLayout(new GridLayout(tamanio, 1, 0, 0));
+		panelTasksHorizontales.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
+		ArrayList<String> tasks = (ArrayList<String>) controladorPrincipal.obtenerListaDeTasksHorizontalesDelNonograma();
+		for(String task : tasks) {
+			JLabel textoParaTask = new JLabel();
+			textoParaTask.setText(task);
+			panelTasksHorizontales.add(textoParaTask);
+		}
+	}
+
+	private void colocarTasksVerticales() {
+		
+	}
 
 	private void crearPanelesDelNanograma() {
 		GridBagConstraints gbc = new GridBagConstraints();
