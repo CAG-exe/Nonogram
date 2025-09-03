@@ -18,6 +18,7 @@ public class Nonograma {
 	private int tamanio;
 	private int pista;
 	private CalculadoraDeTamanios CalculadoraDeTamanios;
+	private boolean JuegoAndando;
 	
 	public Nonograma() {
 	}
@@ -28,6 +29,8 @@ public class Nonograma {
 		matrizSolucion = new Matriz(tamanio);
 		matrizSolucion.generarMatrizSolucion();
 		CalculadoraDeTamanios = new CalculadoraDeTamanios(tamanio);
+		pista=setPista(tamanio);
+		JuegoAndando=true;
 	}
 	
 
@@ -75,7 +78,7 @@ public class Nonograma {
 				ArrayList<Integer> columnaSolucion = (ArrayList<Integer>) matrizSolucion.conseguirMarcada(fila);
 				int columnaEncontrada = matrizJuego.conserguirNoMarcadaDe(columnaSolucion,fila);
 				if(columnaEncontrada != -1) {
-					pista--;
+					restaPista();
 					return new int[]{fila,columnaEncontrada};
 				}
 				filasVisitadas.add(fila);
@@ -85,6 +88,10 @@ public class Nonograma {
 		return new int[] {-1};
 	}
 	
+	private void restaPista() {
+		pista=pista-1;
+	}
+
 	private int generarNumeroEntreFilas() {
 		return (int)(Math.random()*matrizJuego.longitud());
 	}
@@ -101,10 +108,8 @@ public class Nonograma {
 	}
 
 	public int getPista() {
-		return setPista(tamanio);
+		return pista;
 	}
-	
-	
 	
 
 	public ImageIcon ImageIcon() {
@@ -126,6 +131,14 @@ public class Nonograma {
 
 	public CalculadoraDeTamanios obtenerCalculadoraDeTamanios() {
 		return CalculadoraDeTamanios;
+	}
+	
+	public void terminarJuego() {
+		JuegoAndando=false;
+	}
+
+	public boolean isJuegoAndando() {
+		return JuegoAndando;
 	}
 
 }

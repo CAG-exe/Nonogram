@@ -48,14 +48,35 @@ public class ControladorPrincipal {
 	}
 	
 	public static int[] pedirPista() {
-
 		return gameModel.DarPista();
 		}
 
-	public static int cantidadPista() {
-		return gameModel.getPista();
+	public static void cantidadPista() {
+		int cantidadPistas=gameModel.getPista();
+		 if (cantidadPistas >= 1 && juegoAndando()==true) {
+			 int[] pista = gameModel.DarPista();
+			 if(pista.length > 1) {
+				usable(cantidadPistas);
+				darPista(pista);
+			 }
+		 }
+		 if(cantidadPistas-1==0) {
+			NonogramWindow.invalidarBotonPista();
+			NonogramWindow.renombrarBotonPista("PISTAS USADAS");
+		 }
 	}
 
+
+	private static void darPista(int[] pista) {
+		if(pista.length==2)
+			NonogramWindow.ModificarCasillaConPista(pista);
+	}
+
+	private static void usable(int cantidadPistas) {
+		if(cantidadPistas>=1){
+			NonogramWindow.renombrarBotonPista("PISTA ("+(cantidadPistas-1)+")");
+		}
+	}
 
 	public ImageIcon obtenerImageicon() {
 		return gameModel.ImageIcon();
@@ -67,9 +88,10 @@ public class ControladorPrincipal {
 
 	public void mostrarMenu() {
 		this.menuPanel = new Menu(this);
-		interfaz.cambiarDePanel(menuPanel);
+		Interfaz.cambiarDePanel(menuPanel);
 		interfaz.setSize(gameModel.tamanioVentanaPrincipalModelo());
 		interfaz.setTitle("Nonograma-Menu");
+		interfaz.favIcon(obtenerImageicon().getImage());
 	}
 	
 	public void mostrarTutorial() {
@@ -137,6 +159,14 @@ public class ControladorPrincipal {
 			if (opcion == JOptionPane.YES_OPTION) {
 				mostrarMenu();
 			}
+	}
+	
+	public static boolean juegoAndando() {
+		return gameModel.isJuegoAndando();
+	}
+	
+	public void terminarJuego(){
+		gameModel.terminarJuego();
 	}
 	
 }

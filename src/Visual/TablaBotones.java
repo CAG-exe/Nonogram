@@ -10,6 +10,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import Controlador.ControladorPrincipal;
+
 public class TablaBotones {
 	private enum estadoBoton{NEGRO,BLANCO,EQUIS}
 	private JPanel panelCasillas;
@@ -44,6 +46,7 @@ public class TablaBotones {
     	casilla.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) { //Click izquierdo
+                	if(NonogramWindow.botonesGrillaHabilitados()) {
                     if (casilla.getBackground().equals(Color.white) && casilla.getText() != "X") {
                         casilla.setBackground(Color.black);
                         NonogramWindow.sendInfo(i,j);
@@ -63,6 +66,7 @@ public class TablaBotones {
                         casilla.setFont(new Font("Arial", Font.BOLD, 24));
                     }
 				}
+                }
 			}
 
 			@Override

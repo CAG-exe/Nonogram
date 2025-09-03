@@ -38,11 +38,10 @@ public class NonogramWindow extends JPanel {
 	private NonogramGrilla NonogramaGrilla;
 	public JButton comprobarButton;
 	public JButton volverButton;
-	public JButton pista;
+	public static JButton pista;
 	public JButton solucionBoton;
-	private boolean pistaUsada = false;
 	public JButton volverButton2;
-	private ControladorPrincipal controladorPrincipal;
+	private static ControladorPrincipal controladorPrincipal;
 
 
 
@@ -106,6 +105,7 @@ public class NonogramWindow extends JPanel {
 		comprobarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controladorPrincipal.comprobarResultadoDelJugador();
+				controladorPrincipal.terminarJuego();
 			}
 		});
 		panel.add(comprobarButton);
@@ -136,33 +136,7 @@ public class NonogramWindow extends JPanel {
 		pista.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int cantidadPista = ControladorPrincipal.cantidadPista();
-				if ( cantidadPista >= 1) {
-					int[] pista = ControladorPrincipal.pedirPista();
-					if (pista.length > 1) {
-						darPista(pista);
-						renombrar();
-						usable(cantidadPista);
-						}
-					}
-				}
-				
-			private void usable(int cantidadPista) {
-				if(cantidadPista==1){
-				pista.setText("PISTA USADAS");
-				pista.setEnabled(false);
-				}
-			}
-
-			private void renombrar() {
-				int pistas=ControladorPrincipal.cantidadPista();
-				pista.setText("PISTA ("+pistas+")");
-				
-			}
-
-			private void darPista(int[] pista) {
-				if(pista.length ==2) {
-					casillas[pista[0]][pista[1]].setBackground(Color.BLACK);}
+				ControladorPrincipal.cantidadPista();		
 			}
 		});
 		
@@ -209,8 +183,8 @@ public class NonogramWindow extends JPanel {
 	}
 
 
-	public static void darCasillas(JButton[][] casillas) {
-		casillas = casillas;
+	public static void darCasillas(JButton[][] casillas2) {
+		casillas = casillas2;
 		
 	}
 
@@ -230,6 +204,23 @@ public class NonogramWindow extends JPanel {
 		MensajeFinal.setBounds(474, 410, 106, 39);
 		panelPrincipal.add(MensajeFinal);
 		MensajeFinal.setVisible(true);
+	}
+
+	public static void renombrarBotonPista(String string) {
+		pista.setText(string);	
+	}
+
+	public static void ModificarCasillaConPista(int[] pista) {
+		casillas[pista[0]][pista[1]].setBackground(Color.BLACK);	
+	}
+
+	public static void invalidarBotonPista() {
+		pista.setEnabled(false);
+		
+	}
+	
+	public static boolean botonesGrillaHabilitados() {
+		return controladorPrincipal.juegoAndando();
 	}
 	
 }

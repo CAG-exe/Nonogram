@@ -49,7 +49,6 @@ public class Interfaz extends JFrame{
 		setSize(tamanioVentana);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        ImageIcon favicon = ControladorPrincipal.obtenerImageicon();
         frame.setVisible(true);
 	}
 	
@@ -69,5 +68,9 @@ public class Interfaz extends JFrame{
 
 	public void setSize(Rectangle Rectangle) {
 		frame.setBounds(Rectangle);
+	}
+
+	public void favIcon(Image image) {
+		frame.setIconImage(image);
 	}
 }
