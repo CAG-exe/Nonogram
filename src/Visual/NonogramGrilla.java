@@ -61,10 +61,10 @@ public class NonogramGrilla{
 
 	private void colocarTasksHorizontales() {
 		panelTasksHorizontales.setLayout(new GridLayout(tamanio, 1, 0, 0));
-		panelTasksHorizontales.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
 		ArrayList<String> tasks = (ArrayList<String>) controladorPrincipal.obtenerListaDeTasksHorizontalesDelNonograma();
 		for(String task : tasks) {
 			JLabel textoParaTask = new JLabel();
+			textoParaTask.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 			textoParaTask.setText(task);
 			panelTasksHorizontales.add(textoParaTask);
 		}
@@ -127,7 +127,6 @@ public class NonogramGrilla{
         panel.setMinimumSize(dimension);
         panel.setMaximumSize(dimension);
 		panel.setBackground(color);
-		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		panel.setLayout(new BorderLayout());
 		return panel;
 	}
