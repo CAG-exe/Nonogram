@@ -27,7 +27,6 @@ public class Nonograma {
 		matrizJuego = new Matriz(tamanio);
 		matrizSolucion = new Matriz(tamanio);
 		matrizSolucion.generarMatrizSolucion();
-		setPista(tamanio);
 		CalculadoraDeTamanios = new CalculadoraDeTamanios(tamanio);
 	}
 	
@@ -102,7 +101,7 @@ public class Nonograma {
 	}
 
 	public int getPista() {
-		return pista;
+		return setPista(tamanio);
 	}
 	
 	

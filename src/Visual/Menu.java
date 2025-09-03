@@ -43,6 +43,9 @@ public class Menu extends JPanel {
 		ColorRadioButton = new Color(229, 190, 181);
 		tamanio = 5;
 		
+		
+		
+		//---------------------BOTON JUGAR-------------------------------
 		JButton JugarButton = new JButton("Jugar!");
 		JugarButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -67,6 +70,9 @@ public class Menu extends JPanel {
 		JugarButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		add(JugarButton);
 		
+		
+		
+		//--------------------------------BOTON COMO JUGAR------------------
 		ComoJugarButton = new JButton("!!Como Jugar!!");
 		ComoJugarButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -87,13 +93,20 @@ public class Menu extends JPanel {
 		ComoJugarButton.setFont(new Font("Tahoma", Font.BOLD, 15));
 		ComoJugarButton.setBounds(501, 388, 150, 77);
 		add(ComoJugarButton);
-
+		
+		
+		
+		
 		JLabel LogoLabel = new JLabel("");
 		ImageIcon Logo = new ImageIcon(getClass().getResource("/media/nonograms-logo.png"));
 		LogoLabel.setIcon(Logo);
 		LogoLabel.setBounds(39, 85, 700, 116);
 		add(LogoLabel);
 		
+		
+		
+		
+		//----------------RADIO BUTTONS----------------------------------
 		cincoXcincoRadioButton = new JRadioButton("5x5");
 		cincoXcincoRadioButton.addMouseListener(new MouseAdapter() {
 			@Override

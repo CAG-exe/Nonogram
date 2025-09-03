@@ -19,6 +19,7 @@ import Negocio.Nonograma;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -35,12 +36,12 @@ public class NonogramWindow extends JPanel {
 	private JPanel panelPrincipal;
 	private JPanel panelNonograma;
 	private NonogramGrilla NonogramaGrilla;
-	private JButton comprobarButton;
-	private JButton volverButton;
-	private JButton pista;
-	private JButton solucionBoton;
+	public JButton comprobarButton;
+	public JButton volverButton;
+	public JButton pista;
+	public JButton solucionBoton;
 	private boolean pistaUsada = false;
-	private JButton volverButton2;
+	public JButton volverButton2;
 	private ControladorPrincipal controladorPrincipal;
 
 
@@ -52,7 +53,7 @@ public class NonogramWindow extends JPanel {
 		NonogramaGrilla = new NonogramGrilla(tamanio, panelNonograma, controladorPrincipal);
 	}
 	
-	private void reproducirSonidoVictoria() {
+	public void reproducirSonidoVictoria() {
 		try {
 			InputStream sonido = Class.class.getResourceAsStream("/media/sound_victory.wav");
 		    if (sonido == null) {
@@ -69,7 +70,7 @@ public class NonogramWindow extends JPanel {
 		    System.out.println(e);
 		}	
 	}
-	private void reproducirSonidoDerrota() {
+	public void reproducirSonidoDerrota() {
 		try {
 			InputStream sonido = Class.class.getResourceAsStream("/media/sound_lost1.wav");
 		    if (sonido == null) {
@@ -91,25 +92,12 @@ public class NonogramWindow extends JPanel {
 	private void initialize() {
 
 		setLayout(new BorderLayout());
-		JLabel MensajeFinal=new JLabel("");
-		MensajeFinal.setText("FELICIDADES GANASTE");
-		MensajeFinal.setFont(new Font("Tahoma", Font.BOLD, 13));
-		MensajeFinal.setBounds(404, 430, 106, 39);
-		
-		JLabel MensajeDerrota=new JLabel("");
-		MensajeDerrota.setText("FELICIDADES PERDISTE");
-		MensajeDerrota.setFont(new Font("Tahoma", Font.BOLD, 13));
-		MensajeDerrota.setBounds(424, 410, 196, 39);
 		
 		JPanel panel = new JPanel();
 		this.panelPrincipal = panel;
 		add(panelPrincipal, BorderLayout.CENTER);
 		panelPrincipal.setLayout(null);
 		panelPrincipal.setBackground(new Color(137, 108, 108));
-		panelPrincipal.add(MensajeFinal);
-		MensajeFinal.setVisible(false);
-		panelPrincipal.add(MensajeDerrota);
-		MensajeDerrota.setVisible(false);
 		
 		
 		
@@ -117,15 +105,7 @@ public class NonogramWindow extends JPanel {
 		comprobarButton = new JButton("Comprobar");
 		comprobarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pistaUsada = true;
-				reproducirSonidoDerrota();
-				MensajeDerrota.setVisible(true);
-				comprobarButton.setVisible(false);
-				if(ControladorPrincipal.verificarIgualdad()) {
-					MensajeFinal.setVisible(true);
-					comprobarButton.setVisible(false);
-					reproducirSonidoVictoria();
-				}
+				controladorPrincipal.comprobarResultadoDelJugador();
 			}
 		});
 		panel.add(comprobarButton);
@@ -145,17 +125,7 @@ public class NonogramWindow extends JPanel {
 		volverButton2 = new JButton("Volver al Menú");
 		volverButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int opcion = JOptionPane.showConfirmDialog(
-					null,
-					"¿Estás seguro de que quieres volver? ¡Perderás el progreso actual!",
-					"",
-					JOptionPane.YES_NO_OPTION
-				);
-
-				if (opcion == JOptionPane.YES_OPTION) {
-					controladorPrincipal.mostrarMenu();
-				}
-				// Si selecciona NO, no hace nada y continúa en el juego
+				controladorPrincipal.mostrarDialogoDeConfirmacionDeSalida();
 			}
 		});
 		panel.add(volverButton2);
@@ -239,10 +209,27 @@ public class NonogramWindow extends JPanel {
 	}
 
 
-	public static void darCasillas(JButton[][] casillas2) {
-		casillas = casillas2;
+	public static void darCasillas(JButton[][] casillas) {
+		casillas = casillas;
 		
 	}
-	
 
+	public void mostrarMensajeDeVictoria(Rectangle posicionYTamaño, String Mensaje) {
+		JLabel MensajeFinal=new JLabel("");
+		MensajeFinal.setText("FELICIDADES GANASTE");
+		MensajeFinal.setFont(new Font("Tahoma", Font.BOLD, 13));
+		MensajeFinal.setBounds(457, 410, 200, 39);
+		panelPrincipal.add(MensajeFinal);
+		MensajeFinal.setVisible(true);
+	}
+	
+	public void mostrarMensajeDeDerrota(Rectangle posicionYTamaño, String Mensaje) {
+		JLabel MensajeFinal=new JLabel("");
+		MensajeFinal.setText("PERDISTE");
+		MensajeFinal.setFont(new Font("Tahoma", Font.BOLD, 13));
+		MensajeFinal.setBounds(474, 410, 106, 39);
+		panelPrincipal.add(MensajeFinal);
+		MensajeFinal.setVisible(true);
+	}
+	
 }

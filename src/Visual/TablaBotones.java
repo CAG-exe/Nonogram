@@ -91,7 +91,12 @@ public class TablaBotones {
 		});
 		
 	}
-
+	
+	public void actualizarCasilla(JButton casilla, int estado) {
+		
+	}
+	
+	
 	public static JButton[][] getCasillas() {
 		
 		return casillas;

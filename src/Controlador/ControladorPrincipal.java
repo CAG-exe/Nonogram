@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import Negocio.CalculadoraDeTamanios;
@@ -38,7 +39,7 @@ public class ControladorPrincipal {
 		gameModel.generarMatrizSolucion();
 	}
 	
-	public static boolean verificarIgualdad() {
+	public static boolean verificarRespuestaCorrecta() {
 		return gameModel.verificarIgualdad();
 	}
 	
@@ -52,7 +53,6 @@ public class ControladorPrincipal {
 		}
 
 	public static int cantidadPista() {
-		System.out.println("aaaa");
 		return gameModel.getPista();
 	}
 
@@ -113,6 +113,30 @@ public class ControladorPrincipal {
 	
 	public Dimension[] obtenerTamaniosDeLosPanelesDeLaGrilla() {
 		return calculadoraDeTamanios.obtenerTamaniosDeLosPanalesDeLaGrilla();
+	}
+
+	public void comprobarResultadoDelJugador() {
+		juegoVentana.comprobarButton.setVisible(false);
+		if(verificarRespuestaCorrecta()) {
+			juegoVentana.reproducirSonidoVictoria();
+			juegoVentana.mostrarMensajeDeVictoria(new Rectangle(), "Ganaste");
+		} else {
+			juegoVentana.reproducirSonidoDerrota();
+			juegoVentana.mostrarMensajeDeDerrota(new Rectangle(), "Perdiste");
+		}
+	}
+
+	public void mostrarDialogoDeConfirmacionDeSalida() {
+		int opcion = JOptionPane.showConfirmDialog(
+				null,
+				"¿Estás seguro de que quieres volver? ¡Perderás el progreso actual!",
+				"",
+				JOptionPane.YES_NO_OPTION
+			);
+
+			if (opcion == JOptionPane.YES_OPTION) {
+				mostrarMenu();
+			}
 	}
 	
 }

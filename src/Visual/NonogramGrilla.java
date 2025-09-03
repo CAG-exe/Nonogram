@@ -100,7 +100,6 @@ public class NonogramGrilla{
 	
 
 	private JPanel crearPanel(Dimension dimension,Color color) {
-		System.out.println(dimension);
 		JPanel panel = new JPanel();
         panel.setPreferredSize(dimension);
         panel.setMinimumSize(dimension);
