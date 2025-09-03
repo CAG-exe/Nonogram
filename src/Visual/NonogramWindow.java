@@ -136,7 +136,9 @@ public class NonogramWindow extends JPanel {
 		pista.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				ControladorPrincipal.cantidadPista();		
+
 			}
 		});
 		

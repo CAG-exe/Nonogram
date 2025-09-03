@@ -21,6 +21,7 @@ public class ControladorPrincipal {
 	private Tutorial tutorialPanel;
 	private NonogramWindow juegoVentana;
 	private CalculadoraDeTamanios calculadoraDeTamanios;
+	private boolean solucionComprobada = false;
 	
 	public void setModeloYVista(Interfaz interfaz, Nonograma game){
 		this.interfaz = interfaz;
@@ -139,6 +140,7 @@ public class ControladorPrincipal {
 
 	public void comprobarResultadoDelJugador() {
 		juegoVentana.comprobarButton.setVisible(false);
+		solucionComprobada = true;
 		if(verificarRespuestaCorrecta()) {
 			juegoVentana.reproducirSonidoVictoria();
 			juegoVentana.mostrarMensajeDeVictoria(new Rectangle(), "Ganaste");
@@ -149,6 +151,10 @@ public class ControladorPrincipal {
 	}
 
 	public void mostrarDialogoDeConfirmacionDeSalida() {
+		if (solucionComprobada) {
+			mostrarMenu();
+		}
+		else {
 		int opcion = JOptionPane.showConfirmDialog(
 				null,
 				"¿Estás seguro de que quieres volver? ¡Perderás el progreso actual!",
@@ -159,6 +165,7 @@ public class ControladorPrincipal {
 			if (opcion == JOptionPane.YES_OPTION) {
 				mostrarMenu();
 			}
+		}
 	}
 	
 	public static boolean juegoAndando() {

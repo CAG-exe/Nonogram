@@ -25,6 +25,7 @@ public class Nonograma {
 	
 	public void inicarNonogramaSegunTamanio(int tamanio) {
 		this.tamanio = tamanio;
+		this.pista = setPista(tamanio);
 		matrizJuego = new Matriz(tamanio);
 		matrizSolucion = new Matriz(tamanio);
 		matrizSolucion.generarMatrizSolucion();
@@ -142,4 +143,3 @@ public class Nonograma {
 	}
 
 }
-
