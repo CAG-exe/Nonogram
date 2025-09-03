@@ -132,37 +132,41 @@ public class NonogramWindow extends JPanel {
 		
 		
 		//----------------BOTON DE PISTA-------------------------
-		pista = new JButton("PISTA");
+		pista = new JButton("PISTA (" + ControladorPrincipal.cantidadPista() + ")");
 		pista.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int cantidadPista = ControladorPrincipal.cantidadPista();
-				if ( cantidadPista >= 1) {
-					int[] pista = ControladorPrincipal.pedirPista();
-					if (pista.length > 1) {
-						darPista(pista);
+				if (cantidadPista > 0) {
+					int[] pistaArray = ControladorPrincipal.pedirPista();
+					if (pistaArray.length > 1) {
+						darPista(pistaArray);
 						renombrar();
-						usable(cantidadPista);
-						}
+						usable();
+					} else if (pistaArray[0] == 0) {
+						pista.setText("PISTAS USADAS");
 					}
 				}
+			}
 				
-			private void usable(int cantidadPista) {
-				if(cantidadPista==1){
-				pista.setText("PISTA USADAS");
-				pista.setEnabled(false);
+			private void usable() {
+				int pistasRestantes = ControladorPrincipal.cantidadPista();
+				if(pistasRestantes == 0){
+					pista.setText("PISTAS USADAS");
 				}
 			}
 
 			private void renombrar() {
-				int pistas=ControladorPrincipal.cantidadPista();
-				pista.setText("PISTA ("+pistas+")");
-				
+				int pistas = ControladorPrincipal.cantidadPista();
+				if(pistas > 0) {
+					pista.setText("PISTA (" + pistas + ")");
+				}
 			}
 
 			private void darPista(int[] pista) {
-				if(pista.length ==2) {
-					casillas[pista[0]][pista[1]].setBackground(Color.BLACK);}
+				if(pista.length == 2) {
+					casillas[pista[0]][pista[1]].setBackground(Color.BLACK);
+				}
 			}
 		});
 		
@@ -210,8 +214,7 @@ public class NonogramWindow extends JPanel {
 
 
 	public static void darCasillas(JButton[][] casillas) {
-		casillas = casillas;
-		
+		NonogramWindow.casillas = casillas;
 	}
 
 	public void mostrarMensajeDeVictoria(Rectangle posicionYTamaño, String Mensaje) {

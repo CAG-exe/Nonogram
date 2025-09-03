@@ -24,6 +24,7 @@ public class Nonograma {
 	
 	public void inicarNonogramaSegunTamanio(int tamanio) {
 		this.tamanio = tamanio;
+		this.pista = setPista(tamanio);
 		matrizJuego = new Matriz(tamanio);
 		matrizSolucion = new Matriz(tamanio);
 		matrizSolucion.generarMatrizSolucion();
@@ -75,7 +76,7 @@ public class Nonograma {
 				ArrayList<Integer> columnaSolucion = (ArrayList<Integer>) matrizSolucion.conseguirMarcada(fila);
 				int columnaEncontrada = matrizJuego.conserguirNoMarcadaDe(columnaSolucion,fila);
 				if(columnaEncontrada != -1) {
-					pista--;
+					pista--; // cantidad de pistas
 					return new int[]{fila,columnaEncontrada};
 				}
 				filasVisitadas.add(fila);
@@ -101,7 +102,7 @@ public class Nonograma {
 	}
 
 	public int getPista() {
-		return setPista(tamanio);
+		return pista;
 	}
 	
 	
@@ -129,4 +130,3 @@ public class Nonograma {
 	}
 
 }
-
