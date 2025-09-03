@@ -94,6 +94,7 @@ public class ControladorPrincipal {
 		interfaz.setSize(gameModel.tamanioVentanaPrincipalModelo());
 		interfaz.setTitle("Nonograma-Menu");
 		interfaz.favIcon(obtenerImageicon().getImage());
+		solucionComprobada = false;
 	}
 	
 	public void mostrarTutorial() {
