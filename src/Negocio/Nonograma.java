@@ -1,9 +1,13 @@
 package Negocio;
 
+import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+
+import javax.swing.ImageIcon;
 
 public class Nonograma {
 	
@@ -11,14 +15,22 @@ public class Nonograma {
 	private Matriz matrizJuego;
 	private Task tasksSolucion; 
 	private Task tasksMatrizDelJugador;
-	private int tamanio = 5;
+	private int tamanio;
 	private int pista;
+	private CalculadoraDeTamanios CalculadoraDeTamanios;
 	
-	public Nonograma(int size) {
-		matrizJuego =new Matriz(size);
-		matrizSolucion =new Matriz(size);
-		pista= setPista(size);
+	public Nonograma() {
 	}
+	
+	public void inicarNonogramaSegunTamanio(int tamanio) {
+		this.tamanio = tamanio;
+		matrizJuego = new Matriz(tamanio);
+		matrizSolucion = new Matriz(tamanio);
+		matrizSolucion.generarMatrizSolucion();
+		setPista(tamanio);
+		CalculadoraDeTamanios = new CalculadoraDeTamanios(tamanio);
+	}
+	
 
 	//le pide a la clase matriz que marque la matriz juego
 	public void marcarCasilla(int fila, int columna) {
@@ -91,6 +103,30 @@ public class Nonograma {
 
 	public int getPista() {
 		return pista;
+	}
+	
+	
+	
+
+	public ImageIcon ImageIcon() {
+		return new ImageIcon(getClass().getResource("/media/icon.png"));
+	}
+	
+	
+	public Rectangle tamanioVentanaPrincipalModelo() {
+		return new Rectangle(560, 200,800, 640);
+	}
+
+	public javax.swing.ImageIcon obtenerImagenTutorial() {
+		return new ImageIcon(getClass().getResource("/media/ayuda.png"));
+	}
+
+	public Rectangle calcularTamañoDeVentanaDeJuego() {
+		return CalculadoraDeTamanios.obtenerTamanioDeVentanaDeJuego();
+	}
+
+	public CalculadoraDeTamanios obtenerCalculadoraDeTamanios() {
+		return CalculadoraDeTamanios;
 	}
 
 }

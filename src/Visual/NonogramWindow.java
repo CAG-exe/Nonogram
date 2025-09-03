@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import Controlador.Controlador;
+import Controlador.ControladorPrincipal;
 import Negocio.Nonograma;
 
 import java.awt.BorderLayout;
@@ -41,19 +41,20 @@ public class NonogramWindow extends JPanel {
 	private JButton solucionBoton;
 	private boolean pistaUsada = false;
 	private JButton volverButton2;
+	private ControladorPrincipal controladorPrincipal;
 
 
 
-	public NonogramWindow(int tamanio) {
+	public NonogramWindow(int tamanio, ControladorPrincipal controladorPrincipal) {
 		this.tamanio = tamanio;
-		initialize(tamanio);
-		Controlador.InstanciarNonograma(tamanio);
-		NonogramaGrilla = new NonogramGrilla(tamanio, panelNonograma);
+		this.controladorPrincipal = controladorPrincipal;
+		initialize();
+		NonogramaGrilla = new NonogramGrilla(tamanio, panelNonograma, controladorPrincipal);
 	}
 	
 	private void reproducirSonidoVictoria() {
 		try {
-			InputStream sonido = getClass().getResourceAsStream("/media/sound_victory.wav");
+			InputStream sonido = Class.class.getResourceAsStream("/media/sound_victory.wav");
 		    if (sonido == null) {
 		        System.out.println("No se pudo encontrar el archivo");
 		        return;
@@ -87,7 +88,7 @@ public class NonogramWindow extends JPanel {
 	}
 
 
-	private void initialize(int tamanio) {
+	private void initialize() {
 
 		setLayout(new BorderLayout());
 		JLabel MensajeFinal=new JLabel("");
@@ -120,7 +121,7 @@ public class NonogramWindow extends JPanel {
 				reproducirSonidoDerrota();
 				MensajeDerrota.setVisible(true);
 				comprobarButton.setVisible(false);
-				if(Controlador.verificarIgualdad()) {
+				if(ControladorPrincipal.verificarIgualdad()) {
 					MensajeFinal.setVisible(true);
 					comprobarButton.setVisible(false);
 					reproducirSonidoVictoria();
@@ -135,7 +136,7 @@ public class NonogramWindow extends JPanel {
 		volverButton = new JButton("Volver al Menú");
 		volverButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Interfaz.volverAlMenu();
+				controladorPrincipal.mostrarMenu();
 			}
 		});
 		panel.add(volverButton);
@@ -152,7 +153,7 @@ public class NonogramWindow extends JPanel {
 				);
 
 				if (opcion == JOptionPane.YES_OPTION) {
-					Interfaz.volverAlMenu();
+					controladorPrincipal.mostrarMenu();
 				}
 				// Si selecciona NO, no hace nada y continúa en el juego
 			}
@@ -165,16 +166,28 @@ public class NonogramWindow extends JPanel {
 		pista.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (!pistaUsada) {
-					int[] pista = Controlador.pedirPista();
+				int cantidadPista = ControladorPrincipal.cantidadPista();
+				if ( cantidadPista >= 1) {
+					int[] pista = ControladorPrincipal.pedirPista();
 					if (pista.length > 1) {
 						darPista(pista);
-						pistaUsada = true;
-						solucionBoton.setVisible(true);
-						NonogramWindow.this.pista.setText("PISTA USADA");
-						NonogramWindow.this.pista.setForeground(Color.BLACK);
+						renombrar();
+						usable(cantidadPista);
+						}
 					}
 				}
+				
+			private void usable(int cantidadPista) {
+				if(cantidadPista==1){
+				pista.setText("PISTA USADAS");
+				pista.setEnabled(false);
+				}
+			}
+
+			private void renombrar() {
+				int pistas=ControladorPrincipal.cantidadPista();
+				pista.setText("PISTA ("+pistas+")");
+				
 			}
 
 			private void darPista(int[] pista) {
@@ -182,6 +195,7 @@ public class NonogramWindow extends JPanel {
 					casillas[pista[0]][pista[1]].setBackground(Color.BLACK);}
 			}
 		});
+		
 		panel.add(pista);
 		
 		
@@ -204,48 +218,24 @@ public class NonogramWindow extends JPanel {
 		
 		JPanel panelNanograma = new JPanel(new GridBagLayout());
 		this.panelNonograma = panelNanograma;
-		cambioDeTmanioBounds(tamanio);
+		cambioDeTamanioBounds();
 		panel.add(panelNanograma);
 		panelNanograma.setLayout(new GridLayout(5, 5, 0, 0));
 		panelNanograma.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		
 	}
 
-	private void cambioDeTmanioBounds(int tamanio) {
-		if(tamanio==5) {
-			this.panelNonograma.setBounds(180, 100, 250, 250);
-			comprobarButton.setBounds(450, 410, 150, 39);
-			volverButton2.setBounds(30, 410, 150, 39);
-			pista.setBounds(240, 410, 150, 39);
-			solucionBoton.setBounds(240, 460, 150, 39);
-		}
-		else if(tamanio==10) {
-			this.panelNonograma.setBounds(120, 70, 350, 350);
-			comprobarButton.setBounds(430, 460, 150, 39);
-			volverButton2.setBounds(20, 460, 150, 39);
-			pista.setBounds(225, 460, 150, 39);
-			solucionBoton.setBounds(225, 510, 150, 39);
-		}
-		else if(tamanio==15) {
-			this.panelNonograma.setBounds(140, 80, 500, 500);
-			comprobarButton.setBounds(620, 610, 150, 39);
-			volverButton2.setBounds(40, 610, 150, 39);
-			pista.setBounds(325, 610, 150, 39);
-			solucionBoton.setBounds(325, 660, 150, 39);
-		}
-		else {
-			this.panelNonograma.setBounds(140, 80, 550, 550);
-			comprobarButton.setBounds(650, 660, 150, 39);
-			volverButton2.setBounds(40, 660, 150, 39);
-			pista.setBounds(335, 660, 150, 39);
-			solucionBoton.setBounds(335, 710, 150, 39);
-			
-		}
+	private void cambioDeTamanioBounds() {
+		this.panelNonograma.setBounds(controladorPrincipal.obtenerTamanioDeGrillaDelJuego());
+		comprobarButton.setBounds(controladorPrincipal.obtenerDimensionDeBotonComprobar());
+		volverButton2.setBounds(controladorPrincipal.obtenerDimensionDeBotonVolver());
+		pista.setBounds(controladorPrincipal.obtenerDimensionDeBotonPista());
+		solucionBoton.setBounds(controladorPrincipal.obtenerDimensionDeBotonSolucion());
 	}
 	
 
 	public static void sendInfo(int row, int col) {
-		Controlador.marcarCasilla(row, col);
+		ControladorPrincipal.marcarCasilla(row, col);
 	}
 
 

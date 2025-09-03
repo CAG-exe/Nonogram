@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Controlador.ControladorPrincipal;
+
 
 public class Tutorial extends JPanel {
 
@@ -20,15 +22,16 @@ public class Tutorial extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param controladorPrincipal 
 	 */
-	public Tutorial() {
+	public Tutorial(ControladorPrincipal controladorPrincipal) {
 		setBackground(new Color(137, 108, 108));
 		setLayout(null);
 		JButton BotonVolverMenu = new JButton("Volver al Menú");
 		BotonVolverMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Interfaz.volverAlMenu();;
+				controladorPrincipal.mostrarMenu();
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -46,7 +49,7 @@ public class Tutorial extends JPanel {
 		
 	
 		JLabel lblNewLabel = new JLabel("");
-		ImageIcon ayuda = new ImageIcon(getClass().getResource("/media/ayuda.png"));
+		ImageIcon ayuda = controladorPrincipal.obtenerEjemploTutorial();
 		lblNewLabel.setIcon(ayuda);
 		lblNewLabel.setBounds(62, 448, 347, 135);
 		add(lblNewLabel);

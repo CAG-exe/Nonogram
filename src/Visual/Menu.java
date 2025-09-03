@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import Controlador.ControladorPrincipal;
+
 public class Menu extends JPanel {
 	
 	protected JButton ComoJugarButton;
@@ -31,14 +33,15 @@ public class Menu extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param controladorPrincipal 
 	 */
-	public Menu() {
+	public Menu(ControladorPrincipal controladorPrincipal) {
 		setBackground(new Color(137, 108, 108));
 		setLayout(null);
 		BotonBase = new Color(238, 230, 202);
 		BotonHover = new Color(245, 250, 225);
 		ColorRadioButton = new Color(229, 190, 181);
-		tamanio=5;
+		tamanio = 5;
 		
 		JButton JugarButton = new JButton("Jugar!");
 		JugarButton.addMouseListener(new MouseAdapter() {
@@ -55,8 +58,7 @@ public class Menu extends JPanel {
 		JugarButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				Interfaz.abrirJuego(tamanio);
+				controladorPrincipal.mostrarJuego(tamanio);
 			}
 		});
 		
@@ -67,6 +69,10 @@ public class Menu extends JPanel {
 		
 		ComoJugarButton = new JButton("!!Como Jugar!!");
 		ComoJugarButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				controladorPrincipal.mostrarTutorial();
+			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				ComoJugarButton.setBackground(BotonHover);

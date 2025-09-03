@@ -23,6 +23,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
+import Controlador.ControladorPrincipal;
+
 public class NonogramGrilla{
 	private int tamanio;
 	private JPanel panelNanograma;
@@ -31,10 +33,11 @@ public class NonogramGrilla{
 	private JPanel panelTasksVerticales;
 	private JPanel panelTasksHorizontales;
 	private JLabel MensajeFinal;
-
 	private TablaBotones tablaBotones;
+	private ControladorPrincipal controladorPrincipal;
 	
-	public NonogramGrilla(int tamanio, JPanel panelNanograma) {
+	public NonogramGrilla(int tamanio, JPanel panelNanograma, ControladorPrincipal controladorPrincipal) {
+		this.controladorPrincipal = controladorPrincipal;
 		this.tamanio = tamanio;
 		this.panelNanograma = panelNanograma;
 		this.panelNanograma.setLayout(new GridBagLayout());
@@ -78,28 +81,11 @@ public class NonogramGrilla{
 	}
 
 	private void especificarTamañosDePaneles() {
+		Dimension[] dimensionesPaneles = controladorPrincipal.obtenerTamaniosDeLosPanelesDeLaGrilla();  
 		panelesGrupo = new JPanel[3];
-		if(tamanio==5) {
-			panelesGrupo[0] = crearPanel(200, 50,Color.white);
-			panelesGrupo[1] = crearPanel(50, 200,Color.white);
-			panelesGrupo[2] = crearPanel(200, 200,Color.white);
+		for(int i = 0 ; i < panelesGrupo.length; i++) {
+			panelesGrupo[i] = crearPanel(dimensionesPaneles[i], Color.white);
 		}
-		else if(tamanio==10) {
-			panelesGrupo[0] = crearPanel(280, 70,Color.white);
-			panelesGrupo[1] = crearPanel(70, 280,Color.white);
-			panelesGrupo[2] = crearPanel(280, 280,Color.white);
-		}
-		else if(tamanio==15) {
-			panelesGrupo[0] = crearPanel(420, 90,Color.white);
-			panelesGrupo[1] = crearPanel(90, 420,Color.white);
-			panelesGrupo[2] = crearPanel(420, 420,Color.white);
-		}
-		else {
-			panelesGrupo[0] = crearPanel(420, 130,Color.white);
-			panelesGrupo[1] = crearPanel(130, 420,Color.white);
-			panelesGrupo[2] = crearPanel(420, 420,Color.white);
-			
-		}	
 	}
 
 	private void generarCasillas() {
@@ -113,11 +99,12 @@ public class NonogramGrilla{
 	}
 	
 
-	private JPanel crearPanel(int ancho, int alto,Color color) {
+	private JPanel crearPanel(Dimension dimension,Color color) {
+		System.out.println(dimension);
 		JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(ancho, alto));
-        panel.setMinimumSize(new Dimension(ancho, alto));
-        panel.setMaximumSize(new Dimension(ancho, alto));
+        panel.setPreferredSize(dimension);
+        panel.setMinimumSize(dimension);
+        panel.setMaximumSize(dimension);
 		panel.setBackground(color);
 		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		panel.setLayout(new BorderLayout());
