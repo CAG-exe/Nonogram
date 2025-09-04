@@ -132,13 +132,12 @@ public class NonogramWindow extends JPanel {
 		
 		
 		//----------------BOTON DE PISTA-------------------------
-		pista = new JButton("PISTA");
+		int cantidadPistasInicial = controladorPrincipal.obtenerCantidadPistasDisponibles();
+		pista = new JButton("PISTA (" + cantidadPistasInicial + ")");
 		pista.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				ControladorPrincipal.cantidadPista();		
-
+				ControladorPrincipal.cantidadPista();
 			}
 		});
 		
