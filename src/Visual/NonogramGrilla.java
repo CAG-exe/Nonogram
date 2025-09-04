@@ -43,6 +43,8 @@ public class NonogramGrilla{
 		this.tamanio = tamanio;
 		this.panelNanograma = panelNanograma;
 		this.panelNanograma.setLayout(new GridBagLayout());
+		this.panelNanograma.setBackground(Color.decode("#896c6c"));
+		this.panelNanograma.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		iniciar();
 	}
 	
@@ -69,6 +71,7 @@ public class NonogramGrilla{
 			textoParaTask.setHorizontalAlignment(SwingConstants.CENTER);
 	        textoParaTask.setVerticalAlignment(SwingConstants.CENTER);
 			textoParaTask.setText(task);
+			textoParaTask.setBackground(Color.WHITE);
 			panelTasksHorizontales.add(textoParaTask);
 		}
 	}
@@ -80,6 +83,7 @@ public class NonogramGrilla{
 	    for (String task : tasks) {
 	        JPanel columna = new JPanel(new GridLayout(0, 1));
 	        columna.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+	        columna.setBackground(Color.WHITE);
 
 	        String[] numeros = task.split(" ");
 	        for (String numero : numeros) {
