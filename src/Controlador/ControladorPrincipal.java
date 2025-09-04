@@ -79,6 +79,9 @@ public class ControladorPrincipal {
 			NonogramWindow.renombrarBotonPista("PISTA ("+(cantidadPistas-1)+")");
 		}
 	}
+	public int obtenerCantidadPistasDisponibles() {
+		return gameModel.getPista();
+	}
 
 	public ImageIcon obtenerImageicon() {
 		return gameModel.ImageIcon();

@@ -42,6 +42,7 @@ public class NonogramWindow extends JPanel {
 	public JButton solucionBoton;
 	public JButton volverButton2;
 	private static ControladorPrincipal controladorPrincipal;
+	private Clip currentClip;
 
 
 
@@ -61,9 +62,9 @@ public class NonogramWindow extends JPanel {
 		    }
 		    
 			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(sonido);
-			Clip clip = AudioSystem.getClip();
-			clip.open(audioInputStream);
-			clip.start();
+			currentClip = AudioSystem.getClip();
+			currentClip.open(audioInputStream);
+			currentClip.start();
 		}
 		catch (Exception e) {
 		    System.out.println(e);
@@ -78,13 +79,18 @@ public class NonogramWindow extends JPanel {
 		    }
 		    
 			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(sonido);
-			Clip clip = AudioSystem.getClip();
-			clip.open(audioInputStream);
-			clip.start();
+			currentClip = AudioSystem.getClip();
+			currentClip.open(audioInputStream);
+			currentClip.start();
 		}
 		catch (Exception e) {
 		    System.out.println(e);
 		}	
+	}
+	public void detenerSonido() {
+		if (currentClip.isRunning()) {
+			currentClip.stop();
+		}
 	}
 
 
@@ -125,6 +131,7 @@ public class NonogramWindow extends JPanel {
 		volverButton2 = new JButton("Volver al Menú");
 		volverButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				detenerSonido();
 				controladorPrincipal.mostrarDialogoDeConfirmacionDeSalida();
 			}
 		});
@@ -132,13 +139,12 @@ public class NonogramWindow extends JPanel {
 		
 		
 		//----------------BOTON DE PISTA-------------------------
-		pista = new JButton("PISTA");
+		int cantidadPistasInicial = controladorPrincipal.obtenerCantidadPistasDisponibles();
+		pista = new JButton("PISTA (" + cantidadPistasInicial + ")");
 		pista.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				ControladorPrincipal.cantidadPista();		
-
+				ControladorPrincipal.cantidadPista();
 			}
 		});
 		
