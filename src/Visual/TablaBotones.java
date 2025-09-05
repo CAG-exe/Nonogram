@@ -28,7 +28,6 @@ public class TablaBotones {
 	public JPanel generarCasillas() {
 		for(int i = 0; i<this.tamanio ; i++) {
 			for(int j = 0; j<this.tamanio ; j++) {
-				System.out.println("aaaaaaaa");
 				JButton casilla = new JButton();
 				casilla.setBackground(Color.white);
 				casilla.setBorder(BorderFactory.createLineBorder(Color.gray));
