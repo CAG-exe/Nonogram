@@ -172,7 +172,6 @@ public class NonogramWindow extends JPanel {
 		cambioDeTamanioBounds();
 		panel.add(panelNanograma);
 		panelNanograma.setLayout(new GridLayout(5, 5, 0, 0));
-		panelNanograma.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		
 	}
 

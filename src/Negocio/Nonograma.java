@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
+import Visual.CalculadoraDeTamanios;
+
 public class Nonograma {
 	
 	private Matriz matrizSolucion;

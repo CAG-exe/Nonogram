@@ -46,28 +46,30 @@ public class TablaBotones {
 	private static void accionesDeClicACasillas(JButton casilla,int i,int j) {
     	casilla.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON1) { //Click izquierdo
-                	if(NonogramWindow.botonesGrillaHabilitados()) {
-                    if (casilla.getBackground().equals(Color.white) && casilla.getText() != "X") {
-                        casilla.setBackground(Color.black);
-                        NonogramWindow.sendInfo(i,j);
-                        casilla.setText("");
-                    } else if (casilla.getBackground().equals(Color.black)) {
-                        casilla.setBackground(Color.white);
-                        casilla.setText("");
-                    }
-                } }
-                else if (e.getButton() == MouseEvent.BUTTON3) { //Click derecho
-                    if (casilla.getText().equals("X")) {
-                        casilla.setText("");
-                        casilla.setBackground(Color.white);
-                    } else {
-                        casilla.setText("X");
-                        casilla.setForeground(Color.blue);
-                        casilla.setBackground(Color.white);
-                        casilla.setFont(new Font("Arial", Font.BOLD, 24));
-                    }
-				}
+                if (NonogramWindow.botonesGrillaHabilitados()) { 
+	                	if(e.getButton() == MouseEvent.BUTTON1) {//Click izquierdo
+		                    if (casilla.getBackground().equals(Color.white) && casilla.getText() != "X") {
+		                        casilla.setBackground(Color.black);
+		                        NonogramWindow.sendInfo(i,j);
+		                        casilla.setText("");
+		                    } else if (casilla.getBackground().equals(Color.black)) {
+		                        casilla.setBackground(Color.white);
+		                        casilla.setText("");
+		                    }
+	                	} 
+	                	 else if (e.getButton() == MouseEvent.BUTTON3) { //Click derecho
+	 	                    if (casilla.getText().equals("X")) {
+	 	                        casilla.setText("");
+	 	                        casilla.setBackground(Color.white);
+	 	                    } else {
+	 	                        casilla.setText("X");
+	 	                        casilla.setForeground(Color.blue);
+	 	                        casilla.setBackground(Color.white);
+	 	                        casilla.setFont(new Font("Arial", Font.BOLD, 24));
+	 	                    }
+	 	              }
+	                }
+	               
 			}
 
 			@Override

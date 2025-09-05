@@ -44,7 +44,6 @@ public class NonogramGrilla{
 		this.panelNanograma = panelNanograma;
 		this.panelNanograma.setLayout(new GridBagLayout());
 		this.panelNanograma.setBackground(Color.decode("#896c6c"));
-		this.panelNanograma.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		iniciar();
 	}
 	

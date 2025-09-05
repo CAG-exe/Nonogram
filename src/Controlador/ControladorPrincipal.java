@@ -9,8 +9,8 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-import Negocio.CalculadoraDeTamanios;
 import Negocio.Nonograma;
+import Visual.CalculadoraDeTamanios;
 import Visual.Interfaz;
 import Visual.Menu;
 import Visual.NonogramWindow;

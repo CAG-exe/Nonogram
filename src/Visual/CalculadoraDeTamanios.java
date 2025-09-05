@@ -1,4 +1,4 @@
-package Negocio;
+package Visual;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
