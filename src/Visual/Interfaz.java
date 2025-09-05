@@ -30,6 +30,7 @@ import Controlador.ControladorPrincipal;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 
 public class Interfaz extends JFrame{
 
@@ -57,7 +58,11 @@ public class Interfaz extends JFrame{
 		frame.setTitle(titulo);
 	}
 	
-
+	public void mostrarVentanaSolucion(Boolean[][] matriz, int tamanio, JPanel panelTasksVerticales, JPanel panelTasksHorizontales) {
+		Solucion ventanaSolucion = new Solucion(matriz,tamanio,panelTasksVerticales, panelTasksHorizontales);
+		ventanaSolucion.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		ventanaSolucion.setVisible(true);
+	}
 	
 	public static void cambiarDePanel(JPanel panel) {
 		frame.getContentPane().removeAll();

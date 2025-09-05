@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
@@ -13,6 +14,7 @@ import Negocio.Nonograma;
 import Visual.Interfaz;
 import Visual.Menu;
 import Visual.NonogramWindow;
+import Visual.Solucion;
 import Visual.Tutorial;
 
 public class ControladorPrincipal {
@@ -149,8 +151,14 @@ public class ControladorPrincipal {
 		} else {
 			juegoVentana.reproducirSonidoDerrota();
 			juegoVentana.mostrarMensajeDeDerrota(new Rectangle(), "Perdiste");
+			juegoVentana.solucionBoton.setVisible(true);
 		}
 	}
+	
+	public void mostrarVentanaDeSolucion() {
+		interfaz.mostrarVentanaSolucion(gameModel.getMatrizSolucion(),gameModel.obtenerTamanio(),juegoVentana.NonogramaGrilla.obtenerPanelTasksVerticales(), juegoVentana.NonogramaGrilla.obtenerPanelTasksHorizontales());
+	}
+	
 
 	public void mostrarDialogoDeConfirmacionDeSalida() {
 		if (solucionComprobada) {

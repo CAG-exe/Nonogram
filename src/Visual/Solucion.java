@@ -30,10 +30,10 @@ public class Solucion extends JDialog {
 	
 	
 	public Solucion(Boolean[][] matriz, int tamanio, JPanel panelTasksVerticales, JPanel panelTasksHorizontales) {
+		this.matriz = matriz;
 		this.panelTasksVerticales = panelTasksVerticales;
 		this.panelTasksHorizontales = panelTasksHorizontales;
 		this.tamanio = tamanio;
-		this.matriz = generarMatrizSolucion(); //Temporal
 		
 		
 		getContentPane().setLayout(new BorderLayout());
@@ -69,29 +69,29 @@ public class Solucion extends JDialog {
 	private void crearPanelesSegunTamanio() {
 		panelNonogramaSolucion = new JPanel();
 		panelNonogramaSolucion.setLayout(new GridBagLayout());
-		if(tamanio==5) {
-			setBounds(600, 400, 550, 500);
-			panelNonogramaSolucion.setBounds(140, 100, 250, 250);
-			panelDeCasillasSolucion = crearPanel(200, 50,Color.white);
+		switch(tamanio) {
+			case(5):
+				setBounds(600, 400, 550, 500);
+				panelNonogramaSolucion.setBounds(140, 100, 250, 250);
+				panelDeCasillasSolucion = crearPanel(200, 50,Color.white);
+				break;
+			case(10):
+				setBounds(600, 300, 600, 600);
+				panelNonogramaSolucion.setBounds(120, 100, 350, 350);
+				panelDeCasillasSolucion = crearPanel(280, 70,Color.white);
+				break;
+			case(15):
+				setBounds(500, 200, 720, 750);
+				panelNonogramaSolucion.setBounds(100, 100, 500, 500);
+				panelDeCasillasSolucion = crearPanel(420, 90,Color.white);
+				break;
+			case(20):
+				setBounds(500, 200, 850, 800);
+				panelNonogramaSolucion.setBounds(130, 100, 550, 550);
+				panelDeCasillasSolucion = crearPanel( 420, 130,Color.white);
+				break;
 		}
-		else if(tamanio==10) {
-			setBounds(600, 300, 600, 600);
-			panelNonogramaSolucion.setBounds(120, 100, 350, 350);
-			panelDeCasillasSolucion = crearPanel(280, 70,Color.white);
-		}
-		else if(tamanio==15) {
-			setBounds(500, 200, 720, 750);
-			panelNonogramaSolucion.setBounds(100, 100, 500, 500);
-			panelDeCasillasSolucion = crearPanel(420, 90,Color.white);
-		}
-		else {
-			setBounds(500, 200, 850, 800);
-			panelNonogramaSolucion.setBounds(130, 100, 550, 550);
-			panelDeCasillasSolucion = crearPanel( 420, 130,Color.white);
-			
-		}	
 	}
-	
 	
 	private JPanel crearPanel(int ancho, int alto,Color color) {
 		JPanel panel = new JPanel();
@@ -127,26 +127,6 @@ public class Solucion extends JDialog {
         gbc.fill = GridBagConstraints.BOTH; // Que ocupen todo el espacio disponible
         panelNonogramaSolucion.add(panelDeCasillasSolucion, gbc);
 	}
-	
-	public Boolean[][] generarMatrizSolucion() {
-		Boolean[][] matriz = new Boolean[tamanio][tamanio];
-		double random;
-		for(int fila = 0; fila<tamanio; fila++) {
-			for (int columna = 0; columna<tamanio; columna++) {
-				random = Math.random();
-				if(random >0.5) {
-					matriz[fila][columna] = true;
-				} else {
-					matriz[fila][columna] = false;
-				}
-			}
-			
-		}
-		return matriz;
-	}
-	
-	
-	
 	
 	
 	public void generarCasillas() {

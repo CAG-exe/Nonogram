@@ -66,6 +66,10 @@ public class Nonograma {
 	private Matriz getMatrizJuego() {
 		return matrizJuego;
 	}
+	
+	public Boolean[][] getMatrizSolucion() {
+		return matrizSolucion.matriz;
+	}
 
 	public void generarMatrizSolucionPredefinida() {
 		matrizSolucion.generarSolucionPredefinida();
@@ -149,5 +153,9 @@ public class Nonograma {
 
 	public List<String> obtenerTasksVerticales(){
 		return tasksSolucion.obtenerTasksVerticales();
+	}
+	
+	public int obtenerTamanio() {
+		return tamanio;
 	}
 }

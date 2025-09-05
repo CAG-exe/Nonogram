@@ -35,7 +35,7 @@ public class NonogramWindow extends JPanel {
 	private int tamanio;
 	private JPanel panelPrincipal;
 	private JPanel panelNonograma;
-	private NonogramGrilla NonogramaGrilla;
+	public NonogramGrilla NonogramaGrilla;
 	public JButton comprobarButton;
 	public JButton volverButton;
 	public static JButton pista;
@@ -99,7 +99,6 @@ public class NonogramWindow extends JPanel {
 		panelPrincipal.setBackground(new Color(137, 108, 108));
 		
 		
-		
 		//-------------------BOTON COMPROBAR-------------------
 		comprobarButton = new JButton("Comprobar");
 		comprobarButton.addActionListener(new ActionListener() {
@@ -148,17 +147,15 @@ public class NonogramWindow extends JPanel {
 		
 		/////-------------------------BOTON DE SOLUCION-----------------------
 		solucionBoton = new JButton("Ver solución");
+		solucionBoton.setVisible(false);
 		solucionBoton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Boolean[][] matriz = new Boolean[5][5];
-				Solucion ventanaSolucion = new Solucion(matriz,tamanio,NonogramaGrilla.obtenerPanelTasksVerticales(), NonogramaGrilla.obtenerPanelTasksHorizontales());
-				ventanaSolucion.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				ventanaSolucion.setVisible(true);
+				controladorPrincipal.mostrarVentanaDeSolucion();
 			}
 		});
 		panel.add(solucionBoton);
-		solucionBoton.setVisible(false);
+		
 		
 		
 		

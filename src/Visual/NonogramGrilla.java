@@ -79,6 +79,7 @@ public class NonogramGrilla{
 
 	    for (String task : tasks) {
 	        JPanel columna = new JPanel(new GridLayout(0, 1));
+	        columna.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
 	        String[] numeros = task.split(" ");
 	        for (String numero : numeros) {
