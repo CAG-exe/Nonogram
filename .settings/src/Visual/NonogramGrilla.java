@@ -146,7 +146,7 @@ public class NonogramGrilla{
         panel.setPreferredSize(dimension);
         panel.setMinimumSize(dimension);
         panel.setMaximumSize(dimension);
-        panel.setBackground(color);
+		panel.setBackground(color);
 		panel.setLayout(new BorderLayout());
 		return panel;
 	}
