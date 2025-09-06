@@ -43,6 +43,7 @@ public class NonogramWindow extends JPanel {
 	public JButton volverButton2;
 	private static ControladorPrincipal controladorPrincipal;
 	private Clip currentClip;
+    private JLabel tiempo;
 
 
 
@@ -52,6 +53,7 @@ public class NonogramWindow extends JPanel {
 		initialize();
 		NonogramaGrilla = new NonogramGrilla(tamanio, panelNonograma, controladorPrincipal);
 	}
+
 	
 	public void reproducirSonidoVictoria() {
 		try {
@@ -106,6 +108,12 @@ public class NonogramWindow extends JPanel {
 		panelPrincipal.setLayout(null);
 		panelPrincipal.setBackground(new Color(137, 108, 108));
 		
+		//-------------------TIEMPO-------------------
+		
+		tiempo = new JLabel("00:00");
+		tiempo.setFont(new Font("Tahoma", Font.BOLD, 19));
+		tiempo.setForeground(new Color(0, 0, 0));
+		panel.add(tiempo);
 		
 		//-------------------BOTON COMPROBAR-------------------
 		comprobarButton = new JButton("Comprobar");
@@ -116,7 +124,6 @@ public class NonogramWindow extends JPanel {
 			}
 		});
 		panel.add(comprobarButton);
-		
 		
 		
 		//------------BOTON VOLVER-------------------------
@@ -152,7 +159,6 @@ public class NonogramWindow extends JPanel {
 		panel.add(pista);
 		
 		
-		
 		/////-------------------------BOTON DE SOLUCION-----------------------
 		solucionBoton = new JButton("Ver solución");
 		solucionBoton.setVisible(false);
@@ -163,8 +169,6 @@ public class NonogramWindow extends JPanel {
 			}
 		});
 		panel.add(solucionBoton);
-		
-		
 		
 		
 		JPanel panelNanograma = new JPanel(new GridBagLayout());
@@ -181,8 +185,14 @@ public class NonogramWindow extends JPanel {
 		volverButton2.setBounds(controladorPrincipal.obtenerDimensionDeBotonVolver());
 		pista.setBounds(controladorPrincipal.obtenerDimensionDeBotonPista());
 		solucionBoton.setBounds(controladorPrincipal.obtenerDimensionDeBotonSolucion());
+		tiempo.setBounds(controladorPrincipal.obtenerDimensionDeTimer());
 	}
 	
+	public void actualizarTemporizador(String tiempoFormateado) {
+		if (tiempo != null) {
+			tiempo.setText(tiempoFormateado);
+		}
+	}
 
 	public static void sendInfo(int row, int col) {
 		ControladorPrincipal.marcarCasilla(row, col);

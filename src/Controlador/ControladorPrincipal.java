@@ -1,8 +1,13 @@
 package Controlador;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.Timer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -18,13 +23,15 @@ import Visual.Solucion;
 import Visual.Tutorial;
 
 public class ControladorPrincipal {
-	private static  Nonograma gameModel;
+	private static Nonograma gameModel;
 	private Interfaz interfaz;
 	private Menu menuPanel;
 	private Tutorial tutorialPanel;
 	private NonogramWindow juegoVentana;
 	private CalculadoraDeTamanios calculadoraDeTamanios;
 	private boolean solucionComprobada = false;
+	private Timer tiempo;
+	private int tiempoTranscurrido = 0; // tiempo en segundos
 	
 	public void setModeloYVista(Interfaz interfaz, Nonograma game){
 		this.interfaz = interfaz;
@@ -115,7 +122,35 @@ public class ControladorPrincipal {
 		interfaz.setSize(gameModel.calcularTamañoDeVentanaDeJuego());
 		this.juegoVentana =  new NonogramWindow(tamanio,this);
 		interfaz.cambiarDePanel(juegoVentana);
+		iniciarTemporizador();
 	}
+	private void iniciarTemporizador() {
+		tiempoTranscurrido = 0;
+		tiempo = new Timer(1000, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tiempoTranscurrido++;
+				if (juegoVentana != null) {
+					juegoVentana.actualizarTemporizador(formatearTiempo(tiempoTranscurrido));
+				}
+			}
+		});
+		tiempo.start();
+	}
+	
+	private void detenerTemporizador() {
+		if (tiempo != null) {
+			tiempo.stop();
+		}
+	}
+	
+	private String formatearTiempo(int segundos) {
+		int minutos = segundos / 60;
+		int segs = segundos % 60;
+		return String.format("%02d:%02d", minutos, segs);
+	}
+	
+
 
 	public ImageIcon obtenerEjemploTutorial() {
 		return gameModel.obtenerImagenTutorial();
@@ -141,6 +176,10 @@ public class ControladorPrincipal {
 		return calculadoraDeTamanios.obtenerDimensionDeBotonSolucion();
 	}
 	
+	public Rectangle obtenerDimensionDeTimer() {
+		return calculadoraDeTamanios.obtenerDimensionDeTimer();
+	}
+	
 	public Dimension[] obtenerTamaniosDeLosPanelesDeLaGrilla() {
 		return calculadoraDeTamanios.obtenerTamaniosDeLosPanalesDeLaGrilla();
 	}
@@ -151,10 +190,12 @@ public class ControladorPrincipal {
 		if(verificarRespuestaCorrecta()) {
 			juegoVentana.reproducirSonidoVictoria();
 			juegoVentana.mostrarMensajeDeVictoria(new Rectangle(), "Ganaste");
+			detenerTemporizador();
 		} else {
 			juegoVentana.reproducirSonidoDerrota();
 			juegoVentana.mostrarMensajeDeDerrota(new Rectangle(), "Perdiste");
 			juegoVentana.solucionBoton.setVisible(true);
+			detenerTemporizador();
 		}
 	}
 	
@@ -177,6 +218,7 @@ public class ControladorPrincipal {
 
 			if (opcion == JOptionPane.YES_OPTION) {
 				mostrarMenu();
+				detenerTemporizador();
 			}
 		}
 	}

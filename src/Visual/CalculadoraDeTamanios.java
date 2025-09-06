@@ -12,6 +12,7 @@ public class CalculadoraDeTamanios {
 	private Rectangle dimencionesDeBotonVolver;
 	private Rectangle dimencionesDeBotonPista;
 	private Rectangle dimencionesDeBotonSolucion;
+	private Rectangle dimencionesDeBotonTimer;
 	
 	
 	public CalculadoraDeTamanios(int tamanio) {
@@ -32,6 +33,8 @@ public class CalculadoraDeTamanios {
 				dimencionesDeBotonVolver = new Rectangle(30, 410, 150, 39);
 				dimencionesDeBotonPista = new Rectangle(240, 410, 150, 39);
 				dimencionesDeBotonSolucion = new Rectangle(240, 460, 150, 39);
+				dimencionesDeBotonTimer = new Rectangle(290,40,150,39);
+				
 				break;
 			case 10:
 				TamanioDeVentanaDeJuego = new Rectangle(600, 200,626, 600);
@@ -43,6 +46,7 @@ public class CalculadoraDeTamanios {
 				dimencionesDeBotonVolver = new Rectangle(20, 460, 150, 39);
 				dimencionesDeBotonPista = new Rectangle(225, 460, 150, 39);
 				dimencionesDeBotonSolucion = new Rectangle(225, 510, 150, 39);
+				dimencionesDeBotonTimer = new Rectangle(285,20,150,39);
 				break;
 			case 15:
 				TamanioDeVentanaDeJuego = new Rectangle(530, 130, 826, 800);
@@ -54,6 +58,7 @@ public class CalculadoraDeTamanios {
 				dimencionesDeBotonVolver = new Rectangle(40, 610, 150, 39);
 				dimencionesDeBotonPista = new Rectangle(325, 610, 150, 39);
 				dimencionesDeBotonSolucion = new Rectangle(325, 660, 150, 39);
+				dimencionesDeBotonTimer = new Rectangle(385,20,150,39);
 				break;
 			case 20:
 				TamanioDeVentanaDeJuego = new Rectangle(530, 130, 826, 800);
@@ -65,6 +70,7 @@ public class CalculadoraDeTamanios {
 				dimencionesDeBotonVolver = new Rectangle(40, 660, 150, 39);
 				dimencionesDeBotonPista = new Rectangle(335, 660, 150, 39);
 				dimencionesDeBotonSolucion = new Rectangle(335, 710, 150, 39);
+				dimencionesDeBotonTimer = new Rectangle(395,10,150,39);
 				break;
 		}
 		
@@ -96,6 +102,9 @@ public class CalculadoraDeTamanios {
 	
 	public Dimension[] obtenerTamaniosDeLosPanalesDeLaGrilla() {
 		return TamaniosDePanelesDeLaGrilla;
+	}
+	public Rectangle obtenerDimensionDeTimer() {
+		return dimencionesDeBotonTimer;
 	}
 	
 	
