@@ -41,6 +41,10 @@ public class Nonograma {
 	public void marcarCasilla(int fila, int columna) {
 		matrizJuego.marcarCasilla(fila, columna);
 	}
+	
+	public void desmarcarCasilla(int fila, int columna) {
+		matrizJuego.desmarcarCasilla(fila, columna);
+	}
 
 	// le pide a la clase matriz que genere una solucion
 	public void generarMatrizSolucion(){

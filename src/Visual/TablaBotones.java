@@ -49,18 +49,21 @@ public class TablaBotones {
 	                	if(e.getButton() == MouseEvent.BUTTON1) {//Click izquierdo
 		                    if (casilla.getBackground().equals(Color.white) && casilla.getText() != "X") {
 		                        casilla.setBackground(Color.black);
-		                        NonogramWindow.sendInfo(i,j);
+		                        NonogramWindow.sendInfoMarcarCasilla(i,j);
 		                        casilla.setText("");
 		                    } else if (casilla.getBackground().equals(Color.black)) {
+		                    	NonogramWindow.sendInfoDesmarcarCasilla(i,j);
 		                        casilla.setBackground(Color.white);
 		                        casilla.setText("");
 		                    }
 	                	} 
 	                	 else if (e.getButton() == MouseEvent.BUTTON3) { //Click derecho
 	 	                    if (casilla.getText().equals("X")) {
+	 	                    	NonogramWindow.sendInfoDesmarcarCasilla(i,j);
 	 	                        casilla.setText("");
 	 	                        casilla.setBackground(Color.white);
 	 	                    } else {
+	 	                    	NonogramWindow.sendInfoDesmarcarCasilla(i,j);
 	 	                        casilla.setText("X");
 	 	                        casilla.setForeground(Color.blue);
 	 	                        casilla.setBackground(Color.white);

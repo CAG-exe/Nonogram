@@ -58,6 +58,10 @@ public class ControladorPrincipal {
 		gameModel.marcarCasilla(row, col);
 	}
 	
+	public static void desmarcarCasilla(int row, int col) {
+		gameModel.desmarcarCasilla(row, col);
+	}
+	
 	public static int[] pedirPista() {
 		return gameModel.DarPista();
 		}

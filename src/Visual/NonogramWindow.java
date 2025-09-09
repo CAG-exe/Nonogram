@@ -194,7 +194,12 @@ public class NonogramWindow extends JPanel {
 		}
 	}
 
-	public static void sendInfo(int row, int col) {
+	public static void sendInfoDesmarcarCasilla(int row, int col) {
+		ControladorPrincipal.desmarcarCasilla(row, col);
+	}
+	
+	
+	public static void sendInfoMarcarCasilla(int row, int col) {
 		ControladorPrincipal.marcarCasilla(row, col);
 	}
 
