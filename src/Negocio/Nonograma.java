@@ -48,8 +48,23 @@ public class Nonograma {
 
 	// le pide a la clase matriz que genere una solucion
 	public void generarMatrizSolucion(){
-		matrizSolucion.generarMatrizSolucion();
-		tasksSolucion = new Task(matrizSolucion, tamanio);
+		boolean matrizNoSatisfactoria = true;
+		while(matrizNoSatisfactoria){
+			matrizSolucion.generarMatrizSolucion();
+			tasksSolucion = new Task(matrizSolucion, tamanio);
+			boolean tiene_algun_lleno_o_cero = false;
+			for(String task : tasksSolucion.obtenerTodosLosTasks()) {
+				if(task.contains(""+ tamanio) || task.contains("0")) {
+					tiene_algun_lleno_o_cero |= true;
+				} else {
+					tiene_algun_lleno_o_cero |= false;
+				}
+			}
+			if(!tiene_algun_lleno_o_cero) {
+				matrizNoSatisfactoria = false;
+			}
+			
+		}
 	}
 
 	public Task TaksDeMatrizSolucion() {

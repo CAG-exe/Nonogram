@@ -10,10 +10,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import Controlador.ControladorPrincipal;
 
 public class TablaBotones {
-	private enum estadoBoton{NEGRO,BLANCO,EQUIS}
 	private JPanel panelCasillas;
 	public static JButton[][] casillas;
 	private int tamanio;

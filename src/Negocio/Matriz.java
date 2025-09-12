@@ -42,6 +42,8 @@ public Boolean[][] matriz;
 				random = Math.random();
 				if(random >0.5) {
 					matriz[fila][columna] = true;
+				} else {
+					matriz[fila][columna] = false;
 				}
 			}
 			
