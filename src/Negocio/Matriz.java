@@ -14,10 +14,10 @@ public Boolean[][] matriz;
 			throw new IllegalArgumentException("El tamaño de la matriz debe ser mayor a 0");
 		}
 		matriz = new Boolean[tamanio][tamanio];
-		LLenarDeCeros();
+		LLenarDeFalse();
 	}
 	
-	private void LLenarDeCeros() {
+	private void LLenarDeFalse() {
 		for (int fila = 0; fila < matriz.length; fila++) {
 		    for (int columna = 0; columna < matriz[0].length; columna++) {
 		    	matriz[fila][columna]= false;
@@ -26,12 +26,10 @@ public Boolean[][] matriz;
 	}
 
 	public void desmarcarCasilla(int fila, int columna) {
-		System.out.println("desmarca");
 		matriz[fila][columna]=false;
 	}
 
 	public void marcarCasilla(int fila,int columna){
-		System.out.println("marca");
 		matriz[fila][columna]= true;
 	}
 
@@ -51,31 +49,12 @@ public Boolean[][] matriz;
 	}
 	
 	public void generarSolucionPredefinida() {
+		LLenarDeFalse();
 		matriz[0][0]=true;
 	}
 	
 	public int longitud() {
 		return matriz.length;
-	}
-	
-    //necesita se testeada
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Matriz other = (Matriz) obj;
-		boolean sonIguales = true;
-		for (int fila = 0; fila < longitud(); fila++) {
-		    for (int columna = 0; columna < matriz[0].length; columna++) {
-		    	sonIguales &= other.consultarMatriz(fila, columna) == (consultarMatriz(fila, columna));
-		    }
-		    
-		}
-		return sonIguales;
 	}
 
 	public int consultarTamanio() {

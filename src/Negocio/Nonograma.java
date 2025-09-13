@@ -26,6 +26,9 @@ public class Nonograma {
 	}
 	
 	public void inicarNonogramaSegunTamanio(int tamanio) {
+		if(tamanio != 5 && tamanio != 10 && tamanio != 15 && tamanio != 20) {
+			throw new IllegalArgumentException("El tamaño del nanograma es ilegal. Probar con 5, 10, 15 o 20.");
+		}
 		this.tamanio = tamanio;
 		this.pista = setPista(tamanio);
 		matrizJuego = new Matriz(tamanio);
@@ -39,10 +42,24 @@ public class Nonograma {
 
 	//le pide a la clase matriz que marque la matriz juego
 	public void marcarCasilla(int fila, int columna) {
+		if(fila<0 || fila >= tamanio) {
+			throw new IllegalArgumentException("El valor de la fila debe ser entre 0 y " + (tamanio-1) +".");
+		}
+		
+		if(columna<0 || columna >= tamanio) {
+			throw new IllegalArgumentException("El valor de la columna debe ser entre 0 y " + (tamanio-1) +".");
+		}
 		matrizJuego.marcarCasilla(fila, columna);
 	}
 	
 	public void desmarcarCasilla(int fila, int columna) {
+		if(fila<0 || fila >= tamanio) {
+			throw new IllegalArgumentException("El valor de la fila debe ser entre 0 y " + (tamanio-1) +".");
+		}
+		
+		if(columna<0 || columna >= tamanio) {
+			throw new IllegalArgumentException("El valor de la columna debe ser entre 0 y " + (tamanio-1) +".");
+		}
 		matrizJuego.desmarcarCasilla(fila, columna);
 	}
 
@@ -66,6 +83,11 @@ public class Nonograma {
 			
 		}
 	}
+	
+	public void generarMatrizSolucionPredefinida() {
+		matrizSolucion.generarSolucionPredefinida();
+		tasksSolucion = new Task(matrizSolucion, tamanio);
+	}
 
 	public Task TaksDeMatrizSolucion() {
 		if(tasksSolucion.equals(null)) {
@@ -75,7 +97,7 @@ public class Nonograma {
 	}
 	
 	public boolean comprobarSolucionDelJugador() {
-		Task tasksMatrizDelJugador = new Task(matrizJuego,5);
+		Task tasksMatrizDelJugador = new Task(matrizJuego,tamanio);
 		return tasksSolucion.comprobarIgualdad(tasksMatrizDelJugador);
 	}
 	
@@ -91,11 +113,11 @@ public class Nonograma {
 	public Boolean[][] getMatrizSolucion() {
 		return matrizSolucion.matriz;
 	}
-
-	public void generarMatrizSolucionPredefinida() {
-		matrizSolucion.generarSolucionPredefinida();
-	}
 	
+	public boolean consultarValorDeLaCasillaJugador(int i, int f) {
+		return matrizJuego.consultarMatriz(i, f);
+	}
+
 	public int[] DarPista() {
 		int buscarCasilla=20;
 		while(buscarCasilla>1) {
