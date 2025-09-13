@@ -1,8 +1,6 @@
 package Controlador;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,7 +30,8 @@ public class ControladorPrincipal {
 	private boolean solucionComprobada = false;
 	private Timer tiempo;
 	private int tiempoTranscurrido = 0; // tiempo en segundos
-	
+	private String nombreJugador;
+
 	public void setModeloYVista(Interfaz interfaz, Nonograma game){
 		this.interfaz = interfaz;
 		this.gameModel = game;
@@ -116,7 +115,8 @@ public class ControladorPrincipal {
 		interfaz.setTitle("Nonograma-Tutorial");
 	}
 	
-	public void mostrarJuego(int tamanio) {
+	public void mostrarJuego(int tamanio, String nombreJugador) {
+		this.nombreJugador = nombreJugador;
 		gameModel.inicarNonogramaSegunTamanio(tamanio);
 		this.calculadoraDeTamanios = gameModel.obtenerCalculadoraDeTamanios();
 		interfaz.setSize(gameModel.calcularTamañoDeVentanaDeJuego());
@@ -124,6 +124,7 @@ public class ControladorPrincipal {
 		interfaz.cambiarDePanel(juegoVentana);
 		iniciarTemporizador();
 	}
+	
 	private void iniciarTemporizador() {
 		tiempoTranscurrido = 0;
 		tiempo = new Timer(1000, new ActionListener() {
@@ -150,7 +151,6 @@ public class ControladorPrincipal {
 		return String.format("%02d:%02d", minutos, segs);
 	}
 	
-
 
 	public ImageIcon obtenerEjemploTutorial() {
 		return gameModel.obtenerImagenTutorial();
@@ -189,11 +189,11 @@ public class ControladorPrincipal {
 		solucionComprobada = true;
 		if(verificarRespuestaCorrecta()) {
 			juegoVentana.reproducirSonidoVictoria();
-			juegoVentana.mostrarMensajeDeVictoria(new Rectangle(), "Ganaste");
+			juegoVentana.mostrarMensajeDeVictoria(new Rectangle(), "Ganaste", nombreJugador);
 			detenerTemporizador();
 		} else {
 			juegoVentana.reproducirSonidoDerrota();
-			juegoVentana.mostrarMensajeDeDerrota(new Rectangle(), "Perdiste");
+			juegoVentana.mostrarMensajeDeDerrota(new Rectangle(), "Perdiste", nombreJugador);
 			juegoVentana.solucionBoton.setVisible(true);
 			detenerTemporizador();
 		}

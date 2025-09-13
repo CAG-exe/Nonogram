@@ -204,20 +204,20 @@ public class NonogramWindow extends JPanel {
 		
 	}
 
-	public void mostrarMensajeDeVictoria(Rectangle posicionYTamaño, String Mensaje) {
+	public void mostrarMensajeDeVictoria(Rectangle posicionYTamaño, String Mensaje, String nombreJugador) {
 		JLabel MensajeFinal=new JLabel("");
-		MensajeFinal.setText("FELICIDADES GANASTE");
+		MensajeFinal.setText("¡FELICIDADES " + nombreJugador.toUpperCase() + " GANASTE!");
 		MensajeFinal.setFont(new Font("Tahoma", Font.BOLD, 13));
 		MensajeFinal.setBounds(457, 410, 200, 39);
 		panelPrincipal.add(MensajeFinal);
 		MensajeFinal.setVisible(true);
 	}
 	
-	public void mostrarMensajeDeDerrota(Rectangle posicionYTamaño, String Mensaje) {
+	public void mostrarMensajeDeDerrota(Rectangle posicionYTamaño, String Mensaje, String nombreJugador) {
 		JLabel MensajeFinal=new JLabel("");
-		MensajeFinal.setText("PERDISTE");
+		MensajeFinal.setText(nombreJugador.toUpperCase() + " PERDISTE");
 		MensajeFinal.setFont(new Font("Tahoma", Font.BOLD, 13));
-		MensajeFinal.setBounds(474, 410, 106, 39);
+		MensajeFinal.setBounds(474, 410, 200, 39);
 		panelPrincipal.add(MensajeFinal);
 		MensajeFinal.setVisible(true);
 	}

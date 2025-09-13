@@ -11,6 +11,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -61,10 +62,19 @@ public class Menu extends JPanel {
 		JugarButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controladorPrincipal.mostrarJuego(tamanio);
+				String nombreJugador = JOptionPane.showInputDialog(
+					Menu.this,
+					"Escriba su nombre:",
+					"Nombre del Jugador",
+					JOptionPane.PLAIN_MESSAGE
+				);
+				
+				if (!nombreJugador.isEmpty()) {
+					controladorPrincipal.mostrarJuego(tamanio, nombreJugador);
+				}
 			}
 		});
-		
+
 		JugarButton.setBackground(BotonBase);
 		JugarButton.setBounds(501, 268, 150, 77);
 		JugarButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -148,8 +158,7 @@ public class Menu extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("el tamaño es 20");
-				tamanio=20
-						;
+				tamanio=20;
 			}
 		});
 		recolorearBoton(veinteXveinteRadioButton);
