@@ -25,21 +25,13 @@ public Boolean[][] matriz;
 		}
 	}
 
-	public void marcarCasilla(int fila, int columna) {
-		Boolean valorBooleano = matriz[fila][columna];
-		if(!valorBooleano) {
-			MarcarCasilla(fila,columna);
-		} else {
-			DesmarcarCasilla(fila,columna);
-		}
-	}
-	
-
-	private void DesmarcarCasilla(int fila, int columna) {
+	public void desmarcarCasilla(int fila, int columna) {
+		System.out.println("desmarca");
 		matriz[fila][columna]=false;
 	}
 
-	private void MarcarCasilla(int fila,int columna){
+	public void marcarCasilla(int fila,int columna){
+		System.out.println("marca");
 		matriz[fila][columna]= true;
 	}
 
@@ -50,6 +42,8 @@ public Boolean[][] matriz;
 				random = Math.random();
 				if(random >0.5) {
 					matriz[fila][columna] = true;
+				} else {
+					matriz[fila][columna] = false;
 				}
 			}
 			
@@ -116,6 +110,8 @@ public Boolean[][] matriz;
 		}
 		return -1;
 	}
+
+
 
 	
 }
