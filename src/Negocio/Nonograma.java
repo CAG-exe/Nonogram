@@ -1,9 +1,6 @@
 package Negocio;
 
-import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.Rectangle;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -16,11 +13,11 @@ public class Nonograma {
 	private Matriz matrizSolucion;
 	private Matriz matrizJuego;
 	private Task tasksSolucion; 
-	private Task tasksMatrizDelJugador;
 	private int tamanio;
 	private int pista;
 	private CalculadoraDeTamanios CalculadoraDeTamanios;
 	private boolean JuegoAndando;
+	private HashSet<Integer> posicionesVisitadas;
 	
 	public Nonograma() {
 	}
@@ -118,31 +115,54 @@ public class Nonograma {
 		return matrizJuego.consultarMatriz(i, f);
 	}
 
+
 	public int[] DarPista() {
-		int buscarCasilla=20;
-		while(buscarCasilla>1) {
-			int fila = generarNumeroEntreFilas();
-			HashSet<Integer> filasVisitadas=new HashSet<Integer>();
-			if(!filasVisitadas.contains(fila)) {
-				ArrayList<Integer> columnaSolucion = (ArrayList<Integer>) matrizSolucion.conseguirMarcada(fila);
-				int columnaEncontrada = matrizJuego.conserguirNoMarcadaDe(columnaSolucion,fila);
-				if(columnaEncontrada != -1) {
-					restaPista();
-					return new int[]{fila,columnaEncontrada};
-				}
-				filasVisitadas.add(fila);
-				}
-			buscarCasilla--;
-			}
-		return new int[] {-1};
+	    boolean buscandoPista = true;
+	    int contar = 0;
+
+	    while (buscandoPista) {
+	        int casillaAprueba = BuscarCasilla();
+	        int[] filaCol = procesarCasillaSiEsValida(casillaAprueba);
+
+	        if (filaCol != null) {
+	            contar++;
+	            return filaCol;
+	        }
+
+	        contar++;
+	        if (contar == 20)
+	            buscandoPista = false;
+	    }
+
+	    return new int[] {-1};
+	}
+	
+	private int[] procesarCasillaSiEsValida(int casillaAprueba) {
+	    if (!posicionesVisitadas.contains(casillaAprueba)) {
+	        if (comprobarCasillaEsFuncionan(casillaAprueba)) {
+	            restaPista();
+	            posicionesVisitadas.add(casillaAprueba);
+	            int[] filaCol = Matriz.convertirDeIntAFilaColumna(casillaAprueba, tamanio);
+	            matrizJuego.marcarCasilla(filaCol[0], filaCol[1]);
+	            return filaCol;
+	        }
+	        posicionesVisitadas.add(casillaAprueba);
+	    }
+	    return null;
+	}
+	
+	
+
+	private boolean comprobarCasillaEsFuncionan(int casillaAprueba) {
+		return matrizSolucion.estaMarcada(casillaAprueba,tamanio) && !matrizJuego.estaMarcada(casillaAprueba,tamanio)? true: false;
+	}
+
+	private int BuscarCasilla() {
+		return (int)(Math.random()*Math.pow(tamanio,2));
 	}
 	
 	private void restaPista() {
 		pista=pista-1;
-	}
-
-	private int generarNumeroEntreFilas() {
-		return (int)(Math.random()*matrizJuego.longitud());
 	}
 
 	private int setPista(int size) {

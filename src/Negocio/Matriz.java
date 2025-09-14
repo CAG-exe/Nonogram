@@ -1,9 +1,5 @@
 package Negocio;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 
 public class Matriz {
 	
@@ -48,6 +44,8 @@ public Boolean[][] matriz;
 		}
 	}
 	
+	
+	
 	public void generarSolucionPredefinida() {
 		LLenarDeFalse();
 		matriz[0][0]=true;
@@ -69,28 +67,17 @@ public Boolean[][] matriz;
 		}
 	}
 
-	public List<Integer> conseguirMarcada(int fila) {
-		ArrayList<Integer> columnasMarcadas= new ArrayList<Integer>();
-		for(int col=0;col<matriz.length;col++) {
-			if(matriz[fila][col]==true) {
-				columnasMarcadas.add(col);
-			}
-		}
-		return columnasMarcadas;
+	public boolean estaMarcada(int casillaAprueba, int tamanio) {
+		int[] filaYCol=convertirDeIntAFilaColumna(casillaAprueba,tamanio);
+		return matriz[filaYCol[0]][filaYCol[1]];
 	}
 
-	public int conserguirNoMarcadaDe(List<Integer> columnaSolucion, int fila) {
-		columnaSolucion = (ArrayList<Integer>) columnaSolucion;
-		for(Integer columna : columnaSolucion) {
-			if(matriz[fila][columna]==false) {
-				matriz[fila][columna] = true;
-				return columna;
-			}
-		}
-		return -1;
+	public static int[] convertirDeIntAFilaColumna(int casillaAprueba, int tamanio) {
+		int[] convetirCasilla= new int[2];
+		convetirCasilla[0] = casillaAprueba/tamanio;
+		convetirCasilla[1] = casillaAprueba%tamanio;
+		return convetirCasilla;
 	}
-
-
 
 	
 }

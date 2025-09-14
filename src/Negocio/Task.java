@@ -9,7 +9,6 @@ public class Task {
 	private List<String> tareasTotales; //Junta ambas task, la primera mitad es en horizontal, la segunda mitad es en vertical
 	private List<String> tasksHorizontal;
 	private List<String> tasksVertical;
-	private int tamanio;
 	
 	public Task(Matriz mat,int tamanio) {
 		tareasTotales = new ArrayList<String>(); 
@@ -23,7 +22,6 @@ public class Task {
 		if (mat == null) {
 			throw new IllegalArgumentException("La matriz no puede ser null");
 		}
-		this.tamanio = tamanio;
 		if (tamanio <= 0) {
 			throw new IllegalArgumentException("El tamaño de la matriz debe ser mayor a 0");
 		}
@@ -37,44 +35,69 @@ public class Task {
 		return tareasTotales;
 	}
 	
-	private List<String> generarTasksFila(Matriz mat, int tamanio, boolean esHorizontal){
-		ArrayList<String> tasks = new ArrayList<String>();
-		
-		for(int fila = 0; fila<tamanio; fila++) {
-			
-			String tarea = "";
-			int contador = 0;
-			
-			for(int columna = 0 ; columna<tamanio; columna++) {
-				
-				boolean valor;
-				if (esHorizontal) {
-	                   valor = mat.consultarMatriz(fila, columna);
-	               } else {
-	                   valor = mat.consultarMatriz(columna, fila);
-	               }
-				
-				if(valor) { // Si es true (negro) entonces suma el contador.
-					contador++;
-				}else {
-					if (contador > 0) { //Cuando llega a una casilla blanca entonces suma a la task acumulado.
-		                if (tarea.length() > 0) tarea+= " ";
-		                tarea+= contador;
-		            }
-					contador = 0;
-				}	
-			}
-			
-			if (contador > 0) { //Guarda la ultima acumulacion.
-                if (tarea.length() > 0) tarea+= " ";
-                tarea+= contador;
-            } else {
-            	if (tarea.length() == 0)
-                tarea+= contador;
-            }
-			tasks.add(tarea); //Añade el String al task. 
-		}
-		return tasks;
+
+	private List<String> generarTasksFila(Matriz mat, int tamanio, boolean esHorizontal) {
+	    List<String> tasks = new ArrayList<>();
+	    
+	    for (int fila = 0; fila < tamanio; fila++) {
+	        String tarea = construirTareaParaFila(mat, tamanio, fila, esHorizontal);
+	        tasks.add(tarea);
+	    }
+	    
+	    return tasks;
+	}
+	
+	private String construirTareaParaFila(Matriz mat, int tamanio, int fila, boolean esHorizontal) {
+	    List<Integer> secuenciasNegras = new ArrayList<>();
+	    int contadorActual = 0;
+	    
+	    for (int columna = 0; columna < tamanio; columna++) {
+	        boolean esNegro = esHorizontal(mat, esHorizontal, fila, columna);
+	        
+	        if (esNegro) {
+	            contadorActual++;
+	        } 
+	        else {
+	            if (contadorActual > 0) {
+	                secuenciasNegras.add(contadorActual);
+	                contadorActual = 0;
+	            }
+	        }
+	    }
+	    
+	    // Agregar la última secuencia si existe
+	    if (contadorActual > 0) {
+	        secuenciasNegras.add(contadorActual);
+	    }
+	    
+	    return formatearSecuencias(secuenciasNegras);
+	}
+	
+	private String formatearSecuencias(List<Integer> secuencias) {
+	    if (secuencias.isEmpty()) {
+	        return "0";
+	    }
+	    
+	    StringBuilder resultado = new StringBuilder();
+	    for (int i = 0; i < secuencias.size(); i++) {
+	        if (i > 0) {
+	            resultado.append(" ");
+	        }
+	        resultado.append(secuencias.get(i));
+	    }
+	    
+	    return resultado.toString();
+	}
+	
+
+	private boolean esHorizontal(Matriz mat, boolean esHorizontal, int fila, int columna) {
+		boolean valor;
+		if (esHorizontal) {
+		       valor = mat.consultarMatriz(fila, columna);
+		   } else {
+		       valor = mat.consultarMatriz(columna, fila);
+		   }
+		return valor;
 	}
 	
 	// Muestra los valores e las pistas para mostrar a la izquierda
