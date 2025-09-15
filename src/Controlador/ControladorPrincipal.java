@@ -202,6 +202,20 @@ public class ControladorPrincipal {
 			juegoVentana.solucionBoton.setVisible(true);
 			detenerTemporizador();
 		}
+		mostrarDialogoDeVolverAJugar();
+	}
+	private void mostrarDialogoDeVolverAJugar() {
+		int opcion = JOptionPane.showConfirmDialog(
+			null,
+			"¿Quieres volver a jugar?",
+			"",
+			JOptionPane.YES_NO_OPTION
+		);
+		
+		if (opcion == JOptionPane.YES_OPTION) {
+			int tamanio = gameModel.obtenerTamanio();
+			mostrarJuego(tamanio, nombreJugador);
+		}
 	}
 	
 	public void mostrarVentanaDeSolucion() {
