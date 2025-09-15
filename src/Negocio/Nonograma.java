@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
-import Visual.CalculadoraDeTamanios;
-
 public class Nonograma {
 	
 	private Matriz matrizSolucion;
@@ -15,7 +13,6 @@ public class Nonograma {
 	private Task tasksSolucion; 
 	private int tamanio;
 	private int pista;
-	private CalculadoraDeTamanios CalculadoraDeTamanios;
 	private boolean JuegoAndando;
 	private HashSet<Integer> posicionesVisitadas;
 	
@@ -26,12 +23,12 @@ public class Nonograma {
 		if(tamanio != 5 && tamanio != 10 && tamanio != 15 && tamanio != 20) {
 			throw new IllegalArgumentException("El tamaño del nanograma es ilegal. Probar con 5, 10, 15 o 20.");
 		}
+		posicionesVisitadas = new HashSet<Integer>();
 		this.tamanio = tamanio;
 		this.pista = setPista(tamanio);
 		matrizJuego = new Matriz(tamanio);
 		matrizSolucion = new Matriz(tamanio);
 		generarMatrizSolucion();
-		CalculadoraDeTamanios = new CalculadoraDeTamanios(tamanio);
 		pista=setPista(tamanio);
 		JuegoAndando=true;
 	}
@@ -184,22 +181,9 @@ public class Nonograma {
 	public ImageIcon ImageIcon() {
 		return new ImageIcon(getClass().getResource("/media/icon.png"));
 	}
-	
-	
-	public Rectangle tamanioVentanaPrincipalModelo() {
-		return new Rectangle(560, 200,800, 640);
-	}
 
 	public javax.swing.ImageIcon obtenerImagenTutorial() {
 		return new ImageIcon(getClass().getResource("/media/ayuda.png"));
-	}
-
-	public Rectangle calcularTamañoDeVentanaDeJuego() {
-		return CalculadoraDeTamanios.obtenerTamanioDeVentanaDeJuego();
-	}
-
-	public CalculadoraDeTamanios obtenerCalculadoraDeTamanios() {
-		return CalculadoraDeTamanios;
 	}
 	
 	public void terminarJuego() {

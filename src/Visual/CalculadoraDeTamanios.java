@@ -13,6 +13,7 @@ public class CalculadoraDeTamanios {
 	private Rectangle dimencionesDeBotonPista;
 	private Rectangle dimencionesDeBotonSolucion;
 	private Rectangle dimencionesDeBotonTimer;
+	private Rectangle dimencionesDelMensajeFinal;
 	
 	
 	public CalculadoraDeTamanios(int tamanio) {
@@ -34,6 +35,7 @@ public class CalculadoraDeTamanios {
 				dimencionesDeBotonPista = new Rectangle(240, 410, 150, 39);
 				dimencionesDeBotonSolucion = new Rectangle(240, 460, 150, 39);
 				dimencionesDeBotonTimer = new Rectangle(290,40,150,39);
+				dimencionesDelMensajeFinal = new Rectangle(457, 410, 200, 39);
 				
 				break;
 			case 10:
@@ -47,6 +49,7 @@ public class CalculadoraDeTamanios {
 				dimencionesDeBotonPista = new Rectangle(225, 460, 150, 39);
 				dimencionesDeBotonSolucion = new Rectangle(225, 510, 150, 39);
 				dimencionesDeBotonTimer = new Rectangle(285,20,150,39);
+				dimencionesDelMensajeFinal = new Rectangle(430, 460, 200, 39);
 				break;
 			case 15:
 				TamanioDeVentanaDeJuego = new Rectangle(530, 130, 826, 800);
@@ -59,6 +62,7 @@ public class CalculadoraDeTamanios {
 				dimencionesDeBotonPista = new Rectangle(325, 610, 150, 39);
 				dimencionesDeBotonSolucion = new Rectangle(325, 660, 150, 39);
 				dimencionesDeBotonTimer = new Rectangle(385,20,150,39);
+				dimencionesDelMensajeFinal = new Rectangle(620, 610, 200, 39);
 				break;
 			case 20:
 				TamanioDeVentanaDeJuego = new Rectangle(530, 130, 826, 800);
@@ -71,6 +75,7 @@ public class CalculadoraDeTamanios {
 				dimencionesDeBotonPista = new Rectangle(335, 660, 150, 39);
 				dimencionesDeBotonSolucion = new Rectangle(335, 710, 150, 39);
 				dimencionesDeBotonTimer = new Rectangle(395,10,150,39);
+				dimencionesDelMensajeFinal = new Rectangle(650, 660, 200, 39);
 				break;
 		}
 		
@@ -107,6 +112,9 @@ public class CalculadoraDeTamanios {
 		return dimencionesDeBotonTimer;
 	}
 	
+	public Rectangle obtenerDimencionesDelMensajeFinal() {
+		return dimencionesDelMensajeFinal;
+	}
 	
 	
 }

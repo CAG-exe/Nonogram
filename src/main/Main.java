@@ -18,7 +18,7 @@ public class Main {
         
         Nonograma gameModel = new Nonograma();
         ControladorPrincipal ControladorPrincipal = new ControladorPrincipal();
-        Interfaz interfazPrincipal = new Interfaz(ControladorPrincipal);
+        Interfaz interfazPrincipal = new Interfaz(ControladorPrincipal, gameModel);
         ControladorPrincipal.setModeloYVista(interfazPrincipal, gameModel);
         ControladorPrincipal.iniciar();
 	}

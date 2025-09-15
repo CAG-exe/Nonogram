@@ -6,44 +6,36 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.List;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
 import Controlador.ControladorPrincipal;
+import Negocio.Nonograma;
 
 public class NonogramGrilla{
 	private int tamanio;
+	private Nonograma modelo;
 	private JPanel panelNanograma;
 	private JPanel[] panelesGrupo; //Contiene los paneles de casillas y los tasks
 	private JPanel panelCasillas;
 	private JPanel panelTasksVerticales;
 	private JPanel panelTasksHorizontales;
-	private JLabel MensajeFinal;
 	private TablaBotones tablaBotones;
 	private ControladorPrincipal controladorPrincipal;
+	private int cantidadDePaneles;
 	
-	public NonogramGrilla(int tamanio, JPanel panelNanograma, ControladorPrincipal controladorPrincipal) {
+	public NonogramGrilla(Nonograma modelo, JPanel panelNanograma, ControladorPrincipal controladorPrincipal) {
 		this.controladorPrincipal = controladorPrincipal;
-		this.tamanio = tamanio;
+		this.modelo = modelo;
+		this.tamanio = modelo.obtenerTamanio();
 		this.panelNanograma = panelNanograma;
 		this.panelNanograma.setLayout(new GridBagLayout());
 		this.panelNanograma.setBackground(Color.decode("#896c6c"));
+		this.cantidadDePaneles = 3;
 		iniciar();
 	}
 	
@@ -63,7 +55,7 @@ public class NonogramGrilla{
 
 	private void colocarTasksHorizontales() {
 		panelTasksHorizontales.setLayout(new GridLayout(tamanio, 1, 0, 0));
-		ArrayList<String> tasks = (ArrayList<String>) controladorPrincipal.obtenerListaDeTasksHorizontalesDelNonograma();
+		ArrayList<String> tasks = (ArrayList<String>) modelo.obtenerTasksHorizontales();
 		for(String task : tasks) {
 			JLabel textoParaTask = new JLabel();
 			textoParaTask.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
@@ -77,7 +69,7 @@ public class NonogramGrilla{
 
 	private void colocarTasksVerticales() {
 	    panelTasksVerticales.setLayout(new GridLayout(1, tamanio, 0, 0));
-	    ArrayList<String> tasks = (ArrayList<String>) controladorPrincipal.obtenerListaDeTasksVerticalesDelNonograma();
+	    ArrayList<String> tasks = (ArrayList<String>) modelo.obtenerTasksVerticales();
 
 	    for (String task : tasks) {
 	        JPanel columna = new JPanel(new GridLayout(0, 1));
@@ -123,7 +115,7 @@ public class NonogramGrilla{
 
 	private void especificarTamañosDePaneles() {
 		Dimension[] dimensionesPaneles = controladorPrincipal.obtenerTamaniosDeLosPanelesDeLaGrilla();  
-		panelesGrupo = new JPanel[3];
+		panelesGrupo = new JPanel[cantidadDePaneles];
 		for(int i = 0 ; i < panelesGrupo.length; i++) {
 			panelesGrupo[i] = crearPanel(dimensionesPaneles[i], Color.white);
 		}
@@ -132,7 +124,7 @@ public class NonogramGrilla{
 	private void generarCasillas() {
 		panelCasillas.setLayout(new GridLayout(tamanio, tamanio, 0, 0));
 		panelCasillas.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
-		this.tablaBotones= new TablaBotones(panelCasillas,tamanio);
+		this.tablaBotones= new TablaBotones(panelCasillas,tamanio, controladorPrincipal);
 		NonogramWindow.darCasillas(TablaBotones.casillas);
 		panelCasillas = tablaBotones.generarCasillas();
 		panelCasillas.revalidate();

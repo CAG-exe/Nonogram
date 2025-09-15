@@ -10,29 +10,36 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import Controlador.ControladorPrincipal;
+
 
 public class TablaBotones {
 	private JPanel panelCasillas;
 	public static JButton[][] casillas;
 	private int tamanio;
+	private static ControladorPrincipal controladorPrincipal;
+	private static Color colorDeCasillaSelecionada = Color.black;
+	private static Color colorDeCasilla = Color.white;
+	private static Color colorDeCasillaTachada = Color.white;
 	
 	
-	TablaBotones(JPanel panelCasillas, int tamanio){
+	TablaBotones(JPanel panelCasillas, int tamanio, ControladorPrincipal controladorPrincipal){
+		this.controladorPrincipal  = controladorPrincipal;
 		casillas = new JButton[tamanio][tamanio];
 		this.panelCasillas = panelCasillas;
 		this.tamanio = tamanio;
 	}
 
 	public JPanel generarCasillas() {
-		for(int i = 0; i<this.tamanio ; i++) {
-			for(int j = 0; j<this.tamanio ; j++) {
+		for(int fila = 0; fila<this.tamanio ; fila++) {
+			for(int columna = 0; columna<this.tamanio ; columna++) {
 				JButton casilla = new JButton();
 				casilla.setBackground(Color.white);
 				casilla.setBorder(BorderFactory.createLineBorder(Color.gray));
 				
-				accionesDeClicACasillas(casilla, i ,j);
+				accionesDeClicACasillas(casilla, fila ,columna);
 				
-				this.casillas[i][j] = casilla;
+				this.casillas[fila][columna] = casilla;
 				this.panelCasillas.add(casilla);
 			}
 		}
@@ -40,48 +47,20 @@ public class TablaBotones {
 	}
 	
 	
-	private static void accionesDeClicACasillas(JButton casilla,int i,int j) {
+	private static void accionesDeClicACasillas(JButton casilla,int fila,int columna) {
     	casilla.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
-                if (NonogramWindow.botonesGrillaHabilitados()) { 
-	                	if(e.getButton() == MouseEvent.BUTTON1) {//Click izquierdo
-		                    if (casilla.getBackground().equals(Color.white) && casilla.getText() != "X") {
-		                        casilla.setBackground(Color.black);
-		                        NonogramWindow.sendInfoMarcarCasilla(i,j);
-		                        casilla.setText("");
-		                    } else if (casilla.getBackground().equals(Color.black)) {
-		                    	NonogramWindow.sendInfoDesmarcarCasilla(i,j);
-		                        casilla.setBackground(Color.white);
-		                        casilla.setText("");
-		                    }
-	                	} 
-	                	 else if (e.getButton() == MouseEvent.BUTTON3) { //Click derecho
-	 	                    if (casilla.getText().equals("X")) {
-	 	                    	NonogramWindow.sendInfoDesmarcarCasilla(i,j);
-	 	                        casilla.setText("");
-	 	                        casilla.setBackground(Color.white);
-	 	                    } else {
-	 	                    	NonogramWindow.sendInfoDesmarcarCasilla(i,j);
-	 	                        casilla.setText("X");
-	 	                        casilla.setForeground(Color.blue);
-	 	                        casilla.setBackground(Color.white);
-	 	                        casilla.setFont(new Font("Arial", Font.BOLD, 24));
-	 	                    }
-	 	              }
-	                }
-	               
+	               controladorPrincipal.actualizarEstadoDeLaCasilla(e, fila, columna);
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
 			}
 
 			@Override
 			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
+				// TODO Auto-generated method stub	
 			}
 
 			@Override
@@ -99,13 +78,38 @@ public class TablaBotones {
 		
 	}
 	
-	public void actualizarCasilla(JButton casilla, int estado) {
-		
+	public static void marcarLaCasillaVisual(int fila, int columna) {
+		actualizarCasilla(fila, columna, Color.black, "");
+	}
+	
+	public static void desmarcarLaCasillaVisual(int fila, int columna) {
+		actualizarCasilla(fila, columna, Color.white, "");
+	}
+	
+	public static void tacharLaCasillaVisual(int fila, int columna) {
+		actualizarCasilla(fila, columna, Color.white, "X");
+	}
+	
+	public static void actualizarCasilla(int i, int j, Color color, String text) {
+		JButton casilla = casillas[i][j];
+		casilla.setForeground(Color.blue);
+		casilla.setFont(new Font("Arial", Font.BOLD, 24));
+		casilla.setText(text);
+		casilla.setBackground(color);
+	}
+	
+	public static boolean esCasillaSeleccionada(int fila, int columna) {
+		JButton casilla = casillas[fila][columna];
+		return casilla.getBackground().equals(colorDeCasillaSelecionada);
 	}
 	
 	
+	public static boolean esCasillaTachada(int fila, int columna) {
+		JButton casilla = casillas[fila][columna];
+		return casilla.getText().equals("X");
+	}
+	
 	public static JButton[][] getCasillas() {
-		
 		return casillas;
 	}
 	

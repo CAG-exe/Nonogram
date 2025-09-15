@@ -1,13 +1,16 @@
 package Controlador;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.Timer;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -18,6 +21,7 @@ import Visual.Interfaz;
 import Visual.Menu;
 import Visual.NonogramWindow;
 import Visual.Solucion;
+import Visual.TablaBotones;
 import Visual.Tutorial;
 
 public class ControladorPrincipal {
@@ -99,14 +103,11 @@ public class ControladorPrincipal {
 		return gameModel.ImageIcon();
 	}
 
-	public Rectangle tamanioVentanaPrincipal() {
-		return gameModel.tamanioVentanaPrincipalModelo();
-	}
 
 	public void mostrarMenu() {
 		this.menuPanel = new Menu(this);
 		Interfaz.cambiarDePanel(menuPanel);
-		interfaz.setSize(gameModel.tamanioVentanaPrincipalModelo());
+		interfaz.setTamanioDeVentanaPrincipalPorDefecto();
 		interfaz.setTitle("Nonograma-Menu");
 		interfaz.favIcon(obtenerImageicon().getImage());
 		solucionComprobada = false;
@@ -115,16 +116,16 @@ public class ControladorPrincipal {
 	public void mostrarTutorial() {
 		this.tutorialPanel = new Tutorial(this);
 		interfaz.cambiarDePanel(tutorialPanel);
-		interfaz.setSize(gameModel.tamanioVentanaPrincipalModelo());
+		interfaz.setTamanioDeVentanaPrincipalPorDefecto();
 		interfaz.setTitle("Nonograma-Tutorial");
 	}
 	
 	public void mostrarJuego(int tamanio, String nombreJugador) {
 		this.nombreJugador = nombreJugador;
 		gameModel.inicarNonogramaSegunTamanio(tamanio);
-		this.calculadoraDeTamanios = gameModel.obtenerCalculadoraDeTamanios();
-		interfaz.setSize(gameModel.calcularTamañoDeVentanaDeJuego());
-		this.juegoVentana =  new NonogramWindow(tamanio,this);
+		calculadoraDeTamanios = new CalculadoraDeTamanios(tamanio);
+		this.juegoVentana =  new NonogramWindow(gameModel,this);
+		interfaz.setSize(calculadoraDeTamanios.obtenerTamanioDeVentanaDeJuego());
 		interfaz.cambiarDePanel(juegoVentana);
 		iniciarTemporizador();
 	}
@@ -193,11 +194,11 @@ public class ControladorPrincipal {
 		solucionComprobada = true;
 		if(verificarRespuestaCorrecta()) {
 			juegoVentana.reproducirSonidoVictoria();
-			juegoVentana.mostrarMensajeDeVictoria(new Rectangle(), "Ganaste", nombreJugador);
+			juegoVentana.mostrarMensajeDeVictoria(calculadoraDeTamanios.obtenerDimencionesDelMensajeFinal(), "Ganaste", nombreJugador);
 			detenerTemporizador();
 		} else {
 			juegoVentana.reproducirSonidoDerrota();
-			juegoVentana.mostrarMensajeDeDerrota(new Rectangle(), "Perdiste", nombreJugador);
+			juegoVentana.mostrarMensajeDeDerrota(calculadoraDeTamanios.obtenerDimencionesDelMensajeFinal(), "Perdiste", nombreJugador);
 			juegoVentana.solucionBoton.setVisible(true);
 			detenerTemporizador();
 		}
@@ -225,6 +226,30 @@ public class ControladorPrincipal {
 				detenerTemporizador();
 			}
 		}
+	}
+	
+	
+	public void actualizarEstadoDeLaCasilla(MouseEvent e, int fila, int columna) {
+		if (NonogramWindow.botonesGrillaHabilitados()) { 
+        	if(e.getButton() == MouseEvent.BUTTON1) {//Click izquierdo
+                if (!TablaBotones.esCasillaSeleccionada(fila, columna)) {
+                    marcarCasilla(fila,columna);
+                    TablaBotones.marcarLaCasillaVisual(fila, columna);
+                } else if (TablaBotones.esCasillaSeleccionada(fila, columna)) {
+                	desmarcarCasilla(fila,columna);
+                	TablaBotones.desmarcarLaCasillaVisual(fila, columna);
+                }
+        	} 
+        	 else if (e.getButton() == MouseEvent.BUTTON3) { //Click derecho
+                 if (TablaBotones.esCasillaTachada(fila, columna)) {
+                 	desmarcarCasilla(fila,columna);
+                 	TablaBotones.desmarcarLaCasillaVisual(fila, columna);
+                 } else {
+                 	desmarcarCasilla(fila,columna);
+                 	TablaBotones.tacharLaCasillaVisual(fila, columna);
+                 }
+           }
+        }
 	}
 	
 	public static boolean juegoAndando() {

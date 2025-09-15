@@ -1,28 +1,17 @@
 package Visual;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagLayout;
-
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
 import Controlador.ControladorPrincipal;
 import Negocio.Nonograma;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
-import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.InputStream;
 import java.awt.event.ActionEvent;
 import javax.sound.sampled.AudioInputStream;
@@ -32,7 +21,6 @@ import javax.sound.sampled.Clip;
 public class NonogramWindow extends JPanel {
 
 	private static JButton[][] casillas;
-	private int tamanio;
 	private JPanel panelPrincipal;
 	private JPanel panelNonograma;
 	public NonogramGrilla NonogramaGrilla;
@@ -47,11 +35,10 @@ public class NonogramWindow extends JPanel {
 
 
 
-	public NonogramWindow(int tamanio, ControladorPrincipal controladorPrincipal) {
-		this.tamanio = tamanio;
+	public NonogramWindow(Nonograma modelo, ControladorPrincipal controladorPrincipal) {
 		this.controladorPrincipal = controladorPrincipal;
 		initialize();
-		NonogramaGrilla = new NonogramGrilla(tamanio, panelNonograma, controladorPrincipal);
+		NonogramaGrilla = new NonogramGrilla(modelo, panelNonograma, controladorPrincipal);
 	}
 
 	
@@ -211,9 +198,9 @@ public class NonogramWindow extends JPanel {
 
 	public void mostrarMensajeDeVictoria(Rectangle posicionYTamaño, String Mensaje, String nombreJugador) {
 		JLabel MensajeFinal=new JLabel("");
-		MensajeFinal.setText("¡FELICIDADES " + nombreJugador.toUpperCase() + " GANASTE!");
+		MensajeFinal.setText("¡" + nombreJugador.toUpperCase() + " GANASTE!");
 		MensajeFinal.setFont(new Font("Tahoma", Font.BOLD, 13));
-		MensajeFinal.setBounds(457, 410, 200, 39);
+		MensajeFinal.setBounds(posicionYTamaño);
 		panelPrincipal.add(MensajeFinal);
 		MensajeFinal.setVisible(true);
 	}
@@ -222,7 +209,7 @@ public class NonogramWindow extends JPanel {
 		JLabel MensajeFinal=new JLabel("");
 		MensajeFinal.setText(nombreJugador.toUpperCase() + " PERDISTE");
 		MensajeFinal.setFont(new Font("Tahoma", Font.BOLD, 13));
-		MensajeFinal.setBounds(474, 410, 200, 39);
+		MensajeFinal.setBounds(posicionYTamaño);
 		panelPrincipal.add(MensajeFinal);
 		MensajeFinal.setVisible(true);
 	}
