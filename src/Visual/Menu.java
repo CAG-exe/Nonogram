@@ -69,7 +69,7 @@ public class Menu extends JPanel {
 					JOptionPane.PLAIN_MESSAGE
 				);
 				
-				if (!nombreJugador.isEmpty()) {
+				if (nombreJugador != null && !nombreJugador.isEmpty()) {
 					controladorPrincipal.mostrarJuego(tamanio, nombreJugador);
 				}
 			}
