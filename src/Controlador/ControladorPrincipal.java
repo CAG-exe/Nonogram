@@ -213,6 +213,7 @@ public class ControladorPrincipal {
 		);
 		
 		if (opcion == JOptionPane.YES_OPTION) {
+			juegoVentana.detenerSonido();
 			solucionComprobada = false;
 			gameModel.terminarJuego();
 			int tamanio = gameModel.obtenerTamanio();
