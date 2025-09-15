@@ -107,7 +107,6 @@ public class NonogramWindow extends JPanel {
 		comprobarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controladorPrincipal.comprobarResultadoDelJugador();
-				controladorPrincipal.terminarJuego();
 			}
 		});
 		panel.add(comprobarButton);
