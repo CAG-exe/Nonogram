@@ -14,6 +14,7 @@ public class CalculadoraDeTamanios {
 	private Rectangle dimencionesDeBotonSolucion;
 	private Rectangle dimencionesDeBotonTimer;
 	private Rectangle dimencionesDelMensajeFinal;
+	private Rectangle dimencionesDeBotonVolverAJugar;
 	
 	
 	public CalculadoraDeTamanios(int tamanio) {
@@ -36,6 +37,7 @@ public class CalculadoraDeTamanios {
 				dimencionesDeBotonSolucion = new Rectangle(240, 460, 150, 39);
 				dimencionesDeBotonTimer = new Rectangle(290,40,150,39);
 				dimencionesDelMensajeFinal = new Rectangle(457, 410, 200, 39);
+				dimencionesDeBotonVolverAJugar = new Rectangle(450, 460, 150, 39);
 				
 				break;
 			case 10:
@@ -50,6 +52,7 @@ public class CalculadoraDeTamanios {
 				dimencionesDeBotonSolucion = new Rectangle(225, 510, 150, 39);
 				dimencionesDeBotonTimer = new Rectangle(285,20,150,39);
 				dimencionesDelMensajeFinal = new Rectangle(430, 460, 200, 39);
+				dimencionesDeBotonVolverAJugar = new Rectangle(430, 510, 150, 39);
 				break;
 			case 15:
 				TamanioDeVentanaDeJuego = new Rectangle(530, 130, 826, 800);
@@ -63,6 +66,7 @@ public class CalculadoraDeTamanios {
 				dimencionesDeBotonSolucion = new Rectangle(325, 660, 150, 39);
 				dimencionesDeBotonTimer = new Rectangle(385,20,150,39);
 				dimencionesDelMensajeFinal = new Rectangle(620, 610, 200, 39);
+				dimencionesDeBotonVolverAJugar = new Rectangle(620, 660, 150, 39);
 				break;
 			case 20:
 				TamanioDeVentanaDeJuego = new Rectangle(530, 130, 826, 800);
@@ -76,6 +80,7 @@ public class CalculadoraDeTamanios {
 				dimencionesDeBotonSolucion = new Rectangle(335, 710, 150, 39);
 				dimencionesDeBotonTimer = new Rectangle(395,10,150,39);
 				dimencionesDelMensajeFinal = new Rectangle(650, 660, 200, 39);
+				dimencionesDeBotonVolverAJugar = new Rectangle(650, 710, 150, 39);
 				break;
 		}
 		
@@ -115,6 +120,10 @@ public class CalculadoraDeTamanios {
 	public Rectangle obtenerDimencionesDelMensajeFinal() {
 		return dimencionesDelMensajeFinal;
 	}
+	public Rectangle obtenerDimensionDeBotonVolverAJugar() {
+		return dimencionesDeBotonVolverAJugar;
+	}
+	
 	
 	
 }

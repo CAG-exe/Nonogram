@@ -188,6 +188,9 @@ public class ControladorPrincipal {
 	public Dimension[] obtenerTamaniosDeLosPanelesDeLaGrilla() {
 		return calculadoraDeTamanios.obtenerTamaniosDeLosPanalesDeLaGrilla();
 	}
+	public Rectangle obtenerDimensionDeBotonVolverAJugar() {
+		return calculadoraDeTamanios.obtenerDimensionDeBotonVolverAJugar();
+	}
 
 	public void comprobarResultadoDelJugador() {
 		juegoVentana.comprobarButton.setVisible(false);
@@ -202,23 +205,13 @@ public class ControladorPrincipal {
 			juegoVentana.solucionBoton.setVisible(true);
 			detenerTemporizador();
 		}
-		mostrarDialogoDeVolverAJugar();
 	}
-	private void mostrarDialogoDeVolverAJugar() {
-		int opcion = JOptionPane.showConfirmDialog(
-			null,
-			"¿Quieres volver a jugar?",
-			"",
-			JOptionPane.YES_NO_OPTION
-		);
-		
-		if (opcion == JOptionPane.YES_OPTION) {
+	public void VolverAJugar() {
 			juegoVentana.detenerSonido();
 			solucionComprobada = false;
 			gameModel.terminarJuego();
 			int tamanio = gameModel.obtenerTamanio();
 			mostrarJuego(tamanio, nombreJugador);
-		}
 	}
 	
 	public void mostrarVentanaDeSolucion() {

@@ -32,6 +32,7 @@ public class NonogramWindow extends JPanel {
 	private static ControladorPrincipal controladorPrincipal;
 	private Clip currentClip;
     private JLabel tiempo;
+	public JButton volverAJugarButton;
 
 
 
@@ -156,6 +157,18 @@ public class NonogramWindow extends JPanel {
 		});
 		panel.add(solucionBoton);
 		
+		/////-------------------------BOTON DE VOLVER A JUGAR-----------------------
+		
+		volverAJugarButton = new JButton("Volver a Jugar");
+		volverAJugarButton.setVisible(false);
+		volverAJugarButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controladorPrincipal.VolverAJugar();
+			}
+		});
+		panel.add(volverAJugarButton);
+		
 		
 		JPanel panelNanograma = new JPanel(new GridBagLayout());
 		this.panelNonograma = panelNanograma;
@@ -172,6 +185,7 @@ public class NonogramWindow extends JPanel {
 		pista.setBounds(controladorPrincipal.obtenerDimensionDeBotonPista());
 		solucionBoton.setBounds(controladorPrincipal.obtenerDimensionDeBotonSolucion());
 		tiempo.setBounds(controladorPrincipal.obtenerDimensionDeTimer());
+		volverAJugarButton.setBounds(controladorPrincipal.obtenerDimensionDeBotonVolverAJugar());
 	}
 	
 	public void actualizarTemporizador(String tiempoFormateado) {
@@ -202,6 +216,7 @@ public class NonogramWindow extends JPanel {
 		MensajeFinal.setBounds(posicionYTamaño);
 		panelPrincipal.add(MensajeFinal);
 		MensajeFinal.setVisible(true);
+		volverAJugarButton.setVisible(true);
 	}
 	
 	public void mostrarMensajeDeDerrota(Rectangle posicionYTamaño, String Mensaje, String nombreJugador) {
@@ -211,6 +226,7 @@ public class NonogramWindow extends JPanel {
 		MensajeFinal.setBounds(posicionYTamaño);
 		panelPrincipal.add(MensajeFinal);
 		MensajeFinal.setVisible(true);
+		volverAJugarButton.setVisible(true);
 	}
 
 	public static void renombrarBotonPista(String string) {
