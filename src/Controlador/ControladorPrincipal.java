@@ -194,6 +194,7 @@ public class ControladorPrincipal {
 		if(verificarRespuestaCorrecta()) {
 			juegoVentana.reproducirSonidoVictoria();
 			juegoVentana.mostrarMensajeDeVictoria(new Rectangle(), "Ganaste", nombreJugador);
+			juegoVentana.solucionBoton.setVisible(true);
 			detenerTemporizador();
 		} else {
 			juegoVentana.reproducirSonidoDerrota();

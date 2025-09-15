@@ -213,7 +213,7 @@ public class NonogramWindow extends JPanel {
 		JLabel MensajeFinal=new JLabel("");
 		MensajeFinal.setText("¡FELICIDADES " + nombreJugador.toUpperCase() + " GANASTE!");
 		MensajeFinal.setFont(new Font("Tahoma", Font.BOLD, 13));
-		MensajeFinal.setBounds(457, 410, 200, 39);
+		MensajeFinal.setBounds(400, 410, 200, 39);
 		panelPrincipal.add(MensajeFinal);
 		MensajeFinal.setVisible(true);
 	}
@@ -222,7 +222,7 @@ public class NonogramWindow extends JPanel {
 		JLabel MensajeFinal=new JLabel("");
 		MensajeFinal.setText(nombreJugador.toUpperCase() + " PERDISTE");
 		MensajeFinal.setFont(new Font("Tahoma", Font.BOLD, 13));
-		MensajeFinal.setBounds(474, 410, 200, 39);
+		MensajeFinal.setBounds(430, 410, 200, 39);
 		panelPrincipal.add(MensajeFinal);
 		MensajeFinal.setVisible(true);
 	}
