@@ -213,6 +213,8 @@ public class ControladorPrincipal {
 		);
 		
 		if (opcion == JOptionPane.YES_OPTION) {
+			solucionComprobada = false;
+			gameModel.terminarJuego();
 			int tamanio = gameModel.obtenerTamanio();
 			mostrarJuego(tamanio, nombreJugador);
 		}
