@@ -45,7 +45,7 @@ public class NonogramWindow extends JPanel {
 	
 	public void reproducirSonidoVictoria() {
 		try {
-			InputStream sonido = Class.class.getResourceAsStream("/media/sound_victory.wav");
+			InputStream sonido = getClass().getResourceAsStream("/media/sound_victory.wav");
 		    if (sonido == null) {
 		        System.out.println("No se pudo encontrar el archivo");
 		        return;
@@ -62,7 +62,7 @@ public class NonogramWindow extends JPanel {
 	}
 	public void reproducirSonidoDerrota() {
 		try {
-			InputStream sonido = Class.class.getResourceAsStream("/media/sound_lost1.wav");
+			InputStream sonido = getClass().getResourceAsStream("/media/sound_lost1.wav");
 		    if (sonido == null) {
 		        System.out.println("No se pudo encontrar el archivo");
 		        return;
