@@ -121,7 +121,6 @@ public class Menu extends JPanel {
 		cincoXcincoRadioButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("el tamaño es 5");
 				tamanio=5;
 			}
 		});
@@ -133,7 +132,6 @@ public class Menu extends JPanel {
 		diezXdiezRadioButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("el tamaño es 10");
 				tamanio=10;
 			}
 		});
@@ -145,7 +143,6 @@ public class Menu extends JPanel {
 		quinceXquinceRadioButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("el tamaño es 15");
 				tamanio=15;
 			}
 		});
@@ -157,7 +154,6 @@ public class Menu extends JPanel {
 		veinteXveinteRadioButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("el tamaño es 20");
 				tamanio=20;
 			}
 		});

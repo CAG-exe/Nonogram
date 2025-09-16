@@ -112,8 +112,6 @@ public class Task {
 
 	
 	public boolean comprobarIgualdad(Task otroTask) {
-		System.out.println(otroTask.tareasTotales);
-		System.out.println(tareasTotales);
 		return otroTask.tareasTotales.equals(tareasTotales);
 	}
 	
